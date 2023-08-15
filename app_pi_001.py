@@ -38,7 +38,7 @@ if st.session_state["authenticated"]:
 
     # チャットボットとやりとりする関数
     def communicate(user_input, bot_response_placeholder, model, temperature, top_p):
-        messages = [{"role": "system", "content": ""}]
+        messages = st.session_state["messages"]
         user_message = {"role": "user", "content": user_input}
         messages.append(user_message)
 
@@ -82,7 +82,7 @@ if st.session_state["authenticated"]:
     )
 
     # TemperatureとTop_Pの値を調整するスライダー
-    temperature = st.sidebar.slider("Temperatureを選択してください", 0.0, 2.0, 0.1, 0.01)
+    temperature = st.sidebar.slider("Temperatureを選択してください", 0.0, 1.0, 0.1, 0.01)
     top_p = st.sidebar.slider("Top_Pを選択してください", 0.0, 1.0, 0.5, 0.01)
 
     # 機能に応じたUIの表示
