@@ -4,7 +4,7 @@ import openai
 import uuid
 
 # サービス名を表示する
-st.sidebar.title("[Pi] AI Assistant")
+st.sidebar.title("[Dev] AI Assistant")
 
 # 初回ログイン認証
 if "authenticated" not in st.session_state:
