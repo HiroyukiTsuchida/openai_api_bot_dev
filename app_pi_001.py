@@ -7,20 +7,20 @@ import uuid
 st.sidebar.title("[Dev] AI Assistant")
 
 # 初回ログイン認証
-if "authenticated" not in st.session_state:
-    st.session_state["authenticated"] = False
+#if "authenticated" not in st.session_state:
+#    st.session_state["authenticated"] = False
 
-if not st.session_state["authenticated"]:
-    user_id = st.text_input("ユーザーIDを入力してください:")
-    password = st.text_input("パスワードを入力してください:", type="password")
-    if st.button("ログイン"):
-        if user_id == "Admin" and password == "LLM@2023":
-            st.session_state["authenticated"] = True
-            st.success("ログイン成功!")
-        else:
-            st.error("誤ったユーザーIDまたはパスワードです。")
+#if not st.session_state["authenticated"]:
+#    user_id = st.text_input("ユーザーIDを入力してください:")
+#    password = st.text_input("パスワードを入力してください:", type="password")
+#    if st.button("ログイン"):
+#        if user_id == "Admin" and password == "LLM@2023":
+#            st.session_state["authenticated"] = True
+#            st.success("ログイン成功!")
+#        else:
+#            st.error("誤ったユーザーIDまたはパスワードです。")
 
-if st.session_state["authenticated"]:
+#if st.session_state["authenticated"]:
     # Create a unique key for the widget
     unique_key = str(uuid.uuid4())
 
