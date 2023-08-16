@@ -2,6 +2,8 @@
 import streamlit as st
 import openai
 import uuid
+import streamlit as st
+import streamlit_clipboard
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
@@ -104,9 +106,8 @@ if selected_option == "Q&A":
     bot_response_placeholder = st.empty()
 
     # Copy button
-    if st.button("コピー", key="copy_button_Q&A"):
-        st.session_state["clipboard"] = st.session_state.get("user_input_Q&A", "")
-        st.copied_code(st.session_state["clipboard"])
+    if st.button("Copy", key="copy_button_Q&A"):
+        streamlit_clipboard.copy(st.session_state["clipboard"])
 
     # Execute the communicate function when the user presses the 'Submit' button
     if st.button("実行", key="send_button_Q&A"):
