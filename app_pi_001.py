@@ -93,8 +93,12 @@ if selected_option == "Q&A":
 
     # Create a placeholder for the user's input
     user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""))
-    token_count = len(user_input.split())
-    st.markdown(f'<span style="color:grey; font-size:12px;">トークン数: {token_count}</span>', unsafe_allow_html=True)
+
+    # トークン数（文字数）をカウント
+    token_count = len(user_input)
+
+    # トークン数を表示
+    st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
 
     # Create a placeholder for the bot's responses
     bot_response_placeholder = st.empty()
