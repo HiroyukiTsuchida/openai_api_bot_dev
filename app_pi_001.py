@@ -27,7 +27,6 @@ if st.session_state["authenticated"] and st.session_state["show_auth_message"]:
     st.success("ログイン成功!")
     if st.button("続ける"):
         st.session_state["show_auth_message"] = False
-        st.write("認証が完了しました。")
 
 if st.session_state["authenticated"] and not st.session_state["show_auth_message"]:
     # Create a unique key for the widget
@@ -79,7 +78,8 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
     # サイドバーで機能を選択
     selected_option = st.sidebar.selectbox(
         "機能を選択してください",
-        ["Q&A", "Translation", "Proofreading", "Excel Formula Analysis", "VBA Analysis", "Data Analysis"],
+        ["選択してください", "Q&A", "Translation", "Proofreading", "Excel Formula Analysis", "VBA Analysis", "Data Analysis"],
+        index=0, # デフォルト値として「選択してください」を設定
         key="selectbox_key"  # 固定のキーを指定する
     )
 
@@ -89,10 +89,6 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
         ["gpt-3.5-turbo-16k", "gpt-4"],
         key="model_selectbox_key"  # 固定のキーを指定する
     )
-
-    # TemperatureとTop_Pの値を調整するスライダー
-    #temperature = st.sidebar.slider("Temperatureを選択してください", 0.0, 1.0, 0.1, 0.01)
-    #top_p = st.sidebar.slider("Top_Pを選択してください", 0.0, 1.0, 0.5, 0.01)
 
     # Temperatureスライダーとその補足情報
     with st.sidebar.beta_expander("Temperatureを選択してください  🛈"):
@@ -105,7 +101,9 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
     # 機能に応じたUIの表示
-    if selected_option == "Q&A":
+    if selected_option == "選択してください":
+        pass  # 何も表示しない
+    elif selected_option == "Q&A":
         # Build the user interface
         st.title("Q&A")
 
