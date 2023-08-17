@@ -2,6 +2,8 @@
 import streamlit as st
 import openai
 import uuid
+import base64
+
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
@@ -98,9 +100,15 @@ if st.session_state["authenticated"]:
         st.write("Top_P: 温度と同様に、これはランダム性を制御しますが、別の方法を使用します。Top_P を下げると、より可能性が高い回答に絞り込まれます。Top_P を上げると、確率が高い回答と低い回答の両方から選択されるようになります。初期値は0.5に設定しています。")
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
-    def copy_text_to_clipboard(text):
-        st.write('<textarea id="copy-textarea" style="display: none;">{}</textarea>'.format(text), unsafe_allow_html=True)
-        st.write('<button onclick="navigator.clipboard.writeText(document.getElementById(\'copy-textarea\').value);">Copy to Clipboard</button>', unsafe_allow_html=True)
+# コピー機能用
+#    def copy_text_to_clipboard(text):
+#        st.write('<textarea id="copy-textarea" style="display: none;">{}</textarea>'.format(text), unsafe_allow_html=True)
+#        st.write('<button onclick="navigator.clipboard.writeText(document.getElementById(\'copy-textarea\').value);">Copy to Clipboard</button>', unsafe_allow_html=True)
+
+    # テキストをダウンロードリンクに変換する関数
+    def get_text_download_link(text, filename="result.txt", text_link="Click here to download the result as a text file"):
+        b64 = base64.b64encode(text.encode()).decode()
+        return f'<a href="data:file/txt;base64,{b64}" download="{filename}">{text_link}</a>'
 
     # 機能に応じたUIの表示
     if selected_option == "選択してください":
@@ -129,9 +137,13 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input_Q&A"] = user_input
                 communicate(st.session_state["user_input_Q&A"], bot_response_placeholder, model, temperature, top_p)
 
-                # Add a button to copy the bot's response to clipboard
-                bot_response = st.session_state["messages"][-1]["content"]  # Assuming the last message in the list is the bot's response
-                copy_text_to_clipboard(bot_response)
+# コピー機能用
+#                # Add a button to copy the bot's response to clipboard
+#                bot_response = st.session_state["messages"][-1]["content"]  # Assuming the last message in the list is the bot's response
+#                copy_text_to_clipboard(bot_response)
+
+                # Add a link to download the bot's response as a text file
+                st.markdown(get_text_download_link(bot_response), unsafe_allow_html=True)
 
             # Clear the user input
             st.session_state["user_input_Q&A"] = ""
