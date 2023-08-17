@@ -2,6 +2,8 @@
 import streamlit as st
 import openai
 import uuid
+import streamlit.components.v1 as components
+from streamlit_clipboard import st_clipboard_textarea
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
@@ -119,13 +121,27 @@ if st.session_state["authenticated"]:
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
+        # 新しく追加：コピーする内容を保存する変数
+        copied_content = ""
+
         # Execute the communicate function when the user presses the 'Submit' button
         if st.button("実行", key="send_button_data"):
             if user_input.strip() == "":
                 st.warning("データを入力してください。")
             else:
                 st.session_state["user_input_Q&A"] = user_input
-                communicate(st.session_state["user_input_Q&A"], bot_response_placeholder, model, temperature, top_p)
+                copied_content = communicate(st.session_state["user_input_Q&A"], bot_response_placeholder, model, temperature, top_p)
+                # コピーする内容を表示する場所にコピーボタンを追加
+                st_clipboard_textarea(copied_content, label="コピーする内容", copy_button_label="コピー")
+
+
+#        # Execute the communicate function when the user presses the 'Submit' button
+#        if st.button("実行", key="send_button_data"):
+#            if user_input.strip() == "":
+#                st.warning("データを入力してください。")
+#            else:
+#                st.session_state["user_input_Q&A"] = user_input
+#                communicate(st.session_state["user_input_Q&A"], bot_response_placeholder, model, temperature, top_p)
 
             # Clear the user input
             st.session_state["user_input_Q&A"] = ""
