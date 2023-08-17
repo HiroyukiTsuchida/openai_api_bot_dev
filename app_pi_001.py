@@ -20,13 +20,11 @@ if not st.session_state["authenticated"] and not st.session_state["show_auth_mes
         if user_id == "admin" and password == "LLM@2023":
             st.session_state["authenticated"] = True
             st.session_state["show_auth_message"] = True
+            st.success("ログイン成功!")
+            if st.button("続ける"):
+                st.session_state["show_auth_message"] = False
         else:
             st.error("誤ったユーザーIDまたはパスワードです。")
-
-if st.session_state["authenticated"] and st.session_state["show_auth_message"]:
-    st.success("ログイン成功!")
-    if st.button("続ける"):
-        st.session_state["show_auth_message"] = False
 
 if st.session_state["authenticated"] and not st.session_state["show_auth_message"]:
     # Create a unique key for the widget
