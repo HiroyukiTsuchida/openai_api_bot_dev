@@ -26,7 +26,6 @@ if not st.session_state["authenticated"]:
 if st.session_state["authenticated"] and st.session_state["show_auth_message"]:
     st.success("ログイン成功!")
     if st.button("続ける"):
-        st.experimental_rerun()
         st.session_state["show_auth_message"] = False
 
 if st.session_state["authenticated"] and not st.session_state["show_auth_message"]:
@@ -133,13 +132,13 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
         st.title("Translation")
 
         # 右側の入力フォーム
-        translate_text = st.text_area("翻訳したい文章を入力し、実行ボタンを押してください。", height=200, key="translate_text_input")
+        user_input = st.text_area("翻訳したい文章を入力し、実行ボタンを押してください。", height=200, key="user_input_translation")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数（文字数）をカウント
-        token_count = len(translate_text) + len(additional_info)
+        token_count = len(user_input) + len(additional_info)
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -152,7 +151,7 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
                 "あなたは優秀な翻訳家です。あなたの役割は、英文を日本語に翻訳し、日本語のウェブサイト上で日本人の投資家向けに翻訳された間違いのない情報を提供することです。\n"
                 "可能な限り原文に忠実に、漏れや間違いなく、自然な日本語に翻訳してください。\n"
                 "＃指示\n"
-                f"{translate_text}を翻訳してください。\n"
+                f"{user_input}を翻訳してください。\n"
                 f"＃補足情報: {additional_info}"
                 "＃注意してほしい点：所有格を無理に全部訳さない\n"
                 "＃例①\n"
@@ -230,13 +229,13 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
         st.title("Proofreading")
 
         # 右側の入力フォーム
-        proofreading_text = st.text_area("校閲/校正したい文章を入力し、実行ボタンを押してください。", height=200, key="proofreading_text_input")
+        user_input = st.text_area("校閲/校正したい文章を入力し、実行ボタンを押してください。", height=200, key="user_input_proof")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数（文字数）をカウント
-        token_count = len(proofreading_text) + len(additional_info)
+        token_count = len(user_input) + len(additional_info)
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -272,7 +271,7 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
                 操作2:[
                 操作1を行った後に指摘事項を全て修正した正しい文章を出力してください。]
                 """
-                f"{proofreading_text}を校閲・校正してください。\n"
+                f"{user_input}を校閲・校正してください。\n"
                 f"＃補足情報: {additional_info}"
             )
             st.session_state["user_input"] = initial_prompt
@@ -283,13 +282,13 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
         st.title("Excel Formula Analysis")
 
         # 右側の入力フォーム
-        Formula_text = st.text_area("解析したいExcelの式を入力し、実行ボタンを押してください。", height=200, key="translate_text_input")
+        user_input = st.text_area("解析したいExcelの式を入力し、実行ボタンを押してください。", height=200, key="user_input_excel")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数（文字数）をカウント
-        token_count = len(Formula_text) + len(additional_info)
+        token_count = len(user_input) + len(additional_info)
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -320,13 +319,13 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
         st.title("VBA Analysis")
 
         # 右側の入力フォーム
-        VBA_text = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。", height=200, key="translate_text_input")
+        user_input = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。", height=200, key="user_input_vba")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数（文字数）をカウント
-        token_count = len(VBA_text) + len(additional_info)
+        token_count = len(user_input) + len(additional_info)
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -345,7 +344,7 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
                 "操作2:[\n"
                 "入力された作業内容を実行するため、シンプルで分かりやすいVBAコードを書き起こしてください。]\n"
                 "＃インプット:\n"
-                f"{VBA_text}\n"
+                f"{user_input}\n"
                 "＃補足情報:\n"
                 f"{additional_info}\n"
             )
@@ -356,13 +355,13 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
         st.title("Data Analysis")
 
         # 右側の入力フォーム
-        Data_text = st.text_area("解析したいログデータを入力し、実行ボタンを押してください。", height=200, key="translate_text_input")
+        user_input = st.text_area("解析したいログデータを入力し、実行ボタンを押してください。", height=200, key="user_input_data")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数（文字数）をカウント
-        token_count = len(Data_text) + len(additional_info)
+        token_count = len(user_input) + len(additional_info)
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -375,7 +374,7 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
                 "あなたはデータ分析のスペシャリストです。\n"
                 "以下のインプット情報に記載されたログ情報を分析して、セキュリティリスク（不正兆候や異常値等）があるデータを抽出して、理由とともに教えてください。]\n"
                 "＃インプット:\n"
-                f"{Data_text}\n"
+                f"{user_input}\n"
                 "＃補足情報:\n"
                 f"{additional_info}\n"
             )
