@@ -26,6 +26,7 @@ if not st.session_state["authenticated"]:
 if st.session_state["authenticated"] and st.session_state["show_auth_message"]:
     st.success("ログイン成功!")
     if st.button("続ける"):
+        st.experimental_rerun()
         st.session_state["show_auth_message"] = False
 
 if st.session_state["authenticated"] and not st.session_state["show_auth_message"]:
