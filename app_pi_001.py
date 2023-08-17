@@ -13,7 +13,7 @@ if "authenticated" not in st.session_state:
 if "show_auth_message" not in st.session_state:
     st.session_state["show_auth_message"] = False
 
-if not st.session_state["authenticated"]:
+if not st.session_state["authenticated"] and not st.session_state["show_auth_message"]:
     user_id = st.text_input("ユーザーIDを入力してください:")
     password = st.text_input("パスワードを入力してください:", type="password")
     if st.button("ログイン"):
