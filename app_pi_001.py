@@ -72,8 +72,8 @@ if st.session_state["authenticated"]:
     # サイドバーで機能を選択
     selected_option = st.sidebar.selectbox(
         "機能を選択してください",
-        index=0, # デフォルト値として「選択してください」を設定
         ["選択してください", "Q&A", "Translation", "Proofreading", "Excel Formula Analysis", "VBA Analysis", "Data Analysis"],
+        index=0, # デフォルト値として「選択してください」を設定
         key="selectbox_key"  # 固定のキーを指定する
     )
 
