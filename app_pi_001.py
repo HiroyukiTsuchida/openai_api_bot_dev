@@ -32,7 +32,7 @@ if st.session_state["authenticated"]:
     # st.session_stateを使いメッセージのやりとりを保存
     if "messages" not in st.session_state:
         st.session_state["messages"] = [
-            {"role": "system", "content": "You are the best of Internal Audit AI assistant in the world."}
+            {"role": "system", "content": "You are the best AI assistant in the world."}
         ]
 
     if "user_input" not in st.session_state:
@@ -68,7 +68,7 @@ if st.session_state["authenticated"]:
             messages.append(bot_message)
 
         # Reset the messages after the chat
-        messages = [{"role": "system", "content": "You are the best of AI assistant in the world."}]
+        messages = [{"role": "system", "content": "You are the best AI assistant in the world."}]
 
     # サイドバーで機能を選択
     selected_option = st.sidebar.selectbox(
@@ -99,7 +99,7 @@ if st.session_state["authenticated"]:
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
     def copy_text_to_clipboard(text):
-        st.write('<textarea id="copy-textarea" style="opacity: 0;">{}</textarea>'.format(text), unsafe_allow_html=True)
+        st.write('<textarea id="copy-textarea" style="display: none;">{}</textarea>'.format(text), unsafe_allow_html=True)
         st.write('<button onclick="navigator.clipboard.writeText(document.getElementById(\'copy-textarea\').value);">Copy to Clipboard</button>', unsafe_allow_html=True)
 
     # 機能に応じたUIの表示
