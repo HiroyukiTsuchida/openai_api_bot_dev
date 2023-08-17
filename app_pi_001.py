@@ -370,16 +370,16 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
-        if user_input.strip() == "":
-            st.warning("入力後に実行を押してください。")
-        elif st.button("実行", key="send_button_data"):
-            initial_prompt = (
-                "あなたはデータ分析のスペシャリストです。\n"
-                "以下のインプット情報に記載されたログ情報を分析して、セキュリティリスク（不正兆候や異常値等）があるデータを抽出して、理由とともに教えてください。]\n"
-                "＃インプット:\n"
-                f"{user_input}\n"
-                "＃補足情報:\n"
-                f"{additional_info}\n"
+        if st.button("実行", key="send_button_data"):
+            if user_input.strip() == "":
+            else:
+                initial_prompt = (
+                    "あなたはデータ分析のスペシャリストです。\n"
+                    "以下のインプット情報に記載されたログ情報を分析して、セキュリティリスク（不正兆候や異常値等）があるデータを抽出して、理由とともに教えてください。]\n"
+                    "＃インプット:\n"
+                    f"{user_input}\n"
+                    "＃補足情報:\n"
+                    f"{additional_info}\n"
             )
             st.session_state["user_input"] = initial_prompt
             communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
