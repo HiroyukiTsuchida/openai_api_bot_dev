@@ -71,7 +71,7 @@ def communicate(user_input, bot_response_placeholder, model, temperature, top_p)
 # サイドバーで機能を選択
 selected_option = st.sidebar.selectbox(
     "機能を選択してください",
-    ["Q&A", "Translation", "Proofreading", "Formula Analysis", "VBA", "Data Analysis"],
+    ["Q&A", "Translation", "Proofreading", "Excel Formula Analysis", "VBA Analysis", "Data Analysis"],
     key="selectbox_key"  # 固定のキーを指定する
 )
 
