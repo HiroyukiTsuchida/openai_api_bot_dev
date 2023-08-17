@@ -27,7 +27,7 @@ if st.session_state["authenticated"] and st.session_state["show_auth_message"]:
     st.success("ログイン成功!")
     if st.button("続ける"):
         st.session_state["show_auth_message"] = False
-        # Set initial title
+        st.write("認証が完了しました。")
 
 if st.session_state["authenticated"] and not st.session_state["show_auth_message"]:
     # Create a unique key for the widget
