@@ -27,6 +27,8 @@ if st.session_state["authenticated"] and st.session_state["show_auth_message"]:
     st.success("ログイン成功!")
     if st.button("続ける"):
         st.session_state["show_auth_message"] = False
+        # Set initial title
+        st.title("Q&A")
 
 if st.session_state["authenticated"] and not st.session_state["show_auth_message"]:
     # Create a unique key for the widget
@@ -106,7 +108,7 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
     # 機能に応じたUIの表示
     if selected_option == "Q&A":
         # Build the user interface
-        st.title("AI Assistant")
+        st.title("Q&A")
 
         # Create a placeholder for the user's input
         user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""))
@@ -381,21 +383,6 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
             st.session_state["user_input"] = initial_prompt
             communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
-# ログイン機能の実装
-#def login():
-#    username = st.sidebar.text_input("ユーザー名")
-#    password = st.sidebar.text_input("パスワード", type="password")
-#    if st.sidebar.button("ログイン"):
-#        if username == "admin" and password == "llm@2023":
-#            st.sidebar.success("ログインに成功しました。")
-#            return True
-#        else:
-#            st.sidebar.error("ユーザー名またはパスワードが間違っています。")
-#    return False
-
-# ログインチェック
-#if not login():
-#    st.stop()
 
 # DeepLのAPIキーを取得
 #DEEPL_API_KEY = st.secrets["DeepLAPI"]["deepl_api_key"]
