@@ -372,6 +372,7 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
 
         if st.button("実行", key="send_button_data"):
             if user_input.strip() == "":
+                st.warning("データを入力してください。")
             else:
                 initial_prompt = (
                     "あなたはデータ分析のスペシャリストです。\n"
@@ -380,7 +381,7 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
                     f"{user_input}\n"
                     "＃補足情報:\n"
                     f"{additional_info}\n"
-            )
+                )
             st.session_state["user_input"] = initial_prompt
             communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
