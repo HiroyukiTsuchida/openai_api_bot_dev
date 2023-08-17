@@ -313,7 +313,7 @@ if st.session_state["authenticated"]:
                     "操作2:[\n"
                     "操作1を行った後にこのExcel関数がどのような処理を行おうとしているものか解説し、よりシンプルで分かりやすい関数に書き換えが可能であれば、その提案をしてください。]\n"
                     "＃Excel関数:\n"
-                    f"{Formula_text}\n"
+                    f"{user_input}\n"
                     "＃補足情報:\n"
                     f"{additional_info}\n"
                 )
