@@ -121,7 +121,7 @@ elif selected_option == "Translation":
     additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
     # トークン数（文字数）をカウント
-    token_count = len(user_input)
+    token_count = len(translate_text)
 
     # トークン数を表示
     st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -218,7 +218,7 @@ elif selected_option == "Proofreading":
     additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
     # トークン数（文字数）をカウント
-    token_count = len(user_input)
+    token_count = len(proofreading_text)
 
     # トークン数を表示
     st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -271,7 +271,7 @@ elif selected_option == "Formula Analysis":
     additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
     # トークン数（文字数）をカウント
-    token_count = len(user_input)
+    token_count = len(Formula_text)
 
     # トークン数を表示
     st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
