@@ -382,8 +382,8 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
                     "＃補足情報:\n"
                     f"{additional_info}\n"
                 )
-            st.session_state["user_input"] = initial_prompt
-            communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
+                st.session_state["user_input"] = initial_prompt
+                communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
 
 # DeepLのAPIキーを取得
