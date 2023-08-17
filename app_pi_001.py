@@ -59,7 +59,8 @@ if st.session_state["authenticated"]:
             if content is not None:
                 # Accumulate content and update the bot's response in real time
                 complete_response += content
-                bot_response_placeholder.markdown(complete_response, unsafe_allow_html=True)
+                indented_response = f"<div style='margin-left: 20px;'>{complete_response}</div>" # インデントで回答
+                bot_response_placeholder.markdown(indented_response, unsafe_allow_html=True)
 
         # After all chunks are received, add the complete response to the chat history
         if complete_response:
