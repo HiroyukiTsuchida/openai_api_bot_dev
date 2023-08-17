@@ -28,7 +28,6 @@ if st.session_state["authenticated"] and st.session_state["show_auth_message"]:
     if st.button("続ける"):
         st.session_state["show_auth_message"] = False
         # Set initial title
-        st.title("Q&A")
 
 if st.session_state["authenticated"] and not st.session_state["show_auth_message"]:
     # Create a unique key for the widget
@@ -114,7 +113,7 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
         user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""))
 
         # トークン数（文字数）をカウント
-        token_count = len(user_input)
+        token_count = len(user_input.split())
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -140,7 +139,7 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数（文字数）をカウント
-        token_count = len(user_input) + len(additional_info)
+        token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -237,7 +236,7 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数（文字数）をカウント
-        token_count = len(user_input) + len(additional_info)
+        token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -290,7 +289,7 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数（文字数）をカウント
-        token_count = len(user_input) + len(additional_info)
+        token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -327,7 +326,7 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数（文字数）をカウント
-        token_count = len(user_input) + len(additional_info)
+        token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -335,7 +334,7 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
-        if st.button("実行", key="send_button_formula"):
+        if st.button("実行", key="send_button_vba"):
             initial_prompt = (
                 "あなたは金融・投資・経済情報の分析を行うスペシャリストで、Microsoft Excelのエキスパートです。\n"
                 "あなたの役割は、一つ目は情報分析のために作成された過去の複雑なVBAコードを分析し、わかりやすく説明すること、二つ目は実行したい作業内容をVBAコードに書き起こすです。\n"
@@ -363,7 +362,7 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数（文字数）をカウント
-        token_count = len(user_input) + len(additional_info)
+        token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -371,7 +370,7 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
-        if st.button("実行", key="send_button_formula"):
+        if st.button("実行", key="send_button_data"):
             initial_prompt = (
                 "あなたはデータ分析のスペシャリストです。\n"
                 "以下のインプット情報に記載されたログ情報を分析して、セキュリティリスク（不正兆候や異常値等）があるデータを抽出して、理由とともに教えてください。]\n"
