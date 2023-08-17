@@ -87,9 +87,11 @@ if st.session_state["authenticated"]:
         key="model_selectbox_key"  # 固定のキーを指定する
     )
 
+    # タイトル「オプション」を追加
+    st.sidebar.header("オプション")
+
     # Temperatureスライダーとその補足情報
     with st.sidebar.beta_expander("Temperature  🛈"):
-        "オプション設定",
         st.write("Temperature（温度）:モデルの出力の「確信度」または「多様性」を制御します。値が高いとモデルの出力は多様性が増し、予測はよりランダムになります。逆に、値が低いとモデルの出力はより確信度が高くなり、最も確率的に高い結果を選びやすくなります。初期値は0.1に設定しています。")
         temperature = st.slider("", 0.0, 2.0, 0.1, 0.01)
 
