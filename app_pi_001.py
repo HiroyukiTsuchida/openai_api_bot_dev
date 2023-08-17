@@ -72,7 +72,8 @@ if st.session_state["authenticated"]:
     # サイドバーで機能を選択
     selected_option = st.sidebar.selectbox(
         "機能を選択してください",
-        ["Q&A", "Translation", "Proofreading", "Excel Formula Analysis", "VBA Analysis", "Data Analysis"],
+        index=0, # デフォルト値として「選択してください」を設定
+        ["選択してください", "Q&A", "Translation", "Proofreading", "Excel Formula Analysis", "VBA Analysis", "Data Analysis"],
         key="selectbox_key"  # 固定のキーを指定する
     )
 
@@ -94,7 +95,9 @@ if st.session_state["authenticated"]:
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
     # 機能に応じたUIの表示
-    if selected_option == "Q&A":
+    if selected_option == "選択してください":
+        pass  # 何も表示しない
+    elif selected_option == "Q&A":
         # Build the user interface
         st.title("Q&A")
 
