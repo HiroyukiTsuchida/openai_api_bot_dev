@@ -7,20 +7,21 @@ import uuid
 st.sidebar.title("[Dev] AI Assistant")
 
 # 初回ログイン認証
-#if "authenticated" not in st.session_state:
-#    st.session_state["authenticated"] = False
+if "authenticated" not in st.session_state:
+    st.session_state["authenticated"] = False
 
-#if not st.session_state["authenticated"]:
-#    user_id = st.text_input("ユーザーIDを入力してください:")
-#    password = st.text_input("パスワードを入力してください:", type="password")
-#    if st.button("ログイン"):
-#        if user_id == "Admin" and password == "LLM@2023":
-#            st.session_state["authenticated"] = True
-#            st.success("ログイン成功!")
-#        else:
-#            st.error("誤ったユーザーIDまたはパスワードです。")
+if not st.session_state["authenticated"]:
+    user_id = st.text_input("ユーザーIDを入力してください:")
+    password = st.text_input("パスワードを入力してください:", type="password")
+    if st.button("ログイン"):
+        if user_id == "Admin" and password == "LLM@2023":
+            st.session_state["authenticated"] = True
+            st.success("ログイン成功!")
+        else:
+            st.error("誤ったユーザーIDまたはパスワードです。")
 
-#if st.session_state["authenticated"]:
+if st.session_state["authenticated"]:
+    st.write("認証が成功しました。")
 
 # Create a unique key for the widget
 unique_key = str(uuid.uuid4())
@@ -348,7 +349,7 @@ elif selected_option == "Data Analysis":
     st.title("Data Analysis")
 
     # 右側の入力フォーム
-    Data_text = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。", height=200, key="translate_text_input")
+    Data_text = st.text_area("解析したいログデータを入力し、実行ボタンを押してください。", height=200, key="translate_text_input")
 
     # 追加：補足情報の入力フィールド
     additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -365,7 +366,7 @@ elif selected_option == "Data Analysis":
     if st.button("実行", key="send_button_formula"):
         initial_prompt = (
             "あなたはデータ分析のスペシャリストです。\n"
-            "以下のインプット情報に記載されたログ情報を分析して、不正の兆候や異常値があるデータを抽出して、理由とともに教えてください。]\n"
+            "以下のインプット情報に記載されたログ情報を分析して、セキュリティリスク（不正兆候や異常値等）があるデータを抽出して、理由とともに教えてください。]\n"
             "＃インプット:\n"
             f"{Data_text}\n"
             "＃補足情報:\n"
