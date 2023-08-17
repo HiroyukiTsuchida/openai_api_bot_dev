@@ -10,23 +10,19 @@ st.sidebar.title("[Dev] AI Assistant")
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
 
-if "show_auth_message" not in st.session_state:
-    st.session_state["show_auth_message"] = False
-
-if not st.session_state["authenticated"] and not st.session_state["show_auth_message"]:
+if not st.session_state["authenticated"]:
     user_id = st.text_input("ユーザーIDを入力してください:")
     password = st.text_input("パスワードを入力してください:", type="password")
     if st.button("ログイン"):
         if user_id == "admin" and password == "LLM@2023":
             st.session_state["authenticated"] = True
-            st.session_state["show_auth_message"] = True
             st.success("ログイン成功!")
             if st.button("続ける"):
-                st.session_state["show_auth_message"] = False
+                pass
         else:
             st.error("誤ったユーザーIDまたはパスワードです。")
 
-if st.session_state["authenticated"] and not st.session_state["show_auth_message"]:
+if st.session_state["authenticated"]:
     # Create a unique key for the widget
     unique_key = str(uuid.uuid4())
 
