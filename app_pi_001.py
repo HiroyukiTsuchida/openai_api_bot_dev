@@ -250,7 +250,34 @@ elif selected_option == "Proofreading":
 
 
 elif selected_option == "Formula Analysis":
-    st.title("[WIP] Formula Analysis")
+    st.title("Formula Analysis")
+
+    # 右側の入力フォーム
+    Formula_text = st.text_area("解析したいExcelの式を入力し、実行ボタンを押してください。", height=200, key="translate_text_input")
+
+    # 追加：補足情報の入力フィールド
+    additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
+
+    # Create a placeholder for the bot's responses
+    bot_response_placeholder = st.empty()
+
+    if st.button("実行", key="send_button_formula"):
+        initial_prompt = (
+            "あなたは金融・投資・経済情報の分析を行うスペシャリストで、Microsoft Excelのエキスパートです。\n"
+            "あなたの役割は、情報分析のために作成された過去の複雑なExcel関数を分析し、わかりやすく説明することです。\n"
+            "これから入力するExcel関数に対して、下記の操作1を行い、出力してください。\n"
+            "操作1:[\n"
+            "複雑なネスト構造になっているExcel関数を改行し、わかりやすく表示してください。\n"
+            ""]\n"
+            "操作2:[\n"
+            "操作1を行った後にこのExcel関数がどのような処理を行おうとしているものか解説し、よりシンプルで分かりやすい関数に書き換えが可能であれば、その提案をしてください。]\n"
+            "＃Excel関数:\n"
+            f"{Formula_text}\n"
+            "＃補足情報:\n"
+            f{additional_info}"\n"
+        )
+        st.session_state["user_input"] = initial_prompt
+        communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
 
 elif selected_option == "VBA":
