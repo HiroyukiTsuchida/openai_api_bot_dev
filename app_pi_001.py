@@ -268,13 +268,13 @@ elif selected_option == "Formula Analysis":
             "これから入力するExcel関数に対して、下記の操作1を行い、出力してください。\n"
             "操作1:[\n"
             "複雑なネスト構造になっているExcel関数を改行し、わかりやすく表示してください。\n"
-            ""]\n"
+            "]\n"
             "操作2:[\n"
             "操作1を行った後にこのExcel関数がどのような処理を行おうとしているものか解説し、よりシンプルで分かりやすい関数に書き換えが可能であれば、その提案をしてください。]\n"
             "＃Excel関数:\n"
             f"{Formula_text}\n"
             "＃補足情報:\n"
-            f{additional_info}"\n"
+            f"{additional_info}"\n"
         )
         st.session_state["user_input"] = initial_prompt
         communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
