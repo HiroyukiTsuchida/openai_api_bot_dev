@@ -83,8 +83,18 @@ model = st.sidebar.selectbox(
 )
 
 # TemperatureとTop_Pの値を調整するスライダー
-temperature = st.sidebar.slider("Temperatureを選択してください", 0.0, 1.0, 0.1, 0.01)
-top_p = st.sidebar.slider("Top_Pを選択してください", 0.0, 1.0, 0.5, 0.01)
+#temperature = st.sidebar.slider("Temperatureを選択してください", 0.0, 1.0, 0.1, 0.01)
+#top_p = st.sidebar.slider("Top_Pを選択してください", 0.0, 1.0, 0.5, 0.01)
+
+# Temperatureスライダーとその補足情報
+with st.sidebar.beta_expander("Temperatureを選択してください 🛈"):
+    st.write("Temperatureの補足コメント: ランダム性を制御します。温度を下げることは、モデルがより反復的および決定論的な応答を生成することを意味します。温度を上げると、予期しない応答や創造的な応答が増えます。温度または上位 P の両方ではなくどちらかを調整してみてください。")
+    temperature = st.slider("", 0.0, 1.0, 0.1, 0.01)
+
+# Top_Pスライダーとその補足情報
+with st.sidebar.beta_expander("Top_Pを選択してください 🛈"):
+    st.write("Top_Pの補足コメント: 温度と同様に、これはランダム性を制御しますが、別の方法を使用します。上位 P を下げると、モデルのトークンの選択がより可能性が高いトークンに絞り込まれます。上位 P を上げると、確率が高いトークンと低いトークンの両方からモデルが選択できるようになります。温度または上位 P の両方ではなくどちらかを調整してみてください。")
+    top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
 # 機能に応じたUIの表示
 if selected_option == "Q&A":
