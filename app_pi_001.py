@@ -87,12 +87,12 @@ model = st.sidebar.selectbox(
 #top_p = st.sidebar.slider("Top_Pを選択してください", 0.0, 1.0, 0.5, 0.01)
 
 # Temperatureスライダーとその補足情報
-with st.sidebar.beta_expander("Temperatureを選択してください 🛈"):
+with st.sidebar.beta_expander("Temperatureを選択してください  🛈"):
     st.write("Temperature（温度）:モデルの出力の「確信度」または「多様性」を制御します。値が高いとモデルの出力は多様性が増し、予測はよりランダムになります。逆に、値が低いとモデルの出力はより確信度が高くなり、最も確率的に高い結果を選びやすくなります。初期値は0.1に設定しています。")
     temperature = st.slider("", 0.0, 2.0, 0.1, 0.01)
 
 # Top_Pスライダーとその補足情報
-with st.sidebar.beta_expander("Top_Pを選択してください 🛈"):
+with st.sidebar.beta_expander("Top_Pを選択してください  🛈"):
     st.write("Top_P: 温度と同様に、これはランダム性を制御しますが、別の方法を使用します。Top_P を下げると、より可能性が高い回答に絞り込まれます。Top_P を上げると、確率が高い回答と低い回答の両方から選択されるようになります。初期値は0.5に設定しています。")
     top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
@@ -345,8 +345,34 @@ elif selected_option == "VBA Analysis":
         communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
 elif selected_option == "Data Analysis":
-    st.title("[WIP] Data Analysis")
+    st.title("Data Analysis")
 
+    # 右側の入力フォーム
+    Data_text = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。", height=200, key="translate_text_input")
+
+    # 追加：補足情報の入力フィールド
+    additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
+
+    # トークン数（文字数）をカウント
+    token_count = len(Data_text) + len(additional_info)
+
+    # トークン数を表示
+    st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
+
+    # Create a placeholder for the bot's responses
+    bot_response_placeholder = st.empty()
+
+    if st.button("実行", key="send_button_formula"):
+        initial_prompt = (
+            "あなたはデータ分析のスペシャリストです。\n"
+            "以下のインプット情報に記載されたログ情報を分析して、不正の兆候や異常値があるデータを抽出して、理由とともに教えてください。]\n"
+            "＃インプット:\n"
+            f"{Data_text}\n"
+            "＃補足情報:\n"
+            f"{additional_info}\n"
+        )
+        st.session_state["user_input"] = initial_prompt
+        communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
 # ログイン機能の実装
 #def login():
