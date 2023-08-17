@@ -77,7 +77,6 @@ if st.session_state["authenticated"] and not st.session_state["show_auth_message
     selected_option = st.sidebar.selectbox(
         "機能を選択してください",
         ["Q&A", "Translation", "Proofreading", "Excel Formula Analysis", "VBA Analysis", "Data Analysis"],
-        index=0, # デフォルト値として「選択してください」を設定
         key="selectbox_key"  # 固定のキーを指定する
     )
 
