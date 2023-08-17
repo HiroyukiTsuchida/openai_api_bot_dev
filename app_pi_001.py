@@ -120,6 +120,12 @@ elif selected_option == "Translation":
     # 追加：補足情報の入力フィールド
     additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
+    # トークン数（文字数）をカウント
+    token_count = len(user_input)
+
+    # トークン数を表示
+    st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
+    
     # Create a placeholder for the bot's responses
     bot_response_placeholder = st.empty()
 
@@ -211,6 +217,12 @@ elif selected_option == "Proofreading":
     # 追加：補足情報の入力フィールド
     additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
+    # トークン数（文字数）をカウント
+    token_count = len(user_input)
+
+    # トークン数を表示
+    st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
+
     # Create a placeholder for the bot's responses
     bot_response_placeholder = st.empty()
 
@@ -257,6 +269,12 @@ elif selected_option == "Formula Analysis":
 
     # 追加：補足情報の入力フィールド
     additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
+
+    # トークン数（文字数）をカウント
+    token_count = len(user_input)
+
+    # トークン数を表示
+    st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
 
     # Create a placeholder for the bot's responses
     bot_response_placeholder = st.empty()
