@@ -274,7 +274,7 @@ elif selected_option == "Formula Analysis":
             "＃Excel関数:\n"
             f"{Formula_text}\n"
             "＃補足情報:\n"
-            f"{additional_info}"\n"
+            f"{additional_info}\n"
         )
         st.session_state["user_input"] = initial_prompt
         communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
