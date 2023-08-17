@@ -261,8 +261,8 @@ elif selected_option == "Proofreading":
         communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
 
-elif selected_option == "Formula Analysis":
-    st.title("Formula Analysis")
+elif selected_option == "Excel Formula Analysis":
+    st.title("Excel Formula Analysis")
 
     # 右側の入力フォーム
     Formula_text = st.text_area("解析したいExcelの式を入力し、実行ボタンを押してください。", height=200, key="translate_text_input")
@@ -298,9 +298,41 @@ elif selected_option == "Formula Analysis":
         communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
 
-elif selected_option == "VBA":
-    st.title("[WIP] VBA")
+elif selected_option == "VBA Analysis":
+    st.title("VBA Analysis")
 
+    # 右側の入力フォーム
+    VBA_text = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。", height=200, key="translate_text_input")
+
+    # 追加：補足情報の入力フィールド
+    additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
+
+    # トークン数（文字数）をカウント
+    token_count = len(VBA_text) + len(additional_info)
+
+    # トークン数を表示
+    st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
+
+    # Create a placeholder for the bot's responses
+    bot_response_placeholder = st.empty()
+
+    if st.button("実行", key="send_button_formula"):
+        initial_prompt = (
+            "あなたは金融・投資・経済情報の分析を行うスペシャリストで、Microsoft Excelのエキスパートです。\n"
+            "あなたの役割は、一つ目は情報分析のために作成された過去の複雑なVBAコードを分析し、わかりやすく説明すること、二つ目は実行したい作業内容をVBAコードに書き起こすです。\n"
+            "これから入力するデータがVBAコードの場合は下記の操作1を、日本語の場合は操作2を行い、出力してください。\n"
+            "操作1:[\n"
+            "このVBAコードがどのような処理を実行しようとするものか、わかりやすく表示してください。\n"
+            ""]\n"
+            "操作2:[\n"
+            "入力された作業内容を実行するため、シンプルで分かりやすいVBAコードを書き起こしてください。]\n"
+            "＃インプット:\n"
+            f"{VBA_text}\n"
+            "＃補足情報:\n"
+            f"{additional_info}\n"
+        )
+        st.session_state["user_input"] = initial_prompt
+        communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
 elif selected_option == "Data Analysis":
     st.title("[WIP] Data Analysis")
