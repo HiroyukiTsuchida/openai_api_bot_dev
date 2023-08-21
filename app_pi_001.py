@@ -99,6 +99,9 @@ if st.session_state["authenticated"]:
         st.write("Top_P: 温度と同様に、これはランダム性を制御しますが、別の方法を使用します。Top_P を下げると、より可能性が高い回答に絞り込まれます。Top_P を上げると、確率が高い回答と低い回答の両方から選択されるようになります。初期値は0.5に設定しています。")
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
+    # 留意点の表示
+    st.sidebar.markdown('<span style="color:red">**個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
+
     # 機能に応じたUIの表示
     if selected_option == "選択してください":
         pass  # 何も表示しない
@@ -143,7 +146,7 @@ if st.session_state["authenticated"]:
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
-        
+
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
