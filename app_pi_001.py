@@ -135,6 +135,9 @@ if st.session_state["authenticated"]:
     elif selected_option == "Translation":
         st.title("Translation")
 
+    # 留意点の表示
+        st.markdown('<span style="color:red">***注意！個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
+
         # 右側の入力フォーム
         user_input = st.text_area("翻訳したい文章を入力し、実行ボタンを押してください。", height=200, key="user_input_translation")
 
