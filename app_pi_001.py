@@ -355,22 +355,16 @@ if st.session_state["authenticated"]:
         st.session_state["show_prompt"] = False
 
     # ボタンのラベルを動的に変更
-    button_label = "システムプロンプトを表示" if not st.session_state["show_prompt"] else "システムプロンプトを非表示"
+    button_label = "システムプロンプトを表示" if not st.session_state["show_prompt"] else "戻る"
 
     # サイドバーにボタンを配置
     if st.sidebar.button(button_label):
-        # セッションステートの状態をトグルする
         st.session_state["show_prompt"] = not st.session_state["show_prompt"]
-        # 直ちに次のコードに進行するための条件
-        button_clicked = True
-    else:
-        button_clicked = False
+        st.experimental_rerun()  # ページ全体を再実行
 
-    # セッションステートの状態とボタンのクリック状態に基づいてプロンプトを表示/非表示
-    if st.session_state["show_prompt"] or button_clicked:
+    # セッションステートの状態に基づいてプロンプトを表示/非表示
+    if st.session_state["show_prompt"]:
         st.markdown(initial_prompt)
-    else:
-        st.empty()  # 明示的に空のスペースを生成
 
     # 右側の入力フォーム
         user_input = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。", height=200, key="user_input_vba")
