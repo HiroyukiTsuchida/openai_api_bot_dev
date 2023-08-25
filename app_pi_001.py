@@ -350,10 +350,21 @@ if st.session_state["authenticated"]:
         "入力された作業内容を実行するため、シンプルで分かりやすいVBAコードを書き起こしてください。]\n"
         )
 
-    # サイドバーに「システムプロンプトを表示」ボタンを配置
-        if st.sidebar.button("システムプロンプトを表示"):
-        # ボタンがクリックされたら、メインページに内容を表示
-            st.write(initial_prompt)
+    # セッションステートの初期化
+        if "show_prompt" not in st.session_state:
+            st.session_state["show_prompt"] = False
+
+    # ボタンのラベルを動的に変更
+        button_label = "システムプロンプトを表示" if not st.session_state["show_prompt"] else "システムプロンプトを非表示"
+
+    # サイドバーにボタンを配置
+        if st.sidebar.button(button_label):
+        # ボタンの状態をトグルする
+            st.session_state["show_prompt"] = not st.session_state["show_prompt"]
+
+    # セッションステートの状態に基づいてプロンプトを表示/非表示
+        if st.session_state["show_prompt"]:
+            st.markdown(initial_prompt)
 
     # 右側の入力フォーム
         user_input = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。", height=200, key="user_input_vba")
