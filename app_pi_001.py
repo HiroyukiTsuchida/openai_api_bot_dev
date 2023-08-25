@@ -349,12 +349,12 @@ if st.session_state["authenticated"]:
         "操作2:[\n"
         "入力された作業内容を実行するため、シンプルで分かりやすいVBAコードを書き起こしてください。]\n"
         )
-
+    
     # システムプロンプトの表示
         st.text("システムプロンプト:")
         st.write(initial_prompt)
-        tooltip_text = "これはシステムプロンプトの詳細です。..."
-        st.tooltip(tooltip_text, location="below")
+        info_text = "これはシステムプロンプトの詳細です。..."
+        st.info(info_text)
 
     # 右側の入力フォーム
         user_input = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。", height=200, key="user_input_vba")
