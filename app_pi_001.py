@@ -353,7 +353,7 @@ if st.session_state["authenticated"]:
     # サイドバーに「システムプロンプトを表示」ボタンを配置
         if st.sidebar.button("システムプロンプトを表示"):
         # ボタンがクリックされたら、メインページに内容を表示
-        st.write(initial_prompt)
+            st.write(initial_prompt)
 
     # 右側の入力フォーム
         user_input = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。", height=200, key="user_input_vba")
