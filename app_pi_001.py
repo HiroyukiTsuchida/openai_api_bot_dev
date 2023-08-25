@@ -234,7 +234,7 @@ if st.session_state["authenticated"]:
 
         #システムプロンプトの表示
         tooltip_text = "これはシステムプロンプトの詳細です。"
-    
+
         # システムプロンプトの表示
         st.text(initial_prompt)
         st.tooltip(tooltip_text, location="below")
@@ -349,12 +349,11 @@ if st.session_state["authenticated"]:
         "操作2:[\n"
         "入力された作業内容を実行するため、シンプルで分かりやすいVBAコードを書き起こしてください。]\n"
         )
-    
-    # システムプロンプトの表示
-        st.text("システムプロンプト:")
+
+    # サイドバーに「システムプロンプトを表示」ボタンを配置
+        if st.sidebar.button("システムプロンプトを表示"):
+        # ボタンがクリックされたら、メインページに内容を表示
         st.write(initial_prompt)
-        info_text = "これはシステムプロンプトの詳細です。..."
-        st.info(info_text)
 
     # 右側の入力フォーム
         user_input = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。", height=200, key="user_input_vba")
