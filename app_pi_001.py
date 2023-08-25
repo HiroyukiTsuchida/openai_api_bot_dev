@@ -232,6 +232,14 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
+        #システムプロンプトの表示
+        tooltip_text = "これはシステムプロンプトの詳細です。..."
+    
+        # システムプロンプトの表示
+        st.text(initial_prompt)
+        st.tooltip(tooltip_text, location="below")
+
+
     elif selected_option == "Proofreading":
         st.title("Proofreading")
 
