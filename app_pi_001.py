@@ -126,7 +126,7 @@ if st.session_state["authenticated"]:
         bot_response_placeholder = st.empty()
 
         # Execute the communicate function when the user presses the 'Submit' button
-        if st.button("実行", key="send_button_data"):
+        if st.button("実行", key="send_button_question"):
             if user_input.strip() == "":
                 st.warning("データを入力してください。")
             else:
@@ -174,6 +174,9 @@ if st.session_state["authenticated"]:
 # サイドバーにボタンを配置
         if st.sidebar.button(button_label):
             st.session_state["show_prompt"] = not st.session_state["show_prompt"]
+
+# イニシャルプロンプトを初期値として定義
+        initial_prompt = ""
 
         if st.button("実行", key="send_button_translation"):
             if user_input.strip() == "":
@@ -256,7 +259,7 @@ if st.session_state["authenticated"]:
                 )
 
  # ユーザーの入力画面またはシステムプロンプトを表示
-            if st.session_state["show_prompt"]:
+            if st.session_state["show_prompt"] and initial_prompt:
                 st.text(initial_prompt)
 
     elif selected_option == "Proofreading":
