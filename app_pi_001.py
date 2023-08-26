@@ -176,7 +176,7 @@ if st.session_state["authenticated"]:
             st.session_state["show_prompt"] = not st.session_state["show_prompt"]
 
 # イニシャルプロンプトを初期値として定義
-        initial_prompt = = (
+        initial_prompt =  (
                     "あなたは優秀な翻訳家です。あなたの役割は、英文を日本語に翻訳し、日本語のウェブサイト上で日本人の投資家向けに翻訳された間違いのない情報を提供することです。\n"
                     "可能な限り原文に忠実に、漏れや間違いなく、自然な日本語に翻訳してください。\n"
                     "＃指示\n"
