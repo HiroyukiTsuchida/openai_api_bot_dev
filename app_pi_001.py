@@ -138,15 +138,10 @@ if st.session_state["authenticated"]:
             if user_input.strip() == "":
                 st.warning("データを入力してください。")
             else:
-                st.session_state["user_input_Q&A"] = user_input
-                communicate(st.session_state["user_input_Q&A"], bot_response_placeholder, model, temperature, top_p)
-
-            else:
                 initial_prompt = (
                     "あなたの役割は、ユーザーからの質問に対してわかりやすく端的に回答することです。"
                     )
-
-   st.session_state["user_input"] = initial_prompt
+                st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
 
