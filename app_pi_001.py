@@ -140,6 +140,8 @@ if st.session_state["authenticated"]:
             # Clear the user input
             st.session_state["user_input_Q&A"] = ""
 
+
+
     elif selected_option == "Translation":
         st.title("Translation")
 
@@ -254,7 +256,7 @@ if st.session_state["authenticated"]:
                 )
 
  # ユーザーの入力画面またはシステムプロンプトを表示
-            elif st.session_state["show_prompt"]:
+            if st.session_state["show_prompt"]:
                 st.text(initial_prompt)
 
     elif selected_option == "Proofreading":
