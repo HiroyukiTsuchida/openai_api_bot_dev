@@ -102,17 +102,6 @@ if st.session_state["authenticated"]:
     # システムプロンプト表示ボタンの説明
     st.sidebar.markdown('<span style="color:blue">***このメニューにあらかじめ組み込まれたプロンプトは、このボタンを押すと表示されます**</span>', unsafe_allow_html=True)
 
-# セッションステートの初期化（プロンプトの表示状態を保持するためのフラグ）
-    if "show_prompt" not in st.session_state:
-        st.session_state["show_prompt"] = False
-
-# ボタンのラベルを動的に変更
-    button_label = "プロンプトを表示" if not st.session_state["show_prompt"] else "戻る"
-
-# サイドバーにボタンを配置
-    if st.sidebar.button(button_label):
-        st.session_state["show_prompt"] = not st.session_state["show_prompt"]
-
     # 機能に応じたUIの表示
     if selected_option == "選択してください":
         pass  # 何も表示しない
@@ -250,13 +239,25 @@ if st.session_state["authenticated"]:
                     "【悪い日本語訳の例】申込書は確認のために社長に提出されなければならない。\n"
                     "【良い日本語訳の例】申込書を提出し社長の確認を受けなければならない。\n"
                 )
+
+# セッションステートの初期化（プロンプトの表示状態を保持するためのフラグ）
+        if "show_prompt" not in st.session_state:
+            st.session_state["show_prompt"] = False
+
+# ボタンのラベルを動的に変更
+        button_label = "プロンプトを表示" if not st.session_state["show_prompt"] else "戻る"
+
+# サイドバーにボタンを配置
+        if st.sidebar.button(button_label):
+            st.session_state["show_prompt"] = not st.session_state["show_prompt"]
+
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
      
  # ユーザーの入力画面またはシステムプロンプトを表示
-    if st.session_state["show_prompt"]:
-        st.text(initial_prompt)
+        if st.session_state["show_prompt"]:
+            st.text(initial_prompt)
 
     elif selected_option == "Proofreading":
         st.title("Proofreading")
