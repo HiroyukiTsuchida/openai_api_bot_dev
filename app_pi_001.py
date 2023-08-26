@@ -250,9 +250,8 @@ if st.session_state["authenticated"]:
 # サイドバーにボタンを配置
         if st.sidebar.button(button_label):
             st.session_state["show_prompt"] = not st.session_state["show_prompt"]
-
-                st.session_state["user_input"] = initial_prompt
-                communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
+            st.session_state["user_input"] = initial_prompt
+            communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
      
  # ユーザーの入力画面またはシステムプロンプトを表示
