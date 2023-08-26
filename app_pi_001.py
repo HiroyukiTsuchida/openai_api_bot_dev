@@ -110,6 +110,9 @@ if st.session_state["authenticated"]:
         # Build the user interface
         st.title("Q&A")
 
+    # 留意点の表示
+        st.markdown('<span style="color:red">***注意！個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
+
         # Create a placeholder for the user's input
         user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""))
 
@@ -159,6 +162,16 @@ if st.session_state["authenticated"]:
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
+# セッションステートの初期化（プロンプトの表示状態を保持するためのフラグ）
+        if "show_prompt" not in st.session_state:
+            st.session_state["show_prompt"] = False
+
+# ボタンのラベルを動的に変更
+        button_label = "プロンプトを表示" if not st.session_state["show_prompt"] else "戻る"
+
+# サイドバーにボタンを配置
+        if st.sidebar.button(button_label):
+            st.session_state["show_prompt"] = not st.session_state["show_prompt"]
 
         if st.button("実行", key="send_button_translation"):
             if user_input.strip() == "":
@@ -240,23 +253,9 @@ if st.session_state["authenticated"]:
                     "【良い日本語訳の例】申込書を提出し社長の確認を受けなければならない。\n"
                 )
 
-# セッションステートの初期化（プロンプトの表示状態を保持するためのフラグ）
-        if "show_prompt" not in st.session_state:
-            st.session_state["show_prompt"] = False
-
-# ボタンのラベルを動的に変更
-        button_label = "プロンプトを表示" if not st.session_state["show_prompt"] else "戻る"
-
-# サイドバーにボタンを配置
-        if st.sidebar.button(button_label):
-            st.session_state["show_prompt"] = not st.session_state["show_prompt"]
-            st.session_state["user_input"] = initial_prompt
-            communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
-
-     
  # ユーザーの入力画面またはシステムプロンプトを表示
-        if st.session_state["show_prompt"]:
-            st.text(initial_prompt)
+            elif st.session_state["show_prompt"]:
+                st.text(initial_prompt)
 
     elif selected_option == "Proofreading":
         st.title("Proofreading")
