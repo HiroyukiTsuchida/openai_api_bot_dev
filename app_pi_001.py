@@ -1,6 +1,5 @@
 
 import streamlit as st
-from streamlit_clipboard import st_clipboard
 import openai
 import uuid
 
@@ -135,9 +134,6 @@ if st.session_state["authenticated"]:
             else:
                 st.session_state["user_input_Q&A"] = user_input
                 communicate(st.session_state["user_input_Q&A"], bot_response_placeholder, model, temperature, top_p)
-
-        # グレーの枠でテキストを表示し、「クリップボードにコピー」ボタンを追加
-        st_clipboard.text_area("結果をコピー", value=bot_response_placeholder, height=400, background_color="lightgray")
 
         # Clear the user input
         st.session_state["user_input_Q&A"] = ""
