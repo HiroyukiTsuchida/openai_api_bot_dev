@@ -306,11 +306,7 @@ if st.session_state["authenticated"]:
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
-        if st.button("実行", key="send_button_formula"):
-            if user_input.strip() == "":
-                st.warning("データを入力してください。")
-            else:
-                initial_prompt = (
+        initial_prompt = (
                     "あなたは金融・投資・経済情報の分析を行うスペシャリストで、Microsoft Excelのエキスパートです。\n"
                     "あなたの役割は、情報分析のために作成された過去の複雑なExcel関数を分析し、わかりやすく説明することです。\n"
                     "これから入力するExcel関数に対して、下記の操作1を行い、出力してください。\n"
@@ -324,6 +320,11 @@ if st.session_state["authenticated"]:
                     "＃補足情報:\n"
                     f"{additional_info}\n"
                 )
+            
+        if st.button("実行", key="send_button_formula"):
+            if user_input.strip() == "":
+                st.warning("データを入力してください。")
+            else:
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
