@@ -82,7 +82,7 @@ if st.session_state["authenticated"]:
     # モデルを選択
     model = st.sidebar.selectbox(
         "モデルを選択してください",
-        ["gpt-3.5-turbo-16k", "gpt-4"],
+        ["gpt-4", "gpt-3.5-turbo-16k"],
         key="model_selectbox_key"  # 固定のキーを指定する
     )
 
@@ -163,11 +163,7 @@ if st.session_state["authenticated"]:
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
-        if st.button("実行", key="send_button_translation"):
-            if user_input.strip() == "":
-                st.warning("データを入力してください。")
-            else:
-                initial_prompt = (
+        initial_prompt = (
                     "あなたは優秀な翻訳家です。あなたの役割は、英文を日本語に翻訳し、日本語のウェブサイト上で日本人の投資家向けに翻訳された間違いのない情報を提供することです。\n"
                     "可能な限り原文に忠実に、漏れや間違いなく、自然な日本語に翻訳してください。\n"
                     "＃指示\n"
@@ -242,6 +238,11 @@ if st.session_state["authenticated"]:
                     "【悪い日本語訳の例】申込書は確認のために社長に提出されなければならない。\n"
                     "【良い日本語訳の例】申込書を提出し社長の確認を受けなければならない。\n"
                 )
+
+        if st.button("実行", key="send_button_translation"):
+            if user_input.strip() == "":
+                st.warning("データを入力してください。")
+            else:
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
