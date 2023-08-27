@@ -110,9 +110,9 @@ if st.session_state["authenticated"]:
         st.title("Q&A")
 
         # Create a placeholder for the user's input
-        user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""))
+        user_input = st.text_area("自由に質問を入力してください。※文字数・トークン数の上限の目安：2,000", value=st.session_state.get("user_input_Q&A", ""))
 
-        # トークン数（文字数）をカウント
+        # トークン数をカウント
         token_count = len(user_input.split())
 
         # トークン数を表示
@@ -142,7 +142,7 @@ if st.session_state["authenticated"]:
         st.title("Translation")
 
         # 右側の入力フォーム
-        user_input = st.text_area("翻訳したい文章を入力し、実行ボタンを押してください。", height=200, key="user_input_translation")
+        user_input = st.text_area("翻訳したい文章を入力し、実行ボタンを押してください。※文字数・トークン数の上限の目安：2,000", height=200, key="user_input_translation")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -152,6 +152,13 @@ if st.session_state["authenticated"]:
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
+
+        # 文字数をカウント
+        char_count = len(user_input.split()) + len(additional_info.split())
+
+        # 文字数を表示
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数: {char_count}</span>', unsafe_allow_html=True)
+
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -242,7 +249,7 @@ if st.session_state["authenticated"]:
         st.title("Proofreading")
 
         # 右側の入力フォーム
-        user_input = st.text_area("校閲/校正したい文章を入力し、実行ボタンを押してください。", height=200, key="user_input_proof")
+        user_input = st.text_area("校閲/校正したい文章を入力し、実行ボタンを押してください。※文字数・トークン数の上限の目安：2,000", height=200, key="user_input_proof")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -253,14 +260,16 @@ if st.session_state["authenticated"]:
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
 
+        # 文字数をカウント
+        char_count = len(user_input.split()) + len(additional_info.split())
+
+        # 文字数を表示
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数: {char_count}</span>', unsafe_allow_html=True)
+
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
-        if st.button("実行", key="send_button_proofreading"):
-            if user_input.strip() == "":
-                st.warning("データを入力してください。")
-            else:
-                initial_prompt = (
+        initial_prompt = (
                     """あなたは校閲・校正の優秀なスペシャリストです。
                     あなたの役割は、日本の投資家向けに公表される情報を校閲・校正し、間違いなく高品質な文章を作成することです。
                     これから入力する文章に対して、下記の操作1を行い、出力してください。
@@ -290,15 +299,23 @@ if st.session_state["authenticated"]:
                     f"{user_input}を校閲・校正してください。\n"
                     f"＃補足情報: {additional_info}"
                 )
+
+        if st.button("実行", key="send_button_proofreading"):
+            if user_input.strip() == "":
+                st.warning("データを入力してください。")
+            else:
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
+        # 「システムプロンプトを表示」ボタンの設置
+        if st.button("システムプロンプトを表示"):
+            st.write(initial_prompt)
 
     elif selected_option == "Excel Formula Analysis":
         st.title("Excel Formula Analysis")
 
         # 右側の入力フォーム
-        user_input = st.text_area("解析したいExcelの式を入力し、実行ボタンを押してください。", height=200, key="user_input_excel")
+        user_input = st.text_area("解析したいExcelの式を入力し、実行ボタンを押してください。※文字数・トークン数の上限の目安：2,000", height=200, key="user_input_excel")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -308,6 +325,12 @@ if st.session_state["authenticated"]:
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
+
+        # 文字数をカウント
+        char_count = len(user_input.split()) + len(additional_info.split())
+
+        # 文字数を表示
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -334,7 +357,7 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
-        # 「システムプロンプトを表示」ボタンの追加
+        # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
             st.write(initial_prompt)
 
@@ -343,7 +366,7 @@ if st.session_state["authenticated"]:
         st.title("VBA Analysis")
 
         # 右側の入力フォーム
-        user_input = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。", height=200, key="user_input_vba")
+        user_input = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。※文字数・トークン数の上限の目安：2,000", height=200, key="user_input_vba")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -354,14 +377,16 @@ if st.session_state["authenticated"]:
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
 
+        # 文字数をカウント
+        char_count = len(user_input.split()) + len(additional_info.split())
+
+        # 文字数を表示
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数: {char_count}</span>', unsafe_allow_html=True)
+
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
-        if st.button("実行", key="send_button_vba"):
-            if user_input.strip() == "":
-                st.warning("データを入力してください。")
-            else:
-                initial_prompt = (
+        initial_prompt = (
                     "あなたは金融・投資・経済情報の分析を行うスペシャリストで、Microsoft Excelのエキスパートです。\n"
                     "あなたの役割は、一つ目は情報分析のために作成された過去の複雑なVBAコードを分析し、わかりやすく説明すること、二つ目は実行したい作業内容をVBAコードに書き起こすです。\n"
                     "これから入力するデータがVBAコードの場合は下記の操作1を、日本語の場合は操作2を行い、出力してください。\n"
@@ -375,14 +400,24 @@ if st.session_state["authenticated"]:
                     "＃補足情報:\n"
                     f"{additional_info}\n"
                 )
+
+
+        if st.button("実行", key="send_button_vba"):
+            if user_input.strip() == "":
+                st.warning("データを入力してください。")
+            else:
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
+
+        # 「システムプロンプトを表示」ボタンの設置
+        if st.button("システムプロンプトを表示"):
+            st.write(initial_prompt)
 
     elif selected_option == "Data Analysis":
         st.title("Data Analysis")
 
         # 右側の入力フォーム
-        user_input = st.text_area("解析したいログデータを入力し、実行ボタンを押してください。", height=200, key="user_input_data")
+        user_input = st.text_area("解析したいログデータを入力し、実行ボタンを押してください。※文字数・トークン数の上限の目安：2,000", height=200, key="user_input_data")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -393,14 +428,16 @@ if st.session_state["authenticated"]:
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
 
+        # 文字数をカウント
+        char_count = len(user_input.split()) + len(additional_info.split())
+
+        # 文字数を表示
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数: {char_count}</span>', unsafe_allow_html=True)
+
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
-        if st.button("実行", key="send_button_data"):
-            if user_input.strip() == "":
-                st.warning("データを入力してください。")
-            else:
-                initial_prompt = (
+        initial_prompt = (
                     "あなたはデータ分析のスペシャリストです。\n"
                     "以下のインプット情報に記載されたログ情報を分析して、セキュリティリスク（不正兆候や異常値等）があるデータを抽出して、理由とともに教えてください。]\n"
                     "＃インプット:\n"
@@ -408,9 +445,17 @@ if st.session_state["authenticated"]:
                     "＃補足情報:\n"
                     f"{additional_info}\n"
                 )
+
+        if st.button("実行", key="send_button_data"):
+            if user_input.strip() == "":
+                st.warning("データを入力してください。")
+            else:
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
+        # 「システムプロンプトを表示」ボタンの設置
+        if st.button("システムプロンプトを表示"):
+            st.write(initial_prompt)
 
 # DeepLのAPIキーを取得
 #DEEPL_API_KEY = st.secrets["DeepLAPI"]["deepl_api_key"]
