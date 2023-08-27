@@ -148,7 +148,7 @@ if st.session_state["authenticated"]:
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数（文字数）をカウント
-        token_count = len(user_input.split()) + len(additional_info.split())
+        token_count = len(user_input) + len(additional_info)
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -248,7 +248,7 @@ if st.session_state["authenticated"]:
 
 
         # 「システムプロンプトを表示」ボタンの説明
-        st.markdown('<span style="color:green">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
@@ -355,7 +355,7 @@ if st.session_state["authenticated"]:
                     "＃補足情報:\n"
                     f"{additional_info}\n"
                 )
-            
+
         if st.button("実行", key="send_button_formula"):
             if user_input.strip() == "":
                 st.warning("データを入力してください。")
