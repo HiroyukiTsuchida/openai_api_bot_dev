@@ -246,6 +246,11 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
+        # 「システムプロンプトを表示」ボタンの設置
+        if st.button("システムプロンプトを表示"):
+            st.write(initial_prompt)
+
+
     elif selected_option == "Proofreading":
         st.title("Proofreading")
 
