@@ -99,19 +99,15 @@ if st.session_state["authenticated"]:
         st.write("Top_P: 温度と同様に、これはランダム性を制御しますが、別の方法を使用します。Top_P を下げると、より可能性が高い回答に絞り込まれます。Top_P を上げると、確率が高い回答と低い回答の両方から選択されるようになります。【推奨値:0.50】")
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
-    # システムプロンプト表示ボタンの説明
-    st.sidebar.markdown('<span style="color:blue">***このメニューにあらかじめ組み込まれたプロンプトは、このボタンを押すと表示されます**</span>', unsafe_allow_html=True)
+    # 留意点の表示
+    st.sidebar.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
 
     # 機能に応じたUIの表示
     if selected_option == "選択してください":
         pass  # 何も表示しない
-
     elif selected_option == "Q&A":
         # Build the user interface
         st.title("Q&A")
-
-    # 留意点の表示
-        st.markdown('<span style="color:red">***注意！個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the user's input
         user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""))
@@ -126,28 +122,18 @@ if st.session_state["authenticated"]:
         bot_response_placeholder = st.empty()
 
         # Execute the communicate function when the user presses the 'Submit' button
-        if st.button("実行", key="send_button_question"):
+        if st.button("実行", key="send_button_data"):
             if user_input.strip() == "":
                 st.warning("データを入力してください。")
             else:
-                initial_prompt = (
-                    "あなたの役割は、ユーザーからの質問に対してわかりやすく端的に回答することです。"
-                    )
-                st.session_state["user_input"] = initial_prompt
-                communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
-
+                st.session_state["user_input_Q&A"] = user_input
+                communicate(st.session_state["user_input_Q&A"], bot_response_placeholder, model, temperature, top_p)
 
             # Clear the user input
             st.session_state["user_input_Q&A"] = ""
 
-
-
     elif selected_option == "Translation":
         st.title("Translation")
-
-    # 留意点の表示
-        st.markdown('<span style="color:red">***注意！個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
-
 
         # 右側の入力フォーム
         user_input = st.text_area("翻訳したい文章を入力し、実行ボタンを押してください。", height=200, key="user_input_translation")
@@ -164,19 +150,11 @@ if st.session_state["authenticated"]:
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
-# セッションステートの初期化（プロンプトの表示状態を保持するためのフラグ）
-        if "show_prompt" not in st.session_state:
-            st.session_state["show_prompt"] = False
-
-# ボタンのラベルを動的に変更
-        button_label = "プロンプトを表示" if not st.session_state["show_prompt"] else "戻る"
-
-# サイドバーにボタンを配置
-        if st.sidebar.button(button_label):
-            st.session_state["show_prompt"] = not st.session_state["show_prompt"]
-
-# イニシャルプロンプトを初期値として定義
-        initial_prompt =  (
+        if st.button("実行", key="send_button_translation"):
+            if user_input.strip() == "":
+                st.warning("データを入力してください。")
+            else:
+                initial_prompt = (
                     "あなたは優秀な翻訳家です。あなたの役割は、英文を日本語に翻訳し、日本語のウェブサイト上で日本人の投資家向けに翻訳された間違いのない情報を提供することです。\n"
                     "可能な限り原文に忠実に、漏れや間違いなく、自然な日本語に翻訳してください。\n"
                     "＃指示\n"
@@ -251,25 +229,11 @@ if st.session_state["authenticated"]:
                     "【悪い日本語訳の例】申込書は確認のために社長に提出されなければならない。\n"
                     "【良い日本語訳の例】申込書を提出し社長の確認を受けなければならない。\n"
                 )
-
-        if st.button("実行", key="send_button_translation"):
-            if user_input.strip() == "":
-                st.warning("データを入力してください。")
-            else:
-
- # ユーザーの入力画面またはシステムプロンプトを表示
-                if st.session_state["show_prompt"] and initial_prompt:
-                    st.text(initial_prompt)
-                else:
-                    st.session_state["user_input"] = initial_prompt
-                    communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
-
+                st.session_state["user_input"] = initial_prompt
+                communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
     elif selected_option == "Proofreading":
         st.title("Proofreading")
-
-    # 留意点の表示
-        st.markdown('<span style="color:red">***注意！個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
 
         # 右側の入力フォーム
         user_input = st.text_area("校閲/校正したい文章を入力し、実行ボタンを押してください。", height=200, key="user_input_proof")
@@ -323,17 +287,9 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
-# ユーザーの入力画面またはシステムプロンプトを表示
-    if st.session_state["show_prompt"]:
-        st.text(initial_prompt)
-
 
     elif selected_option == "Excel Formula Analysis":
         st.title("Excel Formula Analysis")
-
-    # 留意点の表示
-        st.markdown('<span style="color:red">***注意！個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
-
 
         # 右側の入力フォーム
         user_input = st.text_area("解析したいExcelの式を入力し、実行ボタンを押してください。", height=200, key="user_input_excel")
@@ -371,70 +327,48 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
-# ユーザーの入力画面またはシステムプロンプトを表示
-    if st.session_state["show_prompt"]:
-        st.text(initial_prompt)
-
 
     elif selected_option == "VBA Analysis":
         st.title("VBA Analysis")
 
-    # 留意点の表示
-        st.markdown('<span style="color:red">***注意！個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
-
-    # システムプロンプトの定義
-        initial_prompt = (
-        "あなたは金融・投資・経済情報の分析を行うスペシャリストで、Microsoft Excelのエキスパートです。\n"
-        "あなたの役割は、一つ目は情報分析のために作成された過去の複雑なVBAコードを分析し、わかりやすく説明すること、二つ目は実行したい作業内容をVBAコードに書き起こすです。\n"
-        "これから入力するデータがVBAコードの場合は下記の操作1を、日本語の場合は操作2を行い、出力してください。\n"
-        "操作1:[\n"
-        "このVBAコードがどのような処理を実行しようとするものか、わかりやすく表示してください。\n"
-        "]\n"
-        "操作2:[\n"
-        "入力された作業内容を実行するため、シンプルで分かりやすいVBAコードを書き起こしてください。]\n"
-        )
-
-    # 右側の入力フォーム
+        # 右側の入力フォーム
         user_input = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。", height=200, key="user_input_vba")
 
-    # 追加：補足情報の入力フィールド
+        # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
-    # トークン数（文字数）をカウント
+        # トークン数（文字数）をカウント
         token_count = len(user_input.split()) + len(additional_info.split())
 
-    # トークン数を表示
+        # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
 
-    # Create a placeholder for the bot's responses
+        # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
-    if st.button("実行", key="send_button_vba"):
-        if user_input.strip() == "":
-            st.warning("データを入力してください。")
-        else:
-            # user_input と additional_info を使って initial_prompt を更新
-            initial_prompt += (
-                "＃インプット:\n"
-                f"{user_input}\n"
-                "＃補足情報:\n"
-                f"{additional_info}\n"
-            )
-            st.session_state["user_input"] = initial_prompt
-            communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
-
-# ユーザーの入力画面またはシステムプロンプトを表示
-    if st.session_state["show_prompt"]:
-        st.text(initial_prompt)
-
-
+        if st.button("実行", key="send_button_vba"):
+            if user_input.strip() == "":
+                st.warning("データを入力してください。")
+            else:
+                initial_prompt = (
+                    "あなたは金融・投資・経済情報の分析を行うスペシャリストで、Microsoft Excelのエキスパートです。\n"
+                    "あなたの役割は、一つ目は情報分析のために作成された過去の複雑なVBAコードを分析し、わかりやすく説明すること、二つ目は実行したい作業内容をVBAコードに書き起こすです。\n"
+                    "これから入力するデータがVBAコードの場合は下記の操作1を、日本語の場合は操作2を行い、出力してください。\n"
+                    "操作1:[\n"
+                    "このVBAコードがどのような処理を実行しようとするものか、わかりやすく表示してください。\n"
+                    "]\n"
+                    "操作2:[\n"
+                    "入力された作業内容を実行するため、シンプルで分かりやすいVBAコードを書き起こしてください。]\n"
+                    "＃インプット:\n"
+                    f"{user_input}\n"
+                    "＃補足情報:\n"
+                    f"{additional_info}\n"
+                )
+                st.session_state["user_input"] = initial_prompt
+                communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
     elif selected_option == "Data Analysis":
         st.title("Data Analysis")
-
-    # 留意点の表示
-        st.markdown('<span style="color:red">***注意！個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
-
 
         # 右側の入力フォーム
         user_input = st.text_area("解析したいログデータを入力し、実行ボタンを押してください。", height=200, key="user_input_data")
@@ -465,10 +399,6 @@ if st.session_state["authenticated"]:
                 )
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
-
-# ユーザーの入力画面またはシステムプロンプトを表示
-    if st.session_state["show_prompt"]:
-        st.text(initial_prompt)
 
 
 # DeepLのAPIキーを取得
