@@ -248,7 +248,7 @@ if st.session_state["authenticated"]:
 
 
         # 「システムプロンプトを表示」ボタンの説明
-        st.sidebar.markdown('<span style="color:green">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:green">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
@@ -311,7 +311,7 @@ if st.session_state["authenticated"]:
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
         # 「システムプロンプトを表示」ボタンの説明
-        st.sidebar.markdown('<span style="color:green">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:green">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
@@ -364,7 +364,7 @@ if st.session_state["authenticated"]:
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
         # 「システムプロンプトを表示」ボタンの説明
-        st.sidebar.markdown('<span style="color:green">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:green">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
@@ -419,7 +419,7 @@ if st.session_state["authenticated"]:
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
         # 「システムプロンプトを表示」ボタンの説明
-        st.sidebar.markdown('<span style="color:green">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:green">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
@@ -466,7 +466,7 @@ if st.session_state["authenticated"]:
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
         # 「システムプロンプトを表示」ボタンの説明
-        st.sidebar.markdown('<span style="color:green">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:green">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
