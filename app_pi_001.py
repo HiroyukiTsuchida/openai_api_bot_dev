@@ -61,7 +61,7 @@ if st.session_state["authenticated"]:
                 # Accumulate content and update the bot's response in real time
                 complete_response += content
                 formatted_response = complete_response.replace("\n", "<br>")
-                indented_response = f"<pre style='margin-left: 20px;'>{complete_response}</pre>" # インデントで回答
+                indented_response = "".join([f"<pre style='margin-left: 20px;'>{line}</pre>" for line in complete_response.split('\n')]) # インデントで回答
                 bot_response_placeholder.markdown(indented_response, unsafe_allow_html=True)
 
         # After all chunks are received, add the complete response to the chat history
