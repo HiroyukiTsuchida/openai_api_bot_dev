@@ -3,6 +3,9 @@ import streamlit as st
 import openai
 import uuid
 
+def count_tokens(text):
+    tokens = openai.Tokenizer().encode(text)
+    return len(tokens)
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
@@ -113,11 +116,12 @@ if st.session_state["authenticated"]:
         # Create a placeholder for the user's input
         user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""))
 
-        # トークン数（文字数）をカウント
-        token_count = len(user_input.split())
+        # トークン数と文字数をカウント
+        token_count = count_tokens(user_input)
+        char_count = len(user_input)
 
-        # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
+        # トークン数と文字数を表示
+        st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}, 文字数: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -421,4 +425,3 @@ if st.session_state["authenticated"]:
 #    }
 #    response = requests.post(url, headers=headers, data=data)
 #    return response.json()["translations"][0]["text"]
-
