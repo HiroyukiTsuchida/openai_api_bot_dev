@@ -110,19 +110,19 @@ if st.session_state["authenticated"]:
         st.title("Q&A")
 
         # Create a placeholder for the user's input
-        user_input = st.text_area("自由に質問を入力してください。※文字数・トークン数の上限の目安：2,000", value=st.session_state.get("user_input_Q&A", ""))
+        user_input = st.text_area("自由に質問を入力してください。※単語数・文字数の上限の目安：2,000", value=st.session_state.get("user_input_Q&A", ""))
 
         # トークン数をカウント
         token_count = len(user_input.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみはこちらが目安）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語混在の場合はこちらが目安）: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -142,7 +142,7 @@ if st.session_state["authenticated"]:
         st.title("Translation")
 
         # 右側の入力フォーム
-        user_input = st.text_area("翻訳したい文章を入力し、実行ボタンを押してください。※文字数・トークン数の上限の目安：2,000", height=200, key="user_input_translation")
+        user_input = st.text_area("翻訳したい文章を入力し、実行ボタンを押してください。※単語数・文字数の上限の目安：2,000", height=200, key="user_input_translation")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -151,93 +151,93 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみはこちらが目安）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input) + len(additional_info)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語混在の場合はこちらが目安）: {char_count}</span>', unsafe_allow_html=True)
 
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
         initial_prompt = (
-                    """あなたは優秀な翻訳家です。あなたの役割は、英文を日本語に翻訳し、日本語のウェブサイト上で日本人の投資家向けに翻訳された間違いのない情報を提供することです。\n
-                    可能な限り原文に忠実に、漏れや間違いなく、自然な日本語に翻訳してください。\n
-                    ＃指示\n
-                    f{user_input}を翻訳してください。\n
-                    f＃補足情報: {additional_info}
-                    ＃注意してほしい点：所有格を無理に全部訳さない\n
-                    ＃例①\n
-                    【英文】At some point, our kids will be out in the world and their self-esteem will be pivotal to their success. \n
-                    【悪い日本語訳の例】いつか私たちの子供たちが世界に飛び立った時、彼らの自尊心は成功の大きな要となるでしょう。 \n
-                    【良い日本語訳の例】いつか子供たちが世界に旅立ったとき、自尊心は成功の大きな要となるでしょう。\n
-                    ＃例②\n
-                    【英文】The Company aims to nearly double its number of restaurants. \n
-                    【悪い日本語訳の例】その会社は自社のレストランの店舗数をほぼ倍にすることを目指している。 \n
-                    【良い日本語訳の例】その会社はレストランの店舗数をほぼ倍にすることを目指している。 \n
-                    ＃注意してほしい点：複数形は状況によっては無理に訳さない\n
-                    ＃例①\n
-                    【英文】The task of facilitating language learning for our children may seem complicated.\n
-                    【悪い日本語訳の例】子供たちに外国語を学ばせることは難しいように思うかもしれません。\n
-                    【良い日本語訳の例】子供に外国語を学ばせることは難しいように思うかもしれません。\n
-                    ＃例②\n
-                    【原文】For parents, preparing a list of questions before an appointment is a good start as teachers are busy.\n
-                    【悪い日本語訳の例】教師たちは忙しいので親はあらかじめ質問したいことを書き出して面談に臨むといいでしょう。\n
-                    【良い日本語訳の例】教師は忙しいので親はあらかじめ質問したいことを書き出して面談に臨むといいでしょう。 \n
-                    ＃注意してほしい点：「any」は「もし～なら」に分解したほうがいい場合もある\n
-                    ＃例①\n
-                    【英文】Any accident should be reported to the supervisor immediately.\n
-                    【悪い日本語訳の例】どんな事故も上司に報告されなければならない。\n
-                    【良い日本語訳の例】事故があった場合は必ず上司に報告しなければならない。\n
-                    ＃例②\n
-                    【原文】Any member who is in doubt should submit a copy of the medical certificate from their doctor. \n
-                    【悪い日本語訳の例】疑いのあるいずれのメンバーも、医師の診断書を提出しなければならない。\n
-                    【良い日本語訳の例】自然な訳文：メンバーは、疑いがある場合は必ず医師の診断書を提出しなければならない。 \n
-                    ＃注意してほしい点：名詞を動詞に、動詞を名詞に変換したほうが良い場合もある\n
-                    ＃例①：名詞句を動詞句に変換する場合\n
-                    【英文】Exposure to organophosphates can cause headache and diarrhea.\n
-                    【悪い日本語訳の例】有機リン酸への暴露は頭痛と下痢を引き起こすことがある。\n
-                    【良い日本語訳の例】有機リン酸に晒されると頭痛と下痢が生じることがある。\n
-                    ＃例②：動詞を名詞に変換する場合の英和翻訳例\n
-                    【英文】The strong sales of Japanese comic books is attributable to the expansion of the international e-commerce market.\n
-                    【悪い日本語訳の例】日本のマンガの好調な売り上げは海外のＥコマース市場の拡大に起因する。\n
-                    【良い日本語訳の例】日本のマンガの売上が好調な理由として海外のＥコマース市場の拡大が挙げられる。 \n
-                    ＃注意してほしい点：受動態を能動態に、能動態を受動態に変換したほうが良い場合もある\n
-                    ＃例①：受動態を能動態に変換する場合\n
-                    #①‐a\n
-                    【英文】They wer examined by their respective family doctors.\n
-                    【悪い日本語訳の例】彼らはそれぞれかかりつけ医により診察された。\n
-                    【良い日本語訳の例】彼らはそれぞれかかりつけ医の診察を受けた。\n
-                    #①-b\n
-                    【原文】Any problem has to be resolved by employees.\n
-                    【悪い日本語訳の例】いかなる問題も従業員によって解決されなければならない。\n
-                    【良い日本語訳の例】いかなる問題も従業員が解決しなければならない。\n
-                    ＃例②能動態を受動態に変換する場合\n
-                    【英文】How technology enables business model innovation.\n
-                    【悪い日本語訳の例】テクノロジーがいかにビジネスモデルのイノベーションを可能にしているか。\n
-                    【良い日本語訳の例】テクノロジーによりいかにビジネスモデルのイノベーションがもたらされるか。 \n
-                    ＃注意してほしい点：使役動詞はかみ砕いて訳した方がいい場合が多い\n
-                    ＃例①\n
-                    【英文】This combination of experience and innovation has made the company so successful. \n
-                    【悪い日本語訳の例】この経験とイノベーションの組み合わせがその企業を成功させた。 \n
-                    【良い日本語訳の例】この経験とイノベーションこそがその企業を成功に導いた要因だ。\n
-                    ＃例②\n
-                    【原文】Professor Smith has made me want to become a teacher.\n
-                    【悪い日本語訳の例】スミス教授は私を先生になりたくさせた。\n
-                    【良い日本語訳の例】スミス教授に出会って私は先生になりたいと思った。\n
-                    ＃注意してほしい点：「～ための」の「to」や「for」を訳し下げる\n
-                    ＃例①\n
-                    【英文】Lisa had turned her head to observe the birds climbing into the blue sky. \n
-                    【悪い日本語訳の例】リサは鳥たちが青い空へと飛び立っていくのを見るために振り返った。\n
-                    【良い日本語訳の例】リサが振り返ると鳥たちが青い空へと飛び立っていくのが見えた。\n
-                    ＃例②\n
-                    【英文】The application shall be submitted to the president for review. \n
-                    【悪い日本語訳の例】申込書は確認のために社長に提出されなければならない。\n
-                    【良い日本語訳の例】申込書を提出し社長の確認を受けなければならない。\n"""
-                )
+                    "あなたは優秀な翻訳家です。あなたの役割は、英文を日本語に翻訳し、日本語のウェブサイト上で日本人の投資家向けに翻訳された間違いのない情報を提供することです。\n"
+                    "可能な限り原文に忠実に、漏れや間違いなく、自然な日本語に翻訳してください。\n"
+                    "＃指示\n"
+                    f"{user_input}を翻訳してください。\n"
+                    f"＃補足情報: {additional_info}"
+                    "＃注意してほしい点：所有格を無理に全部訳さない\n"
+                    "＃例①\n"
+                    "【英文】At some point, our kids will be out in the world and their self-esteem will be pivotal to their success. \n"
+                    "【悪い日本語訳の例】いつか私たちの子供たちが世界に飛び立った時、彼らの自尊心は成功の大きな要となるでしょう。 \n"
+                    "【良い日本語訳の例】いつか子供たちが世界に旅立ったとき、自尊心は成功の大きな要となるでしょう。\n"
+                    "＃例②\n"
+                    "【英文】The Company aims to nearly double its number of restaurants. \n"
+                    "【悪い日本語訳の例】その会社は自社のレストランの店舗数をほぼ倍にすることを目指している。 \n"
+                    "【良い日本語訳の例】その会社はレストランの店舗数をほぼ倍にすることを目指している。 \n"
+                    "＃注意してほしい点：複数形は状況によっては無理に訳さない\n"
+                    "＃例①\n"
+                    "【英文】The task of facilitating language learning for our children may seem complicated.\n"
+                    "【悪い日本語訳の例】子供たちに外国語を学ばせることは難しいように思うかもしれません。\n"
+                    "【良い日本語訳の例】子供に外国語を学ばせることは難しいように思うかもしれません。\n"
+                    "＃例②\n"
+                    "【原文】For parents, preparing a list of questions before an appointment is a good start as teachers are busy.\n"
+                    "【悪い日本語訳の例】教師たちは忙しいので親はあらかじめ質問したいことを書き出して面談に臨むといいでしょう。\n"
+                    "【良い日本語訳の例】教師は忙しいので親はあらかじめ質問したいことを書き出して面談に臨むといいでしょう。 \n"
+                    "＃注意してほしい点：「any」は「もし～なら」に分解したほうがいい場合もある\n"
+                    "＃例①\n"
+                    "【英文】Any accident should be reported to the supervisor immediately.\n"
+                    "【悪い日本語訳の例】どんな事故も上司に報告されなければならない。\n"
+                    "【良い日本語訳の例】事故があった場合は必ず上司に報告しなければならない。\n"
+                    "＃例②\n"
+                    "【原文】Any member who is in doubt should submit a copy of the medical certificate from their doctor. \n"
+                    "【悪い日本語訳の例】疑いのあるいずれのメンバーも、医師の診断書を提出しなければならない。\n"
+                    "【良い日本語訳の例】自然な訳文：メンバーは、疑いがある場合は必ず医師の診断書を提出しなければならない。 \n"
+                    "＃注意してほしい点：名詞を動詞に、動詞を名詞に変換したほうが良い場合もある\n"
+                    "＃例①：名詞句を動詞句に変換する場合\n"
+                    "【英文】Exposure to organophosphates can cause headache and diarrhea.\n"
+                    "【悪い日本語訳の例】有機リン酸への暴露は頭痛と下痢を引き起こすことがある。\n"
+                    "【良い日本語訳の例】有機リン酸に晒されると頭痛と下痢が生じることがある。\n"
+                    "＃例②：動詞を名詞に変換する場合の英和翻訳例\n"
+                    "【英文】The strong sales of Japanese comic books is attributable to the expansion of the international e-commerce market.\n"
+                    "【悪い日本語訳の例】日本のマンガの好調な売り上げは海外のＥコマース市場の拡大に起因する。\n"
+                    "【良い日本語訳の例】日本のマンガの売上が好調な理由として海外のＥコマース市場の拡大が挙げられる。 \n"
+                    "＃注意してほしい点：受動態を能動態に、能動態を受動態に変換したほうが良い場合もある\n"
+                    "＃例①：受動態を能動態に変換する場合\n"
+                    "#①‐a\n"
+                    "【英文】They wer examined by their respective family doctors.\n"
+                    "【悪い日本語訳の例】彼らはそれぞれかかりつけ医により診察された。\n"
+                    "【良い日本語訳の例】彼らはそれぞれかかりつけ医の診察を受けた。\n"
+                    "#①-b\n"
+                    "【原文】Any problem has to be resolved by employees.\n"
+                    "【悪い日本語訳の例】いかなる問題も従業員によって解決されなければならない。\n"
+                    "【良い日本語訳の例】いかなる問題も従業員が解決しなければならない。\n"
+                    "＃例②能動態を受動態に変換する場合\n"
+                    "【英文】How technology enables business model innovation.\n"
+                    "【悪い日本語訳の例】テクノロジーがいかにビジネスモデルのイノベーションを可能にしているか。\n"
+                    "【良い日本語訳の例】テクノロジーによりいかにビジネスモデルのイノベーションがもたらされるか。 \n"
+                    "＃注意してほしい点：使役動詞はかみ砕いて訳した方がいい場合が多い\n"
+                    "＃例①\n"
+                    "【英文】This combination of experience and innovation has made the company so successful. \n"
+                    "【悪い日本語訳の例】この経験とイノベーションの組み合わせがその企業を成功させた。 \n"
+                    "【良い日本語訳の例】この経験とイノベーションこそがその企業を成功に導いた要因だ。\n"
+                    "＃例②\n"
+                    "【原文】Professor Smith has made me want to become a teacher.\n"
+                    "【悪い日本語訳の例】スミス教授は私を先生になりたくさせた。\n"
+                    "【良い日本語訳の例】スミス教授に出会って私は先生になりたいと思った。\n"
+                    "＃注意してほしい点：「～ための」の「to」や「for」を訳し下げる\n"
+                    "＃例①\n"
+                    "【英文】Lisa had turned her head to observe the birds climbing into the blue sky. \n"
+                    "【悪い日本語訳の例】リサは鳥たちが青い空へと飛び立っていくのを見るために振り返った。\n"
+                    "【良い日本語訳の例】リサが振り返ると鳥たちが青い空へと飛び立っていくのが見えた。\n"
+                    "＃例②\n"
+                    "【英文】The application shall be submitted to the president for review. \n"
+                    "【悪い日本語訳の例】申込書は確認のために社長に提出されなければならない。\n"
+                    "【良い日本語訳の例】申込書を提出し社長の確認を受けなければならない。\n"
+        )
 
         if st.button("実行", key="send_button_translation"):
             if user_input.strip() == "":
@@ -259,7 +259,7 @@ if st.session_state["authenticated"]:
         st.title("Proofreading")
 
         # 右側の入力フォーム
-        user_input = st.text_area("校閲/校正したい文章を入力し、実行ボタンを押してください。※文字数・トークン数の上限の目安：2,000", height=200, key="user_input_proof")
+        user_input = st.text_area("校閲/校正したい文章を入力し、実行ボタンを押してください。※単語数・文字数の上限の目安：2,000", height=200, key="user_input_proof")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -268,13 +268,13 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみはこちらが目安）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input) + len(additional_info)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語混在の場合はこちらが目安）: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -321,7 +321,7 @@ if st.session_state["authenticated"]:
         st.title("Excel Formula Analysis")
 
         # 右側の入力フォーム
-        user_input = st.text_area("解析したいExcelの式を入力し、実行ボタンを押してください。※文字数・トークン数の上限の目安：2,000", height=200, key="user_input_excel")
+        user_input = st.text_area("解析したいExcelの式を入力し、実行ボタンを押してください。※単語数・文字数の上限の目安：2,000", height=200, key="user_input_excel")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -330,13 +330,13 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみはこちらが目安）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input) + len(additional_info)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語混在の場合はこちらが目安）: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -375,7 +375,7 @@ if st.session_state["authenticated"]:
         st.title("VBA Analysis")
 
         # 右側の入力フォーム
-        user_input = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。※文字数・トークン数の上限の目安：2,000", height=200, key="user_input_vba")
+        user_input = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。※単語数・文字数の上限の目安：2,000", height=200, key="user_input_vba")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -384,13 +384,13 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみはこちらが目安）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input) + len(additional_info)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語混在の場合はこちらが目安）: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -429,7 +429,7 @@ if st.session_state["authenticated"]:
         st.title("Data Analysis")
 
         # 右側の入力フォーム
-        user_input = st.text_area("解析したいログデータを入力し、実行ボタンを押してください。※文字数・トークン数の上限の目安：2,000", height=200, key="user_input_data")
+        user_input = st.text_area("解析したいログデータを入力し、実行ボタンを押してください。※単語数・文字数の上限の目安：2,000", height=200, key="user_input_data")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -438,13 +438,13 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみはこちらが目安）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input) + len(additional_info)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語混在の場合はこちらが目安）: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
