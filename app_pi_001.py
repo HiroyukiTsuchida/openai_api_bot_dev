@@ -147,8 +147,8 @@ if st.session_state["authenticated"]:
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
-        # トークン数（文字数）をカウント
-        token_count = len(user_input) + len(additional_info)
+        # トークン数をカウント
+        token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -264,8 +264,8 @@ if st.session_state["authenticated"]:
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
-        # トークン数（文字数）をカウント
-        token_count = len(user_input) + len(additional_info)
+        # トークン数をカウント
+        token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -301,7 +301,7 @@ if st.session_state["authenticated"]:
             "操作1を行った後に指摘事項を全て修正した正しい文章を出力してください。  \n\n"
             f"**{user_input}**を校閲・校正してください。  \n"
             f"＃補足情報: **{additional_info}**"
-)
+            )
 
         if st.button("実行", key="send_button_proofreading"):
             if user_input.strip() == "":
@@ -326,8 +326,8 @@ if st.session_state["authenticated"]:
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
-        # トークン数（文字数）をカウント
-        token_count = len(user_input) + len(additional_info)
+        # トークン数をカウント
+        token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -380,8 +380,8 @@ if st.session_state["authenticated"]:
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
-        # トークン数（文字数）をカウント
-        token_count = len(user_input) + len(additional_info)
+        # トークン数をカウント
+        token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
@@ -434,8 +434,8 @@ if st.session_state["authenticated"]:
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
-        # トークン数（文字数）をカウント
-        token_count = len(user_input) + len(additional_info)
+        # トークン数をカウント
+        token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン: {token_count}</span>', unsafe_allow_html=True)
