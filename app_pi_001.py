@@ -105,9 +105,6 @@ if st.session_state["authenticated"]:
         st.write("Top_P: 温度と同様に、これはランダム性を制御しますが、別の方法を使用します。Top_P を下げると、より可能性が高い回答に絞り込まれます。Top_P を上げると、確率が高い回答と低い回答の両方から選択されるようになります。【推奨値:0.50】")
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
-    # 留意点の表示
-    st.sidebar.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
-
     # 機能に応じたUIの表示
     if selected_option == "選択してください":
         pass  # 何も表示しない
@@ -149,6 +146,9 @@ if st.session_state["authenticated"]:
 
     elif selected_option == "Translation":
         st.title("Translation")
+
+        # 留意点の表示
+        st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
 
         # 右側の入力フォーム
         user_input = st.text_area("翻訳したい文章を入力し、実行ボタンを押してください。※単語数・文字数の上限の目安：2,000", height=200, key="user_input_translation")
@@ -267,6 +267,9 @@ if st.session_state["authenticated"]:
     elif selected_option == "Proofreading":
         st.title("Proofreading")
 
+        # 留意点の表示
+        st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
+
         # 右側の入力フォーム
         user_input = st.text_area("校閲/校正したい文章を入力し、実行ボタンを押してください。※単語数・文字数の上限の目安：2,000", height=200, key="user_input_proof")
 
@@ -329,6 +332,9 @@ if st.session_state["authenticated"]:
     elif selected_option == "Excel Formula Analysis":
         st.title("Excel Formula Analysis")
 
+        # 留意点の表示
+        st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
+
         # 右側の入力フォーム
         user_input = st.text_area("解析したいExcelの式を入力し、実行ボタンを押してください。※単語数・文字数の上限の目安：2,000", height=200, key="user_input_excel")
 
@@ -383,6 +389,9 @@ if st.session_state["authenticated"]:
     elif selected_option == "VBA Analysis":
         st.title("VBA Analysis")
 
+        # 留意点の表示
+        st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
+
         # 右側の入力フォーム
         user_input = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。※単語数・文字数の上限の目安：2,000", height=200, key="user_input_vba")
 
@@ -436,6 +445,9 @@ if st.session_state["authenticated"]:
 
     elif selected_option == "Data Analysis":
         st.title("Data Analysis")
+
+        # 留意点の表示
+        st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
 
         # 右側の入力フォーム
         user_input = st.text_area("解析したいログデータを入力し、実行ボタンを押してください。※単語数・文字数の上限の目安：2,000", height=200, key="user_input_data")
