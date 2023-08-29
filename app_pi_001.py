@@ -86,6 +86,10 @@ if st.session_state["authenticated"]:
         key="model_selectbox_key"  # 固定のキーを指定する
     )
 
+    # モデルについての説明の表示
+    st.sidebar.markdown(***標準は「gpt-4」です。「gpt-3.5-turbo-16kを選択すると、性能は下がりますが入力単語数・文字数の上限を約２倍にすることができます。**)
+
+
     # タイトル「オプション」を追加
     st.sidebar.header("オプション")
 
