@@ -2,13 +2,6 @@
 import streamlit as st
 import openai
 import uuid
-from tiktoken import Tokenizer
-from transformers import GPT2Tokenizer
-
-# モデルのトークナイザをロード
-model_name = "gpt2"
-tokenizer = GPT2Tokenizer.from_pretrained(model_name)
-
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
@@ -130,12 +123,6 @@ if st.session_state["authenticated"]:
 
         # 文字数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語混在の場合はこちらが目安）: {char_count}</span>', unsafe_allow_html=True)
-
-        # tiktokenでトークン数をカウント
-        tik_tok = Tokenizer(tokenizer)
-        text = (user_input)
-        tik_tok_token_count = tik_tok.count_tokens(text)
-        st.markdown(f'<span style="color:grey; font-size:12px;">トークン数: {tik_tok_token_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
