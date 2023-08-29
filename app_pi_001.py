@@ -126,6 +126,7 @@ if st.session_state["authenticated"]:
         st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語混在の場合はこちらが目安）: {char_count}</span>', unsafe_allow_html=True)
 
         # tiktokenでのカウント
+        enc = tiktoken.get_encoding("gpt2")
         tokens = enc.encode(user_input)
         print(len(tokens))
         st.markdown(f'<span style="color:grey; font-size:12px;">トークン数: {len(tokens)}</span>', unsafe_allow_html=True)
