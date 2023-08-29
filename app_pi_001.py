@@ -88,7 +88,7 @@ if st.session_state["authenticated"]:
 
     # モデルについての説明の表示
     st.sidebar.markdown(f'<span style="color:grey; font-size:12px;">標準は「gpt-4」です。「gpt-3.5-turbo-16k」を選択すると、性能は下がりますが入力単語数・文字数の上限を約２倍にすることができます。</span>', unsafe_allow_html=True)
-    
+
     ("")
 
 
@@ -257,7 +257,7 @@ if st.session_state["authenticated"]:
 
 
         # 「システムプロンプトを表示」ボタンの説明
-        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプト（命令文）を表示できます。**</span>', unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
@@ -323,7 +323,7 @@ if st.session_state["authenticated"]:
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
         # 「システムプロンプトを表示」ボタンの説明
-        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプト（命令文）を表示できます。**</span>', unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
@@ -379,7 +379,7 @@ if st.session_state["authenticated"]:
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
         # 「システムプロンプトを表示」ボタンの説明
-        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプト（命令文）を表示できます。**</span>', unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
@@ -437,7 +437,7 @@ if st.session_state["authenticated"]:
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
         # 「システムプロンプトを表示」ボタンの説明
-        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプト（命令文）を表示できます。**</span>', unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
@@ -487,7 +487,7 @@ if st.session_state["authenticated"]:
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
         # 「システムプロンプトを表示」ボタンの説明
-        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプト（命令文）を表示できます。**</span>', unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
