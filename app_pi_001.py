@@ -2,6 +2,7 @@
 import streamlit as st
 import openai
 import uuid
+import tiktoken
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
@@ -123,6 +124,11 @@ if st.session_state["authenticated"]:
 
         # 文字数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語混在の場合はこちらが目安）: {char_count}</span>', unsafe_allow_html=True)
+
+        # tiktokenでのカウント
+        tokens = enc.encode(user_input)
+        print(len(tokens))
+        st.markdown(f'<span style="color:grey; font-size:12px;">トークン数: {len(tokens)}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
