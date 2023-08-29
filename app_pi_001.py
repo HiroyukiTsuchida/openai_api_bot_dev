@@ -87,7 +87,9 @@ if st.session_state["authenticated"]:
     )
 
     # モデルについての説明の表示
-    st.sidebar.markdown("標準は「gpt-4」です。「gpt-3.5-turbo-16kを選択すると、性能は下がりますが入力単語数・文字数の上限を約２倍にすることができます。")
+    st.sidebar.markdown(f'<span style="color:grey; font-size:12px;">標準は「gpt-4」です。「gpt-3.5-turbo-16k」を選択すると、性能は下がりますが入力単語数・文字数の上限を約２倍にすることができます。</span>', unsafe_allow_html=True)
+    
+    ("")
 
 
     # タイトル「オプション」を追加
