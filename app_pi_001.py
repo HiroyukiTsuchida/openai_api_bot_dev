@@ -115,6 +115,9 @@ if st.session_state["authenticated"]:
         # Build the user interface
         st.title("Q&A")
 
+        # 留意点の表示
+        st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
+
         # Create a placeholder for the user's input
         user_input = st.text_area("自由に質問を入力してください。※単語数・文字数の上限の目安：2,000", value=st.session_state.get("user_input_Q&A", ""))
 
@@ -122,13 +125,13 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力された文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -157,13 +160,13 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input) + len(additional_info)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力された文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
 
 
         # Create a placeholder for the bot's responses
@@ -254,7 +257,7 @@ if st.session_state["authenticated"]:
 
 
         # 「システムプロンプトを表示」ボタンの説明
-        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
@@ -274,13 +277,13 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input) + len(additional_info)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力された文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -317,7 +320,7 @@ if st.session_state["authenticated"]:
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
         # 「システムプロンプトを表示」ボタンの説明
-        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
@@ -336,13 +339,13 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input) + len(additional_info)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力された文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -370,7 +373,7 @@ if st.session_state["authenticated"]:
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
         # 「システムプロンプトを表示」ボタンの説明
-        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
@@ -390,13 +393,13 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input) + len(additional_info)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力された文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -425,7 +428,7 @@ if st.session_state["authenticated"]:
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
         # 「システムプロンプトを表示」ボタンの説明
-        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
@@ -444,13 +447,13 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input) + len(additional_info)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力された文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -472,7 +475,7 @@ if st.session_state["authenticated"]:
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
         # 「システムプロンプトを表示」ボタンの説明
-        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、このメニューにあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプトを表示できます。**</span>', unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
