@@ -116,7 +116,7 @@ if st.session_state["authenticated"]:
         st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the user's input
-        user_input = st.text_area("自由に質問を入力してください。※単語数・文字数の上限の目安：2,000", value=st.session_state.get("user_input_Q&A", ""))
+        user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""))
 
         # トークン数をカウント
         token_count = len(user_input.split())
@@ -151,7 +151,7 @@ if st.session_state["authenticated"]:
         st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
 
         # 右側の入力フォーム
-        user_input = st.text_area("翻訳したい文章を入力し、実行ボタンを押してください。※単語数・文字数の上限の目安：2,000", height=200, key="user_input_translation")
+        user_input = st.text_area("翻訳したい文章を入力し、実行ボタンを押してください。", height=200, key="user_input_translation")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -271,7 +271,7 @@ if st.session_state["authenticated"]:
         st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
 
         # 右側の入力フォーム
-        user_input = st.text_area("校閲/校正したい文章を入力し、実行ボタンを押してください。※単語数・文字数の上限の目安：2,000", height=200, key="user_input_proof")
+        user_input = st.text_area("校閲/校正したい文章を入力し、実行ボタンを押してください。", height=200, key="user_input_proof")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -336,7 +336,7 @@ if st.session_state["authenticated"]:
         st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
 
         # 右側の入力フォーム
-        user_input = st.text_area("解析したいExcelの式を入力し、実行ボタンを押してください。※単語数・文字数の上限の目安：2,000", height=200, key="user_input_excel")
+        user_input = st.text_area("解析したいExcelの式を入力し、実行ボタンを押してください。", height=200, key="user_input_excel")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -393,7 +393,7 @@ if st.session_state["authenticated"]:
         st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
 
         # 右側の入力フォーム
-        user_input = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。※単語数・文字数の上限の目安：2,000", height=200, key="user_input_vba")
+        user_input = st.text_area("解析したいVBAのコードを入力し、実行ボタンを押してください。", height=200, key="user_input_vba")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -450,7 +450,7 @@ if st.session_state["authenticated"]:
         st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
 
         # 右側の入力フォーム
-        user_input = st.text_area("解析したいログデータを入力し、実行ボタンを押してください。※単語数・文字数の上限の目安：2,000", height=200, key="user_input_data")
+        user_input = st.text_area("解析したいログデータを入力し、実行ボタンを押してください。", height=200, key="user_input_data")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
