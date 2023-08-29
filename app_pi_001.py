@@ -116,13 +116,13 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみはこちらが目安）: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語混在の場合はこちらが目安）: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -151,13 +151,13 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみはこちらが目安）: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input) + len(additional_info)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語混在の場合はこちらが目安）: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
 
 
         # Create a placeholder for the bot's responses
@@ -268,13 +268,13 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみはこちらが目安）: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input) + len(additional_info)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語混在の場合はこちらが目安）: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -330,13 +330,13 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみはこちらが目安）: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input) + len(additional_info)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語混在の場合はこちらが目安）: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -384,13 +384,13 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみはこちらが目安）: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input) + len(additional_info)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語混在の場合はこちらが目安）: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -438,13 +438,13 @@ if st.session_state["authenticated"]:
         token_count = len(user_input.split()) + len(additional_info.split())
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみはこちらが目安）: {token_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
         char_count = len(user_input) + len(additional_info)
 
         # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語混在の場合はこちらが目安）: {char_count}</span>', unsafe_allow_html=True)
+        st.markdown(f'<span style="color:grey; font-size:12px;">文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
