@@ -107,17 +107,16 @@ if st.session_state["authenticated"]:
 
 
     # リリースノートを表示ボタンを配置
-    if st.sidebar.button('Markdownを表示'):
-        # ボタンがクリックされたときにサイドバーにMarkdownを表示
-        st.sidebar.markdown("""
+    if st.sidebar.button('リリースノートを表示'):
+        # ボタンがクリックされたときにリリースノートを表示
+        st.markdown("""
         ## これはMarkdownヘッダーです
         - リストアイテム1
         - リストアイテム2
         [Googleへのリンク](https://www.google.com/)
         """)
 
-    # アプリのメインコンテンツ
-    st.write("Streamlitアプリのメインコンテンツ")
+
 
 
     # 機能に応じたUIの表示
