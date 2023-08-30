@@ -492,8 +492,8 @@ if st.session_state["authenticated"]:
         if st.button("システムプロンプトを表示"):
             st.write(initial_prompt)
 
-    elif selected_option == ""Release Note":
-        st.title(""Release Note")
+    elif selected_option == "Release Note":
+        st.title("Release Note")
         st.markdown("""
         ## これはMarkdownヘッダーです
         - リストアイテム1
@@ -504,14 +504,6 @@ if st.session_state["authenticated"]:
         
         [Googleへのリンク](https://www.google.com/)
         """)
-
-
-
-
-
-
-
-
 
 
 # DeepLのAPIキーを取得
