@@ -494,7 +494,7 @@ if st.session_state["authenticated"]:
 
     elif selected_option == "Inquiries":
         st.title("Inquiries")
-         st.markdown("""
+        st.markdown("""
         ## これはMarkdownヘッダーです
         - リストアイテム1
         - リストアイテム2
