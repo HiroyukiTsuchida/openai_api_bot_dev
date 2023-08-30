@@ -119,12 +119,6 @@ if st.session_state["authenticated"]:
     # アプリのメインコンテンツ
     st.write("Streamlitアプリのメインコンテンツ")
 
-    if __name__ == "__main__":
-        st.run()
-
-
-
-
 
     # 機能に応じたUIの表示
     if selected_option == "選択してください":
