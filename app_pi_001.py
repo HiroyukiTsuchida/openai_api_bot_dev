@@ -74,7 +74,7 @@ if st.session_state["authenticated"]:
     # サイドバーで機能を選択
     selected_option = st.sidebar.selectbox(
         "機能を選択してください",
-        ["選択してください", "Q&A", "Translation", "Proofreading", "Excel Formula Analysis", "VBA Analysis", "Data Analysis","Inquiries"],
+        ["選択してください", "Q&A", "Translation", "Proofreading", "Excel Formula Analysis", "VBA Analysis", "Data Analysis"],
         index=0, # デフォルト値として「選択してください」を設定
         key="selectbox_key"  # 固定のキーを指定する
     )
@@ -104,11 +104,15 @@ if st.session_state["authenticated"]:
         st.write("Top_P: 温度と同様に、これはランダム性を制御しますが、別の方法を使用します。Top_P を下げると、より可能性が高い回答に絞り込まれます。Top_P を上げると、確率が高い回答と低い回答の両方から選択されるようになります。【推奨値:0.50】")
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
-    # バージョン情報とリリースノートへのハイパーリンク
+    # ユーザーアンケート
+    st.sidebar.markdown("""
+    [お問い合わせ](https://docs.google.com/forms/d/1kl8DXtxMr37aA05Cvu4ZQieo_1fNbCi3XJdNkVJaiO4/edit)
+    """)
+
+    # バージョン情報表示（リリースノートへのハイパーリンク）
     st.sidebar.markdown("""
     [v1.1.0](https://app.luminpdf.com/viewer/64eec06f00de38210728ab26)
     """)
-
 
     # 機能に応じたUIの表示
     if selected_option == "選択してください":
@@ -497,13 +501,6 @@ if st.session_state["authenticated"]:
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
             st.write(initial_prompt)
-
-    elif selected_option == "Inquiries":
-        st.title("Inquiries")
-        st.markdown("""
-        ### 本ツールに関するお問い合わせ・ご要望は、下記のフォームへのご入力をお願いします。
-        - [入力フォーム](https://docs.google.com/forms/d/1kl8DXtxMr37aA05Cvu4ZQieo_1fNbCi3XJdNkVJaiO4/edit)
-        """)
 
 # DeepLのAPIキーを取得
 #DEEPL_API_KEY = st.secrets["DeepLAPI"]["deepl_api_key"]
