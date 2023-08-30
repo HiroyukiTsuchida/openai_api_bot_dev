@@ -91,7 +91,6 @@ if st.session_state["authenticated"]:
 
     ("")
 
-
     # タイトル「オプション」を追加
     st.sidebar.header("オプション")
 
@@ -104,6 +103,28 @@ if st.session_state["authenticated"]:
     with st.sidebar.beta_expander("Top_P  🛈"):
         st.write("Top_P: 温度と同様に、これはランダム性を制御しますが、別の方法を使用します。Top_P を下げると、より可能性が高い回答に絞り込まれます。Top_P を上げると、確率が高い回答と低い回答の両方から選択されるようになります。【推奨値:0.50】")
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
+
+
+
+    # リリースノートを表示ボタンを配置
+    if st.sidebar.button('Markdownを表示'):
+    # ボタンがクリックされたときにサイドバーにMarkdownを表示
+    st.sidebar.markdown("""
+    ## これはMarkdownヘッダーです
+    - リストアイテム1
+    - リストアイテム2
+    [Googleへのリンク](https://www.google.com/)
+    """)
+
+    # アプリのメインコンテンツ
+    st.write("Streamlitアプリのメインコンテンツ")
+
+    if __name__ == "__main__":
+    st.run()
+
+
+
+
 
     # 機能に応じたUIの表示
     if selected_option == "選択してください":
