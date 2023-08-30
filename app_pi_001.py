@@ -4,7 +4,7 @@ import openai
 import uuid
 
 # サービス名を表示する
-st.sidebar.title("[Dev] AI Assistant v1.0.0")
+st.sidebar.title("[Dev] AI Assistant")
 
 # 初回ログイン認証
 if "authenticated" not in st.session_state:
@@ -74,7 +74,7 @@ if st.session_state["authenticated"]:
     # サイドバーで機能を選択
     selected_option = st.sidebar.selectbox(
         "機能を選択してください",
-        ["選択してください", "Q&A", "Translation", "Proofreading", "Excel Formula Analysis", "VBA Analysis", "Data Analysis","Release Note","Inquiries"],
+        ["選択してください", "Q&A", "Translation", "Proofreading", "Excel Formula Analysis", "VBA Analysis", "Data Analysis","Inquiries","Release Note"],
         index=0, # デフォルト値として「選択してください」を設定
         key="selectbox_key"  # 固定のキーを指定する
     )
@@ -103,6 +103,12 @@ if st.session_state["authenticated"]:
     with st.sidebar.beta_expander("Top_P  🛈"):
         st.write("Top_P: 温度と同様に、これはランダム性を制御しますが、別の方法を使用します。Top_P を下げると、より可能性が高い回答に絞り込まれます。Top_P を上げると、確率が高い回答と低い回答の両方から選択されるようになります。【推奨値:0.50】")
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
+
+    # バージョン情報とリリースノートへのハイパーリンク
+    st.sidebar.markdown("""
+    [v1.1.0](https://docs.google.com/document/d/1xkfD3vTD7mhzxoSONWGwqnDyXgJGebGX23ZxRANHeKk/edit#heading=h.q410wg74r639)
+    """)
+
 
     # 機能に応じたUIの表示
     if selected_option == "選択してください":
@@ -495,9 +501,11 @@ if st.session_state["authenticated"]:
     elif selected_option == "Inquiries":
         st.title("Inquiries")
         st.markdown("""
-        ## これはMarkdownヘッダーです
-        - リストアイテム1
-        - リストアイテム2
+        ## 本ツールに関するお問い合わせ・ご要望は、メール又は下記のフォームへのご入力をお願いします。
+        - メール
+        [メールを送る](mailto:kazuki.takahashi@front-ia.com?subject=AI Assistantについて)
+
+        - 入力フォーム
         [Googleへのリンク](https://www.google.com/)
         """)
 
