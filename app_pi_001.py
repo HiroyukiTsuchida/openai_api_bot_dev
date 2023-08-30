@@ -120,7 +120,7 @@ if st.session_state["authenticated"]:
     st.write("Streamlitアプリのメインコンテンツ")
 
     if __name__ == "__main__":
-    st.run()
+        st.run()
 
 
 
