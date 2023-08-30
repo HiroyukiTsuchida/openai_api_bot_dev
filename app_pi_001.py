@@ -106,7 +106,7 @@ if st.session_state["authenticated"]:
 
     # バージョン情報とリリースノートへのハイパーリンク
     st.sidebar.markdown("""
-    [v1.1.0](https://drive.google.com/drive/folders/1Pj7LE1D8Y_xlV75s3L1t_tRTRKzJxvEd?lfhs=2)
+    [v1.1.0](https://app.luminpdf.com/viewer/64eec06f00de38210728ab26)
     """)
 
 
@@ -501,12 +501,8 @@ if st.session_state["authenticated"]:
     elif selected_option == "Inquiries":
         st.title("Inquiries")
         st.markdown("""
-        ### 本ツールに関するお問い合わせ・ご要望は、メール又は下記のフォームへのご入力をお願いします。
-        - メール
-        [メールを送る](mailto:kazuki.takahashi@front-ia.com)
-
-        - 入力フォーム
-        [Googleへのリンク](https://www.google.com/)
+        ### 本ツールに関するお問い合わせ・ご要望は、下記のフォームへのご入力をお願いします。
+        - [入力フォーム](https://www.google.com/)
         """)
 
 # DeepLのAPIキーを取得
