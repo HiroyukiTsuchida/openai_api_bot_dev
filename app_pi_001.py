@@ -74,7 +74,7 @@ if st.session_state["authenticated"]:
     # サイドバーで機能を選択
     selected_option = st.sidebar.selectbox(
         "機能を選択してください",
-        ["選択してください", "Q&A", "Translation", "Proofreading", "Excel Formula Analysis", "VBA Analysis", "Data Analysis"],
+        ["選択してください", "Q&A", "Translation", "Proofreading", "Excel Formula Analysis", "VBA Analysis", "Data Analysis","Release Note","Inquiries"],
         index=0, # デフォルト値として「選択してください」を設定
         key="selectbox_key"  # 固定のキーを指定する
     )
@@ -103,21 +103,6 @@ if st.session_state["authenticated"]:
     with st.sidebar.beta_expander("Top_P  🛈"):
         st.write("Top_P: 温度と同様に、これはランダム性を制御しますが、別の方法を使用します。Top_P を下げると、より可能性が高い回答に絞り込まれます。Top_P を上げると、確率が高い回答と低い回答の両方から選択されるようになります。【推奨値:0.50】")
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
-
-
-
-    # リリースノートを表示ボタンを配置
-    if st.sidebar.button('リリースノートを表示'):
-        # ボタンがクリックされたときにリリースノートを表示
-        st.markdown("""
-        ## これはMarkdownヘッダーです
-        - リストアイテム1
-        - リストアイテム2
-        [Googleへのリンク](https://www.google.com/)
-        """)
-
-
-
 
     # 機能に応じたUIの表示
     if selected_option == "選択してください":
@@ -506,6 +491,28 @@ if st.session_state["authenticated"]:
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
             st.write(initial_prompt)
+
+    elif selected_option == ""Release Note":
+        st.title(""Release Note")
+        st.markdown("""
+        ## これはMarkdownヘッダーです
+        - リストアイテム1
+        - リストアイテム2
+
+    elif selected_option == "Inquiries":
+        st.title("Inquiries")
+        
+        [Googleへのリンク](https://www.google.com/)
+        """)
+
+
+
+
+
+
+
+
+
 
 # DeepLのAPIキーを取得
 #DEEPL_API_KEY = st.secrets["DeepLAPI"]["deepl_api_key"]
