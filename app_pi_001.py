@@ -504,10 +504,69 @@ if st.session_state["authenticated"]:
     elif selected_option == "Release Note":
         st.title("Release Note")
         st.markdown("""
-        ## これはMarkdownヘッダーです
-        - リストアイテム1
-        - リストアイテム2
+        # AI Assistant リリースノート
+        ## V1.1.0（予定）
+
+        **リリース日:** 2023年8月31日
+
+        ### バージョンアップの概要
+        - リリースノート表示ボタンの新設
+
+        ### 実装されている主な機能
+        - Q&A：自由に質問
+        - Translation：英文の翻訳
+        - Proofreading：日本語の文章の校正
+        - Excel Formula Analysis：Excel関数の分析
+        - VBA Analysis：VBAコードの分析
+        - Data Analysis：ログデータ等の分析
+
+        ### 実装されている補助的な機能
+        - 認証機能の追加
+        - 単語数・文字数カウント機能
+        - Excel関数分析等での出力結果を改行された形式で表示する機能
+        - システムプロンプト（各機能にあらかじめ組み込まれた命令文）の表示機能
+        - ChatGPTモデル（「gpt-4」又は「gpt-3.5-turbo-16k」）の選択機能
+        - パラメーター（TemperatureとTop_P）の調整機能
+
+        ### 今後追加開発予定の機能
+        - トークン数カウント機能
+        - 出力結果のコピー / ダウンロード機能
+        - Excel関数分析等での出力結果をインデントされた形式で表示する機能
+        - 質問ログ出力機能（何を質問したか）
+        - ファイル読み込み機能
+
+        ---
+
+        ## V1.0.0
+
+        **リリース日:** 2023年8月29日
+
+        ### 実装されている主な機能
+        - Q&A：自由に質問
+        - Translation：英文の翻訳
+        - Proofreading：日本語の文章の校正
+        - Excel Formula Analysis：Excel関数の分析
+        - VBA Analysis：VBAコードの分析
+        - Data Analysis：ログデータ等の分析
+
+        ### 実装されている補助的な機能
+        - 認証機能の追加
+        - 単語数・文字数カウント機能
+        - Excel関数分析等での出力結果を改行された形式で表示する機能
+        - システムプロンプト（各機能にあらかじめ組み込まれた命令文）の表示機能
+        - ChatGPTモデル（「gpt-4」又は「gpt-3.5-turbo-16k」）の選択機能
+        - パラメーター（TemperatureとTop_P）の調整機能
+
+        ### 今後追加開発予定の機能
+        - トークン数カウント機能
+        - 出力結果のコピー / ダウンロード機能
+        - Excel関数分析等での出力結果をインデントされた形式で表示する機能
+        - 質問ログ出力機能（何を質問したか）
+        - ファイル読み込み機能
         """)
+
+
+
 
 # DeepLのAPIキーを取得
 #DEEPL_API_KEY = st.secrets["DeepLAPI"]["deepl_api_key"]
