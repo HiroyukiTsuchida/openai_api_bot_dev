@@ -502,7 +502,7 @@ if st.session_state["authenticated"]:
         st.title("Inquiries")
         st.markdown("""
         ### 本ツールに関するお問い合わせ・ご要望は、下記のフォームへのご入力をお願いします。
-        - [入力フォーム](https://www.google.com/)
+        - [入力フォーム](https://docs.google.com/forms/d/1kl8DXtxMr37aA05Cvu4ZQieo_1fNbCi3XJdNkVJaiO4/edit)
         """)
 
 # DeepLのAPIキーを取得
