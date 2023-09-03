@@ -109,6 +109,15 @@ if st.session_state["authenticated"]:
         st.write("Top_P: 温度と同様に、これはランダム性を制御しますが、別の方法を使用します。Top_P を下げると、より可能性が高い回答に絞り込まれます。Top_P を上げると、確率が高い回答と低い回答の両方から選択されるようになります。【推奨値:0.50】")
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
+    # モデルの選択とその補足情報
+    with st.sidebar.beta_expander("モデル  🛈"):
+        st.write("モデル: 標準は「gpt-4(8k)」です。「gpt-3.5-turbo-16k」を選択すると、性能は下がりますが入力単語数・文字数の上限を約２倍にすることができます。")
+        model = st.selectbox(
+        "モデルを選択してください",
+        ["gpt-4", "gpt-3.5-turbo-16k"],
+        key="model_selectbox_key"  # 固定のキーを指定する
+    )
+
     # ユーザーアンケート
     st.sidebar.markdown("""
     [お問い合わせ](https://docs.google.com/forms/d/1kl8DXtxMr37aA05Cvu4ZQieo_1fNbCi3XJdNkVJaiO4/edit)
@@ -165,7 +174,7 @@ if st.session_state["authenticated"]:
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数を計算
-        tokens = count_tokens(user_input) + count_tokens(additional_info)
+        tokens = count_tokens(user_input) + count_tokens(additional_info)-4
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
