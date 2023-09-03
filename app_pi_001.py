@@ -135,14 +135,16 @@ if st.session_state["authenticated"]:
         # Create a placeholder for the user's input
         user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""))
 
-        # ユーザーの入力のトークン数を計算
+        # トークン数を計算
         tokens = count_tokens(user_input)
-        st.write(f"入力のトークン数: {tokens}")
-
-        # トークン数をカウント
-        token_count = len(user_input.split())
 
         # トークン数を表示
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
+
+        # 単語数をカウント
+        token_count = len(user_input.split())
+
+        # 単語数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
@@ -177,10 +179,16 @@ if st.session_state["authenticated"]:
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
-        # トークン数をカウント
-        token_count = len(user_input.split()) + len(additional_info.split())
+        # トークン数を計算
+        tokens = count_tokens(user_input) + count_tokens(additional_info)
 
         # トークン数を表示
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
+
+        # 単語数をカウント
+        token_count = len(user_input.split()) + len(additional_info.split())
+
+        # 単語数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
@@ -297,10 +305,16 @@ if st.session_state["authenticated"]:
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
-        # トークン数をカウント
-        token_count = len(user_input.split()) + len(additional_info.split())
+        # トークン数を計算
+        tokens = count_tokens(user_input) + count_tokens(additional_info)
 
         # トークン数を表示
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
+
+        # 単語数をカウント
+        token_count = len(user_input.split()) + len(additional_info.split())
+
+        # 単語数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
@@ -362,10 +376,16 @@ if st.session_state["authenticated"]:
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
-        # トークン数をカウント
-        token_count = len(user_input.split()) + len(additional_info.split())
+        # トークン数を計算
+        tokens = count_tokens(user_input) + count_tokens(additional_info)
 
         # トークン数を表示
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
+
+        # 単語数をカウント
+        token_count = len(user_input.split()) + len(additional_info.split())
+
+        # 単語数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
@@ -419,10 +439,16 @@ if st.session_state["authenticated"]:
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
-        # トークン数をカウント
-        token_count = len(user_input.split()) + len(additional_info.split())
+        # トークン数を計算
+        tokens = count_tokens(user_input) + count_tokens(additional_info)
 
         # トークン数を表示
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
+
+        # 単語数をカウント
+        token_count = len(user_input.split()) + len(additional_info.split())
+
+        # 単語数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
@@ -476,10 +502,16 @@ if st.session_state["authenticated"]:
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
-        # トークン数をカウント
-        token_count = len(user_input.split()) + len(additional_info.split())
+        # トークン数を計算
+        tokens = count_tokens(user_input) + count_tokens(additional_info)
 
         # トークン数を表示
+        st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
+
+        # 単語数をカウント
+        token_count = len(user_input.split()) + len(additional_info.split())
+
+        # 単語数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
 
         # 文字数をカウント
