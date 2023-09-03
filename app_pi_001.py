@@ -44,6 +44,18 @@ if st.session_state["authenticated"]:
         token_count = response['usage']['total_tokens']
         return token_count
 
+    # クリップボードにコピーするためのボタンとJavaScriptを実装
+    def copy_text_to_clipboard(text):
+        button_html = f"""
+        <button onclick='navigator.clipboard.writeText("{text}")'>クリップボードにコピー</button>
+        <script>
+            function copyToClipboard(text) {{
+                navigator.clipboard.writeText(text);
+            }}
+        </script>
+        """
+        return button_html
+
     # チャットボットとやりとりする関数
     def communicate(user_input, bot_response_placeholder, model, temperature, top_p):
         messages = st.session_state["messages"]
@@ -163,6 +175,10 @@ if st.session_state["authenticated"]:
             else:
                 st.session_state["user_input_Q&A"] = user_input
                 communicate(st.session_state["user_input_Q&A"], bot_response_placeholder, model, temperature, top_p)
+
+        # ChatGPTのレスポンスが得られた後にこの関数を呼び出して、クリップボードにコピーするボタンを表示
+        chat_response = "ここにChatGPTからのレスポンスを入力"  # この部分は実際のChatGPTのレスポンスで置き換える必要があります
+        html(copy_text_to_clipboard(chat_response))
 
         # Clear the user input
         st.session_state["user_input_Q&A"] = ""
