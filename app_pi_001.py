@@ -2,7 +2,6 @@
 import streamlit as st
 import openai
 import uuid
-import streamlit.components.v1 as components
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
@@ -44,18 +43,6 @@ if st.session_state["authenticated"]:
         token_count = response['usage']['total_tokens']
         return token_count
 
-    # クリップボードにコピーするためのボタンとJavaScriptを実装
-    def copy_text_to_clipboard(text):
-        button_html = f"""
-        <button onclick='navigator.clipboard.writeText("{text}")'>クリップボードにコピー</button>
-        <script>
-            function copyToClipboard(text) {{
-                navigator.clipboard.writeText(text);
-            }}
-        </script>
-        """
-        return button_html
-
     # チャットボットとやりとりする関数
     def communicate(user_input, bot_response_placeholder, model, temperature, top_p):
         messages = st.session_state["messages"]
@@ -80,8 +67,7 @@ if st.session_state["authenticated"]:
                 formatted_response = complete_response.replace("\n", "<br>")
                 indented_response = "".join([f"<div style='margin-left: 20px; white-space: pre-wrap;'>{line}</div>" for line in complete_response.split('\n')]) # インデントで回答
                 bot_response_placeholder.markdown(indented_response, unsafe_allow_html=True)
-
-        components.html(copy_text_to_clipboard(complete_response))
+                bot_response_placeholder.code(complete_response) 
 
         # After all chunks are received, add the complete response to the chat history
         if complete_response:
