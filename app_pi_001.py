@@ -2,6 +2,7 @@
 import streamlit as st
 import openai
 import uuid
+import streamlit.components.v1 as components
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
@@ -38,6 +39,11 @@ if st.session_state["authenticated"]:
     if "user_input" not in st.session_state:
         st.session_state["user_input"] = ""
 
+    def count_tokens(text):
+        response = openai.Completion.create(model="text-davinci-002", prompt=text, max_tokens=1)
+        token_count = response['usage']['total_tokens']
+        return token_count
+
     # チャットボットとやりとりする関数
     def communicate(user_input, bot_response_placeholder, model, temperature, top_p):
         messages = st.session_state["messages"]
@@ -63,6 +69,7 @@ if st.session_state["authenticated"]:
                 indented_response = "".join([f"<div style='margin-left: 20px; white-space: pre-wrap;'>{line}</div>" for line in complete_response.split('\n')]) # インデントで回答
                 bot_response_placeholder.markdown(indented_response, unsafe_allow_html=True)
 
+        components.html(copy_text_to_clipboard(complete_response))
 
         # After all chunks are received, add the complete response to the chat history
         if complete_response:
@@ -127,6 +134,10 @@ if st.session_state["authenticated"]:
 
         # Create a placeholder for the user's input
         user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""))
+
+        # ユーザーの入力のトークン数を計算
+        tokens = count_tokens(user_input)
+        st.write(f"入力のトークン数: {tokens}")
 
         # トークン数をカウント
         token_count = len(user_input.split())
@@ -371,7 +382,7 @@ if st.session_state["authenticated"]:
                     "あなたの役割は、情報分析のために作成された過去の複雑なExcel関数を分析し、わかりやすく説明することです。\n"
                     "これから入力するExcel関数に対して、下記の操作1を行い、出力してください。\n"
                     "操作1:[\n"
-                    "複雑なネスト構造になっているExcel関数を改行し、わかりやすく表示してください。\n"
+                    "複雑なネスト構造になっているExcel関数を改行し、かつインデント表示をすることで、わかりやすく表示してください。インデントは見やすくなるよう全角\n"
                     "]\n"
                     "操作2:[\n"
                     "操作1を行った後にこのExcel関数がどのような処理を行おうとしているものか解説し、よりシンプルで分かりやすい関数に書き換えが可能であれば、その提案をしてください。]\n"
