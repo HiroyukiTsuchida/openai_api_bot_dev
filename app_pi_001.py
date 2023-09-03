@@ -133,7 +133,7 @@ if st.session_state["authenticated"]:
         user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""))
 
         # トークン数を計算
-        tokens = count_tokens(user_input)--2
+        tokens = count_tokens(user_input)-2
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
