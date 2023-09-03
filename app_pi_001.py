@@ -67,8 +67,7 @@ if st.session_state["authenticated"]:
                 formatted_response = complete_response.replace("\n", "<br>")
                 indented_response = "".join([f"<div style='margin-left: 20px; white-space: pre-wrap;'>{line}</div>" for line in complete_response.split('\n')]) # インデントで回答
                 bot_response_placeholder.markdown(indented_response, unsafe_allow_html=True)
-                bot_response_placeholder.code(complete_response) 
-
+ 
         # After all chunks are received, add the complete response to the chat history
         if complete_response:
             bot_message = {"role": "assistant", "content": complete_response}
@@ -139,18 +138,6 @@ if st.session_state["authenticated"]:
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
 
-        # 単語数をカウント
-        token_count = len(user_input.split())
-
-        # 単語数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
-
-        # 文字数をカウント
-        char_count = len(user_input)
-
-        # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">入力された文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
-
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
@@ -161,6 +148,10 @@ if st.session_state["authenticated"]:
             else:
                 st.session_state["user_input_Q&A"] = user_input
                 communicate(st.session_state["user_input_Q&A"], bot_response_placeholder, model, temperature, top_p)
+
+        # Create another placeholder for the bot's responses
+        bot_response_placeholder = st.empty()
+        bot_response_placeholder.code(complete_response) 
 
         # Clear the user input
         st.session_state["user_input_Q&A"] = ""
@@ -182,19 +173,6 @@ if st.session_state["authenticated"]:
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
-
-        # 単語数をカウント
-        token_count = len(user_input.split()) + len(additional_info.split())
-
-        # 単語数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
-
-        # 文字数をカウント
-        char_count = len(user_input) + len(additional_info)
-
-        # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">入力された文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
-
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -309,18 +287,6 @@ if st.session_state["authenticated"]:
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
 
-        # 単語数をカウント
-        token_count = len(user_input.split()) + len(additional_info.split())
-
-        # 単語数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
-
-        # 文字数をカウント
-        char_count = len(user_input) + len(additional_info)
-
-        # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">入力された文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
-
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
@@ -380,18 +346,6 @@ if st.session_state["authenticated"]:
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
 
-        # 単語数をカウント
-        token_count = len(user_input.split()) + len(additional_info.split())
-
-        # 単語数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
-
-        # 文字数をカウント
-        char_count = len(user_input) + len(additional_info)
-
-        # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">入力された文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
-
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
@@ -443,18 +397,6 @@ if st.session_state["authenticated"]:
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
 
-        # 単語数をカウント
-        token_count = len(user_input.split()) + len(additional_info.split())
-
-        # 単語数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
-
-        # 文字数をカウント
-        char_count = len(user_input) + len(additional_info)
-
-        # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">入力された文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
-
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
 
@@ -505,18 +447,6 @@ if st.session_state["authenticated"]:
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
-
-        # 単語数をカウント
-        token_count = len(user_input.split()) + len(additional_info.split())
-
-        # 単語数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">入力された単語数（英字のみの場合はこちらを確認。上限の目安：2,000）: {token_count}</span>', unsafe_allow_html=True)
-
-        # 文字数をカウント
-        char_count = len(user_input) + len(additional_info)
-
-        # 文字数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">入力された文字数（日本語のみ、英字・日本語混在の場合はこちらを確認。上限の目安：2,000）: {char_count}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
