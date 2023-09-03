@@ -99,7 +99,7 @@ if st.session_state["authenticated"]:
 
     # モデルの選択とその補足情報
     with st.sidebar.beta_expander("モデル  🛈"):
-        st.write("モデル: 標準は「gpt-4(8k)」です。「gpt-3.5-turbo-16k」を選択すると、性能は下がりますが入力単語数・文字数の上限を約２倍にすることができます。")
+        st.write("モデル: 標準は「gpt-4(8k)」です。「gpt-3.5-turbo-16k」を選択すると、性能は下がりますが、入力できるトークン数（データ量）の上限を約２倍にすることができます。")
         model = st.selectbox(
         "モデルを選択してください",
         ["gpt-4", "gpt-3.5-turbo-16k"],
