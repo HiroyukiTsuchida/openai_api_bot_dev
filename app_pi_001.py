@@ -39,8 +39,7 @@ if st.session_state["authenticated"]:
         st.session_state["user_input"] = ""
 
     def count_tokens(text):
-        response = openai.Completion.create(model="text-davinci-002", prompt=text, max_tokens=1)
-        token_count = response['usage']['total_tokens']
+        token_count = openai.Encoding.create(model="text-davinci-002", text=text)['usage']['total_tokens']
         return token_count
 
     # チャットボットとやりとりする関数
