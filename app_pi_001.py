@@ -111,8 +111,9 @@ if st.session_state["authenticated"]:
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
     # ユーザーアンケート
-    st.sidebar.markdown("お問い合わせ")
-    html('<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScHlR9LYv3fmFuhHP0uqwX3SOLJYvELtfz-a0G_VAh5JJPnrw/viewform?embedded=true" width="640" height="1137"></iframe>')
+    if st.sidebar.button('お問い合わせ'):
+        # ボタンがクリックされた場合、iframeをメインのボードに表示
+        html('<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScHlR9LYv3fmFuhHP0uqwX3SOLJYvELtfz-a0G_VAh5JJPnrw/viewform?embedded=true" width="640" height="1137"></iframe>')
 
     # バージョン情報表示（リリースノートへのハイパーリンク）
     st.sidebar.markdown("""
