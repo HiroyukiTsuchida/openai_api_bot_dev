@@ -2,11 +2,6 @@
 import streamlit as st
 import openai
 import uuid
-from streamlit import components
-
-html_code = """
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScHlR9LYv3fmFuhHP0uqwX3SOLJYvELtfz-a0G_VAh5JJPnrw/viewform?embedded=true" width="640" height="1137" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
-"""
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
