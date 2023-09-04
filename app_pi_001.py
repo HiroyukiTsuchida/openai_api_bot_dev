@@ -2,6 +2,7 @@
 import streamlit as st
 import openai
 import uuid
+import streamlit.components.v1 as components
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
@@ -109,11 +110,11 @@ if st.session_state["authenticated"]:
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
     # ユーザーアンケート
+    
+    
     st.sidebar.markdown("""
-    [お問い合わせ](https://docs.google.com/forms/d/e/1FAIpQLScHlR9LYv3fmFuhHP0uqwX3SOLJYvELtfz-a0G_VAh5JJPnrw/viewform)
+    [お問い合わせ](components.iframe<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScHlR9LYv3fmFuhHP0uqwX3SOLJYvELtfz-a0G_VAh5JJPnrw/viewform?embedded=true" width="640" height="1137" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>))
     """)
-
-
 
     # バージョン情報表示（リリースノートへのハイパーリンク）
     st.sidebar.markdown("""
