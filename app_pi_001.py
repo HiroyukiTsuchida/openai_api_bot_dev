@@ -112,20 +112,31 @@ if st.session_state["authenticated"]:
 
     # ユーザーアンケート
     if st.sidebar.button('お問い合わせ'):
-        # ボタンがクリックされた場合、iframeをメインのボードに表示
-        html('<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScHlR9LYv3fmFuhHP0uqwX3SOLJYvELtfz-a0G_VAh5JJPnrw/viewform?embedded=true" width="640" height="1137"></iframe>')
+        # ボタンがクリックされた場合、iframeをメインのボードに表示し、
+        # その他の処理をスキップするためのフラグをセット
+        display_form_only = True
+    else:
+        display_form_only = False
 
     # バージョン情報表示（リリースノートへのハイパーリンク）
     st.sidebar.markdown("""
     [v1.1.0](https://app.luminpdf.com/viewer/64eec06f00de38210728ab26)
     """)
 
+    if display_form_only:
+        # Googleフォームの表示
+        html('<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScHlR9LYv3fmFuhHP0uqwX3SOLJYvELtfz-a0G_VAh5JJPnrw/viewform?embedded=true" width="640" height="1137"></iframe>')
+     else:
+        # ボタンがクリックされていない場合の通常の処理や表示
+
+
+
     # 機能に応じたUIの表示
-    if selected_option == "選択してください":
-        pass  # 何も表示しない
-    elif selected_option == "Q&A":
-        # Build the user interface
-        st.title("Q&A")
+        if selected_option == "選択してください":
+            pass  # 何も表示しない
+        elif selected_option == "Q&A":
+            # Build the user interface
+            st.title("Q&A")
 
         # 留意点の表示
         st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
