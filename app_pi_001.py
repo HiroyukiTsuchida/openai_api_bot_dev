@@ -67,7 +67,7 @@ if st.session_state["authenticated"]:
                 formatted_response = complete_response.replace("\n", "<br>")
                 indented_response = "".join([f"<div style='margin-left: 20px; white-space: pre-wrap;'>{line}</div>" for line in complete_response.split('\n')]) # インデントで回答
                 bot_response_placeholder.markdown(indented_response, unsafe_allow_html=True)
- 
+
         # After all chunks are received, add the complete response to the chat history
         if complete_response:
             bot_message = {"role": "assistant", "content": complete_response}
@@ -87,6 +87,17 @@ if st.session_state["authenticated"]:
     # タイトル「オプション」を追加
     st.sidebar.header("オプション")
 
+    # モデルの選択とその補足情報
+    with st.sidebar.beta_expander("モデル  🛈"):
+        st.markdown("""gpt-4（推奨）：高品質な回答を出力します。入力・出力の合計で約8,000トークンまで処理可能で、出力に時間がかかることがあります。  \n
+        gpt-3.5-turbo-16k：gpt-4と比較すると回答の質は下がりますが、入力・出力の合計で約16,000トークンまで処理で、gpt-4に比べ高速で回答の出力が可能です。
+        """)
+        model = st.selectbox(
+        "モデルを選択してください",
+        ["gpt-4", "gpt-3.5-turbo-16k"],
+        key="model_selectbox_key"  # 固定のキーを指定する
+    )
+
     # Temperatureスライダーとその補足情報
     with st.sidebar.beta_expander("Temperature  🛈"):
         st.write("Temperature（温度）:モデルの出力の「確信度」または「多様性」を制御します。値が高いとモデルの出力は多様性が増し、予測はよりランダムになります。逆に、値が低いとモデルの出力はより確信度が高くなり、最も確率的に高い結果を選びやすくなります。【推奨値:0.10】")
@@ -96,15 +107,6 @@ if st.session_state["authenticated"]:
     with st.sidebar.beta_expander("Top_P  🛈"):
         st.write("Top_P: 温度と同様に、これはランダム性を制御しますが、別の方法を使用します。Top_P を下げると、より可能性が高い回答に絞り込まれます。Top_P を上げると、確率が高い回答と低い回答の両方から選択されるようになります。【推奨値:0.50】")
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
-
-    # モデルの選択とその補足情報
-    with st.sidebar.beta_expander("モデル  🛈"):
-        st.write("モデル: 標準は「gpt-4(8k)」です。「gpt-3.5-turbo-16k」を選択すると、性能は下がりますが、入力できるトークン数（データ量）の上限を約２倍にすることができます。")
-        model = st.selectbox(
-        "モデルを選択してください",
-        ["gpt-4", "gpt-3.5-turbo-16k"],
-        key="model_selectbox_key"  # 固定のキーを指定する
-    )
 
     # ユーザーアンケート
     st.sidebar.markdown("""
