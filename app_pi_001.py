@@ -2,8 +2,6 @@
 import streamlit as st
 import openai
 import uuid
-import streamlit.components.v1 as components
-from streamlit.components.v1 import html
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
@@ -110,33 +108,25 @@ if st.session_state["authenticated"]:
         st.write("Top_P: 温度と同様に、これはランダム性を制御しますが、別の方法を使用します。Top_P を下げると、より可能性が高い回答に絞り込まれます。Top_P を上げると、確率が高い回答と低い回答の両方から選択されるようになります。【推奨値:0.50】")
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
-    # ユーザーアンケート
-    if st.sidebar.button('お問い合わせ'):
-        # ボタンがクリックされた場合、iframeをメインのボードに表示し、
-        # その他の処理をスキップするためのフラグをセット
-        display_form_only = True
-    else:
-        display_form_only = False
+    # （準備中）ユーザーアンケート
+    #st.sidebar.markdown("""
+    #[お問い合わせ](https://docs.google.com/forms/d/e/1FAIpQLScHlR9LYv3fmFuhHP0uqwX3SOLJYvELtfz-a0G_VAh5JJPnrw/viewform)
+    #""")
 
-    # バージョン情報表示（リリースノートへのハイパーリンク）
-    st.sidebar.markdown("""
-    [v1.1.0](https://app.luminpdf.com/viewer/64eec06f00de38210728ab26)
-    """)
+    # バージョン情報表示
+    st.sidebar.write("v1.1.0")
 
-    if display_form_only:
-        # Googleフォームの表示
-        html('<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScHlR9LYv3fmFuhHP0uqwX3SOLJYvELtfz-a0G_VAh5JJPnrw/viewform?embedded=true" width="640" height="1137"></iframe>')
-     else:
-        # ボタンがクリックされていない場合の通常の処理や表示
-
-
+    # （準備中）バージョン情報表示（リリースノートへのハイパーリンク）
+    #st.sidebar.markdown("""
+    #[v1.1.0](https://app.luminpdf.com/viewer/64eec06f00de38210728ab26)
+    #""")
 
     # 機能に応じたUIの表示
-        if selected_option == "選択してください":
-            pass  # 何も表示しない
-        elif selected_option == "Q&A":
-            # Build the user interface
-            st.title("Q&A")
+    if selected_option == "選択してください":
+        pass  # 何も表示しない
+    elif selected_option == "Q&A":
+        # Build the user interface
+        st.title("Q&A")
 
         # 留意点の表示
         st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
