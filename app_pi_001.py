@@ -115,13 +115,9 @@ if st.session_state["authenticated"]:
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
     # ユーザーアンケート
-    st.sidebar.markdown("[お問い合わせ](#)")
-    components.v1.html(html_code, height=1200, scrolling=True)
-
-
-    st.sidebar.markdown("[お問い合わせ](#)")
-    components.v1.html(html_code, height=1200, scrolling=True)
-
+    st.sidebar.markdown("""
+    [お問い合わせ](https://docs.google.com/forms/d/e/1FAIpQLScHlR9LYv3fmFuhHP0uqwX3SOLJYvELtfz-a0G_VAh5JJPnrw/viewform)
+    """)
 
 
 
