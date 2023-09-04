@@ -90,9 +90,9 @@ if st.session_state["authenticated"]:
     # モデルの選択とその補足情報
     with st.sidebar.beta_expander("モデル  🛈"):
         st.write(
-        "gpt-4（推奨）：高品質な回答を出力します。入力・出力の合計で約8,000トークンまで処理可能で、出力に時間がかかることがあります。  \n"
-        "gpt-3.5-turbo-16k：gpt-4と比較すると回答の質は下がりますが、入力・出力の合計で約16,000トークンまで処理で、gpt-4に比べ高速で回答の出力が可能です。"
-        )
+        """gpt-4（推奨）：高品質な回答を出力します。入力・出力の合計で約8,000トークンまで処理可能で、出力に時間がかかることがあります。  \n
+        "gpt-3.5-turbo-16k：gpt-4と比較すると回答の質は下がりますが、入力・出力の合計で約16,000トークンまで処理でき、gpt-4に比べ高速で回答の出力が可能です。
+        """)
         model = st.selectbox(
         "モデルを選択してください",
         ["gpt-4", "gpt-3.5-turbo-16k"],
@@ -111,7 +111,7 @@ if st.session_state["authenticated"]:
 
     # ユーザーアンケート
     st.sidebar.markdown("""
-    [お問い合わせ](https://docs.google.com/forms/d/1kl8DXtxMr37aA05Cvu4ZQieo_1fNbCi3XJdNkVJaiO4/edit)
+    [お問い合わせ](<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScHlR9LYv3fmFuhHP0uqwX3SOLJYvELtfz-a0G_VAh5JJPnrw/viewform?embedded=true" width="640" height="1137" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>)
     """)
 
     # バージョン情報表示（リリースノートへのハイパーリンク）
@@ -278,7 +278,7 @@ if st.session_state["authenticated"]:
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数を計算
-        tokens = count_tokens(user_input) + count_tokens(additional_info)
+        tokens = count_tokens(user_input) + count_tokens(additional_info)-4
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
@@ -337,7 +337,7 @@ if st.session_state["authenticated"]:
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数を計算
-        tokens = count_tokens(user_input) + count_tokens(additional_info)
+        tokens = count_tokens(user_input) + count_tokens(additional_info)-4
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
@@ -388,7 +388,7 @@ if st.session_state["authenticated"]:
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数を計算
-        tokens = count_tokens(user_input) + count_tokens(additional_info)
+        tokens = count_tokens(user_input) + count_tokens(additional_info)-4
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
@@ -439,7 +439,7 @@ if st.session_state["authenticated"]:
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数を計算
-        tokens = count_tokens(user_input) + count_tokens(additional_info)
+        tokens = count_tokens(user_input) + count_tokens(additional_info)-4
 
         # トークン数を表示
         st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
