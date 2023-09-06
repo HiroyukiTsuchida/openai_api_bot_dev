@@ -115,7 +115,7 @@ if st.session_state["authenticated"]:
 
     # バージョン情報表示（リリースノートへのハイパーリンク）
     st.sidebar.markdown("""
-    [v1.2.0](https://app.luminpdf.com/viewer/64eec06f00de38210728ab26)
+    [v1.2.0](https://ai-assistant-releasenote-mfjkhzwcdpy9p33km6tffg.streamlit.app/)
     """)
 
     # 機能に応じたUIの表示
