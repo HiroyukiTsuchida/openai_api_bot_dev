@@ -114,13 +114,15 @@ if st.session_state["authenticated"]:
             {"role": "system", "content": "You are the best AI assistant in the world."}
         ]
 
-    # 「お問い合わせ」ハイパーリンクの作成
+    # 「お問い合わせ」ボタンの設置
     def create_mailto_link():
         to_address = "kazuki.takahashi@front-ia.com"
         subject = "AI Assistantについて"
         mailto_link = f"mailto:{to_address}?subject={subject}"
-        
-        st.sidebar.markdown(f'<a href="{mailto_link}" target="_blank">お問い合わせ</a>', unsafe_allow_html=True)
+
+    if st.sidebar.button("お問い合わせ"):
+        mailto_link
+
 
     # (準備中)ユーザーアンケート
     #st.sidebar.markdown("""
