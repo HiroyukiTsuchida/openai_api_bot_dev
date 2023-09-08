@@ -3,9 +3,6 @@ import streamlit as st
 import openai
 import uuid
 
-def create_mailto_link(to_address, subject):
-    return f"mailto:{to_address}?subject={subject}"
-
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
 
@@ -118,10 +115,13 @@ if st.session_state["authenticated"]:
         ]
 
     # 「お問い合わせ」ハイパーリンクの作成
-    to_address = "kazuki.takahashi@front-ia.com"
-    subject = "AI Assistantについて"
-    mailto_link = create_mailto_link(to_address, subject)
-    st.markdown(f'<a href="{mailto_link}" target="_blank">お問い合わせ</a>', unsafe_allow_html=True)
+    def create_mailto_link(to_address, subject):
+        return f"mailto:{to_address}?subject={subject}"
+  
+        to_address = "kazuki.takahashi@front-ia.com"
+        subject = "AI Assistantについて"
+        mailto_link = create_mailto_link(to_address, subject)
+        st.markdown(f'<a href="{mailto_link}" target="_blank">お問い合わせ</a>', unsafe_allow_html=True)
 
     # (準備中)ユーザーアンケート
     #st.sidebar.markdown("""
