@@ -117,6 +117,7 @@ if st.session_state["authenticated"]:
     # 「お問い合わせ」ボタンの設置
     def create_mailto_link():
         to_address = "kazuki.takahashi@front-ia.com"
+        cc_address = "hiroyuki.tsuchida@front-ia.com"
         subject = "AI Assistantについて"
         return f"mailto:{to_address}?subject={subject}"
 
