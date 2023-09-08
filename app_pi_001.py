@@ -2,14 +2,9 @@
 import streamlit as st
 import openai
 import uuid
-import webbrowser
 
-def send_mail(to_address, subject):
-    # mailto リンクを作成
-    mailto_link = f"mailto:{to_address}?subject={subject}"
-    
-    # メーラーを起動
-    webbrowser.open(mailto_link)
+def create_mailto_link(to_address, subject):
+    return f"mailto:{to_address}?subject={subject}"
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
@@ -122,9 +117,11 @@ if st.session_state["authenticated"]:
             {"role": "system", "content": "You are the best AI assistant in the world."}
         ]
 
-    # お問い合わせボタンの設置（宛先と件名を指定してメーラーを起動）
-    if st.sidebar.button("お問い合わせ"):
-        send_mail("kazuki.takahashi@front-ia.com", "AI Assistantについて")
+    # 「お問い合わせ」ハイパーリンクの作成
+    to_address = "kazuki.takahashi@front-ia.com"
+    subject = "AI Assistantについて"
+    mailto_link = create_mailto_link(to_address, subject)
+    st.markdown(f'<a href="{mailto_link}" target="_blank">お問い合わせ</a>', unsafe_allow_html=True)
 
     # (準備中)ユーザーアンケート
     #st.sidebar.markdown("""
