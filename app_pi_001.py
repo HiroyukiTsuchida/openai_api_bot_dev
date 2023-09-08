@@ -115,12 +115,10 @@ if st.session_state["authenticated"]:
         ]
 
     # 「お問い合わせ」ハイパーリンクの作成
-    def create_mailto_link(to_address, subject):
-        return f"mailto:{to_address}?subject={subject}"
-  
+    def create_mailto_link():
         to_address = "kazuki.takahashi@front-ia.com"
         subject = "AI Assistantについて"
-        mailto_link = create_mailto_link(to_address, subject)
+        mailto_link = f"mailto:{to_address}?subject={subject}"
         st.markdown(f'<a href="{mailto_link}" target="_blank">お問い合わせ</a>', unsafe_allow_html=True)
 
     # (準備中)ユーザーアンケート
