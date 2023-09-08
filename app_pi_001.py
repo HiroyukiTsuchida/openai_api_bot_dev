@@ -118,10 +118,11 @@ if st.session_state["authenticated"]:
     def create_mailto_link():
         to_address = "kazuki.takahashi@front-ia.com"
         subject = "AI Assistantについて"
-        mailto_link = f"mailto:{to_address}?subject={subject}"
+        return f"mailto:{to_address}?subject={subject}"
 
     if st.sidebar.button("お問い合わせ"):
-        mailto_link
+        mailto_link = create_mailto_link()
+
 
 
     # (準備中)ユーザーアンケート
