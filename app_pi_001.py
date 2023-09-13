@@ -1,3 +1,7 @@
+import sys
+
+# passの設定 (pip showで出てきた、LocationのPASSを以下に設定)
+sys.path.append('/usr/local/lib/python3.10/dist-packages')
 
 import streamlit as st
 import openai
