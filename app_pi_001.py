@@ -170,7 +170,7 @@ if st.session_state["authenticated"]:
             else:
                 st.session_state["user_input_Q&A"] = user_input
                 communicate(st.session_state["user_input_Q&A"], bot_response_placeholder, model, temperature, top_p)
-        
+
         # アップローダーの設置
         def extract_text_from_pdf(feed):
             extracted_text = ""
@@ -178,8 +178,8 @@ if st.session_state["authenticated"]:
                 for page in pdf.pages:
                     extracted_text += page.extract_text()
             return extracted_text
-        
-        
+
+
         st.file_uploader("ファイルアップロード", type='pdf')
 
         if uploaded_file:
