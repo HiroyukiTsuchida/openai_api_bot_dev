@@ -168,6 +168,7 @@ if st.session_state["authenticated"]:
         
         # アップローダーの設置
         st.file_uploader("ファイルアップロード", type='pdf')
+        streamlit run file_uproad.py
 
         # Clear the user input
         st.session_state["user_input_Q&A"] = ""
