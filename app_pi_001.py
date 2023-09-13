@@ -2,6 +2,8 @@
 import streamlit as st
 import openai
 import uuid
+from PIL import Image
+import numpy as np
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
@@ -163,6 +165,9 @@ if st.session_state["authenticated"]:
             else:
                 st.session_state["user_input_Q&A"] = user_input
                 communicate(st.session_state["user_input_Q&A"], bot_response_placeholder, model, temperature, top_p)
+        
+        # アップローダーの設置
+        st.file_uploader("ファイルアップロード", type='pdf')
 
         # Clear the user input
         st.session_state["user_input_Q&A"] = ""
