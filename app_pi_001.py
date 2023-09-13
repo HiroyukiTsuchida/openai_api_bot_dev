@@ -168,7 +168,13 @@ if st.session_state["authenticated"]:
         
         # アップローダーの設置
         st.file_uploader("ファイルアップロード", type='pdf')
-        streamlit run file_uproad.py
+        def extract_data(feed):
+            data = []
+            with pdfplumber.load(feed) as pdf:
+                pages = pdf.pages
+                for p in pages:
+                    data.append(p.extract_tables())
+        return None # build more code to return a dataframe
 
         # Clear the user input
         st.session_state["user_input_Q&A"] = ""
