@@ -4,6 +4,7 @@ import openai
 import uuid
 from PIL import Image
 import numpy as np
+import pdfplumber
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
@@ -167,14 +168,23 @@ if st.session_state["authenticated"]:
                 communicate(st.session_state["user_input_Q&A"], bot_response_placeholder, model, temperature, top_p)
         
         # アップローダーの設置
-        st.file_uploader("ファイルアップロード", type='pdf')
-        def extract_data(feed):
-            data = []
+        def extract_text_from_pdf(feed):
+            extracted_text = ""
             with pdfplumber.load(feed) as pdf:
-                pages = pdf.pages
-                for p in pages:
-                    data.append(p.extract_tables())
-        return None # build more code to return a dataframe
+                for page in pdf.pages:
+                    extracted_text += page.extract_text()
+            return extracted_text
+        
+        
+        st.file_uploader("ファイルアップロード", type='pdf')
+
+        if uploaded_file:
+            extracted_text = extract_text_from_pdf(uploaded_file)
+            user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text)
+            st.session_state["user_input_Q&A"] = user_input
+        else:
+            user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""))
+            st.session_state["user_input_Q&A"] = user_input
 
         # Clear the user input
         st.session_state["user_input_Q&A"] = ""
