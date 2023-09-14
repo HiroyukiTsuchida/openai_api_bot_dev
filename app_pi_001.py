@@ -472,7 +472,7 @@ if st.session_state["authenticated"]:
 
             def extract_data_from_csv(feed):
                 # CSVをpandas DataFrameとして読み込む
-                df = pd.read_csv(feed, encoding='utf-8', errors='replace')
+                df = pd.read_csv(feed, encoding='ISO-8859-1')
                 # DataFrameを文字列として返す（あるいは、必要なデータを抽出・変換する）
                 return df.to_string()
 
@@ -557,7 +557,7 @@ if st.session_state["authenticated"]:
 
             def extract_data_from_csv(feed):
                 # CSVをpandas DataFrameとして読み込む
-                df = pd.read_csv(feed, encoding='utf-8', errors='replace')
+                df = pd.read_csv(feed, encoding='ISO-8859-1')
                 # DataFrameを文字列として返す（あるいは、必要なデータを抽出・変換する）
                 return df.to_string()
 
