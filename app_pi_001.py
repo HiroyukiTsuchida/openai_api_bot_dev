@@ -228,6 +228,14 @@ if st.session_state["authenticated"]:
         # PDFアップロードが選択された場合
         elif choice == "PDFアップロード":
             uploaded_file = st.file_uploader("PDFをアップロード", type='pdf')
+
+            def extract_text_from_pdf(feed):
+                extracted_text = ""
+                with pdfplumber.open(feed) as pdf:
+                    for page in pdf.pages:
+                        extracted_text += page.extract_text()
+                return extracted_text
+
             if uploaded_file is not None:
                 extracted_text = extract_text_from_pdf(uploaded_file)
                 # session_stateの更新
@@ -251,12 +259,6 @@ if st.session_state["authenticated"]:
         #elif choice == "PDFアップロード":
         #    uploaded_file = st.file_uploader("PDFをアップロード", type='pdf')
 
-        #    def extract_text_from_pdf(feed):
-        #        extracted_text = ""
-        #        with pdfplumber.open(feed) as pdf:
-        #            for page in pdf.pages:
-        #                extracted_text += page.extract_text()
-        #        return extracted_text
 
         #    if uploaded_file is not None:
         #        extracted_text = extract_text_from_pdf(uploaded_file)
