@@ -5,6 +5,7 @@ import uuid
 from PIL import Image
 import numpy as np
 import pdfplumber
+import pandas
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
@@ -468,19 +469,18 @@ if st.session_state["authenticated"]:
         elif choice == "CSVファイルアップロード":
             uploaded_file = st.file_uploader("CSVファイルをアップロード", type='csv')
 
-            def extract_text_from_pdf(feed):
-                extracted_text = ""
-                with pdfplumber.open(feed) as pdf:
-                    for page in pdf.pages:
-                        extracted_text += page.extract_text()
-                return extracted_text
+            def extract_data_from_csv(feed):
+                # CSVをpandas DataFrameとして読み込む
+                df = pd.read_csv(feed)
+                # DataFrameを文字列として返す（あるいは、必要なデータを抽出・変換する）
+                return df.to_string()
 
             if uploaded_file is not None:
-                extracted_text = extract_text_from_pdf(uploaded_file)
+                extracted_data = extract_data_from_csv(uploaded_file)
                 # session_stateの更新
-                st.session_state["user_input_formula"] = extracted_text
+                st.session_state["user_input_formula"] = extracted_data
                 # ウィジェット生成
-                user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text, key="user_input_formula")
+                user_input = st.text_area("CSVから抽出したデータ:", value=extracted_data, key="user_input_formula")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -543,8 +543,8 @@ if st.session_state["authenticated"]:
         # 直接入力が選択された場合
         if choice == "直接入力":
             # session_stateの更新
-            if "user_input_formula" in st.session_state:
-                default_value = st.session_state["user_input_formula"]
+            if "user_input_vba" in st.session_state:
+                default_value = st.session_state["user_input_vba"]
             else:
                 default_value = ""
             # ウィジェット生成
@@ -554,19 +554,18 @@ if st.session_state["authenticated"]:
         elif choice == "CSVファイルアップロード":
             uploaded_file = st.file_uploader("CSVファイルをアップロード", type='csv')
 
-            def extract_text_from_pdf(feed):
-                extracted_text = ""
-                with pdfplumber.open(feed) as pdf:
-                    for page in pdf.pages:
-                        extracted_text += page.extract_text()
-                return extracted_text
+            def extract_data_from_csv(feed):
+                # CSVをpandas DataFrameとして読み込む
+                df = pd.read_csv(feed)
+                # DataFrameを文字列として返す（あるいは、必要なデータを抽出・変換する）
+                return df.to_string()
 
             if uploaded_file is not None:
-                extracted_text = extract_text_from_pdf(uploaded_file)
+                extracted_data = extract_data_from_csv(uploaded_file)
                 # session_stateの更新
-                st.session_state["user_input_vba"] = extracted_text
+                st.session_state["user_input_vba"] = extracted_data
                 # ウィジェット生成
-                user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text, key="user_input_vba")
+                user_input = st.text_area("CSVから抽出したデータ:", value=extracted_data, key="user_input_vba")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
