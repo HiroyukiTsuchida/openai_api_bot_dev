@@ -228,7 +228,7 @@ if st.session_state["authenticated"]:
 
             if uploaded_file is not None:
                 extracted_text = extract_text_from_pdf(uploaded_file)
-                user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text,key= key="user_input_translation")
+                user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text,key="user_input_translation")
                 st.session_state["user_input_translation"] = user_input
 
 
