@@ -178,7 +178,7 @@ if st.session_state["authenticated"]:
             extracted_text = ""
             with pdfplumber.load(feed) as pdf:
                 for page in pdf.pages:
-                extracted_text += page.extract_text()
+                    extracted_text += page.extract_text()
             return extracted_text
 
         if uploaded_file is not None:
