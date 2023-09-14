@@ -5,7 +5,7 @@ import uuid
 from PIL import Image
 import numpy as np
 import pdfplumber
-import pandas
+import pandas as pd
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
