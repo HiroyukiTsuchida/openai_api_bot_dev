@@ -201,7 +201,8 @@ if st.session_state["authenticated"]:
         # 留意点の表示
         st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
 
-
+        # ユーザー入力を初期化
+        user_input = ""
 
         # ウィジェット生成前にsession_stateを更新
         #if "user_input_translation" not in st.session_state:
