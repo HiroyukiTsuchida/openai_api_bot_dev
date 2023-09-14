@@ -451,6 +451,7 @@ if st.session_state["authenticated"]:
 
         # ユーザー入力を初期化
         user_input = ""
+        uploaded_file = ""
 
         # ラジオボタンで直接入力とPDFアップロードを選択
         choice = st.radio("入力方法を選択してください", ["直接入力", "CSVファイルアップロード"])
