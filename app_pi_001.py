@@ -170,17 +170,16 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input_Q&A"] = user_input
                 communicate(st.session_state["user_input_Q&A"], bot_response_placeholder, model, temperature, top_p)
 
+
         # アップローダーの設置
-        def extract_text_from_pdf(feed):uploaded_file = st.file_uploader("Choose a file")
-            extracted_text = ""
-            with pdfplumber.load(feed) as pdf:
-                for page in pdf.pages:
+        uploaded_file = st.file_uploader("ファイルアップロード", type='pdf')
+
+            def extract_text_from_pdf(feed):
+                extracted_text = ""
+                with pdfplumber.load(feed) as pdf:
+                    for page in pdf.pages:
                     extracted_text += page.extract_text()
             return extracted_text
-
-        st.file_uploader("ファイルアップロード", type='pdf')
-
-        uploaded_file = st.file_uploader("Choose a file")
 
         if uploaded_file is not None:
             extracted_text = extract_text_from_pdf(uploaded_file)
