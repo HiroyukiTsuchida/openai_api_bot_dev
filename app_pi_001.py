@@ -176,9 +176,6 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input_Q&A"] = user_input
 
 
-        # Create a placeholder for the user's input
-        user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""))
-
         # トークン数を計算
         tokens = count_tokens(user_input)-2
 
