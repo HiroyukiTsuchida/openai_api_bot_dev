@@ -158,7 +158,7 @@ if st.session_state["authenticated"]:
 
         # PDFアップロードが選択された場合
         elif choice == "PDFアップロード":
-            uploaded_file = st.file_uploader("PDFファイルをアップロード", type='pdf')
+            uploaded_file = st.file_uploader("PDFをアップロード", type='pdf')
 
             def extract_text_from_pdf(feed):
                 extracted_text = ""
@@ -172,13 +172,10 @@ if st.session_state["authenticated"]:
                 user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text)
                 st.session_state["user_input_Q&A"] = user_input
 
-
-        # トークン数を計算
-        #tokens = count_tokens(user_input)-2
-
         # ユーザー入力の確認
         if 'user_input' in locals() and user_input:
             tokens = count_tokens(user_input) - 1
+            
         # トークン数を表示
             st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
         else:
@@ -205,16 +202,50 @@ if st.session_state["authenticated"]:
         st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
 
         # 右側の入力フォーム
-        user_input = st.text_area("翻訳したい文章を入力し、実行ボタンを押してください。", height=200, key="user_input_translation")
+        
+        # ラジオボタンで直接入力とPDFアップロードを選択
+        choice = st.radio("入力方法を選択してください", ["直接入力", "PDFアップロード"])
+
+        # 直接入力が選択された場合
+        if choice == "直接入力":
+            user_input = st.text_area("翻訳したい文章を入力し、実行ボタンを押してください。", height=200, key="user_input_translation")
+            st.session_state["user_input_translation"] = user_input
+
+        # PDFアップロードが選択された場合
+        elif choice == "PDFアップロード":
+            uploaded_file = st.file_uploader("PDFをアップロード", type='pdf')
+
+            def extract_text_from_pdf(feed):
+                extracted_text = ""
+                with pdfplumber.open(feed) as pdf:
+                    for page in pdf.pages:
+                        extracted_text += page.extract_text()
+                return extracted_text
+
+            if uploaded_file is not None:
+                extracted_text = extract_text_from_pdf(uploaded_file)
+                user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text)
+                st.session_state["user_input_translation"] = user_input
+
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
+        # ユーザー入力の確認
+        if 'user_input' in locals() and user_input:
+            tokens = count_tokens(user_input) - 2
+            
+        # トークン数を表示
+            st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
+        else:
+            tokens = 0
+
+
         # トークン数を計算
-        tokens = count_tokens(user_input) + count_tokens(additional_info)-4
+        #tokens = count_tokens(user_input) + count_tokens(additional_info)-4
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
+        #st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
