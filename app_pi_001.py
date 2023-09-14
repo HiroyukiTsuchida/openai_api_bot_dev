@@ -201,37 +201,66 @@ if st.session_state["authenticated"]:
         # 留意点の表示
         st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
 
-        # 右側の入力フォーム
+
 
         # ウィジェット生成前にsession_stateを更新
-        if "user_input_translation" not in st.session_state:
-            st.session_state["user_input_translation"] = ""
+        #if "user_input_translation" not in st.session_state:
+            #st.session_state["user_input_translation"] = ""
 
-        user_input_translation = st.text_area("テキスト入力", value=st.session_state["user_input_translation"], key="unique_key_for_text_input")
+        #user_input_translation = st.text_area("テキスト入力", value=st.session_state["user_input_translation"], key="unique_key_for_text_input")
+
+
 
         # ラジオボタンで直接入力とPDFアップロードを選択
         choice = st.radio("入力方法を選択してください", ["直接入力", "PDFアップロード"])
 
         # 直接入力が選択された場合
         if choice == "直接入力":
-            user_input = st.text_area("翻訳したい文章を入力し、実行ボタンを押してください。", height=200, key="user_input_translation")
-            st.session_state["user_input_translation"] = user_input
+            # session_stateの更新
+            if "user_input_translation" in st.session_state:
+                default_value = st.session_state["user_input_translation"]
+            else:
+                default_value = ""
+            # ウィジェット生成
+            user_input = st.text_area("翻訳したい文章を入力し、実行ボタンを押してください。", value=default_value, height=200, key="user_input_translation")
 
         # PDFアップロードが選択された場合
         elif choice == "PDFアップロード":
             uploaded_file = st.file_uploader("PDFをアップロード", type='pdf')
-
-            def extract_text_from_pdf(feed):
-                extracted_text = ""
-                with pdfplumber.open(feed) as pdf:
-                    for page in pdf.pages:
-                        extracted_text += page.extract_text()
-                return extracted_text
-
             if uploaded_file is not None:
                 extracted_text = extract_text_from_pdf(uploaded_file)
-                user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text,key="user_input_translation")
-                st.session_state["user_input_translation"] = user_input
+                # session_stateの更新
+                st.session_state["user_input_translation"] = extracted_text
+                # ウィジェット生成
+                user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text, key="user_input_translation")
+
+
+
+
+
+
+
+
+        # 直接入力が選択された場合
+        #if choice == "直接入力":
+        #    user_input = st.text_area("翻訳したい文章を入力し、実行ボタンを押してください。", height=200, key="user_input_translation")
+        #    st.session_state["user_input_translation"] = user_input
+
+        # PDFアップロードが選択された場合
+        #elif choice == "PDFアップロード":
+        #    uploaded_file = st.file_uploader("PDFをアップロード", type='pdf')
+
+        #    def extract_text_from_pdf(feed):
+        #        extracted_text = ""
+        #        with pdfplumber.open(feed) as pdf:
+        #            for page in pdf.pages:
+        #                extracted_text += page.extract_text()
+        #        return extracted_text
+
+        #    if uploaded_file is not None:
+        #        extracted_text = extract_text_from_pdf(uploaded_file)
+        #        user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text,key="user_input_translation")
+        #        st.session_state["user_input_translation"] = user_input
 
 
         # 追加：補足情報の入力フィールド
