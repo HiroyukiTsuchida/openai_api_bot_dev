@@ -207,6 +207,8 @@ if st.session_state["authenticated"]:
         if "user_input_translation" not in st.session_state:
             st.session_state["user_input_translation"] = ""
 
+        user_input_translation = st.text_area("テキスト入力", value=st.session_state["user_input_translation"], key="unique_key_for_text_input")
+
         # ラジオボタンで直接入力とPDFアップロードを選択
         choice = st.radio("入力方法を選択してください", ["直接入力", "PDFアップロード"])
 
