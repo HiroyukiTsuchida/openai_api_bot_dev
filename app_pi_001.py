@@ -1,13 +1,10 @@
-import sys
-
-# passの設定 (pip showで出てきた、LocationのPASSを以下に設定)
-sys.path.append('/usr/local/lib/python3.10/dist-packages')
 
 import streamlit as st
 import openai
 import uuid
 from PIL import Image
 import numpy as np
+import pdfplumber
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
