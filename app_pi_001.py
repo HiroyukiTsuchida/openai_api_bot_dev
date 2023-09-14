@@ -143,12 +143,38 @@ if st.session_state["authenticated"]:
     # 機能に応じたUIの表示
     if selected_option == "選択してください":
         pass  # 何も表示しない
+
     elif selected_option == "Q&A":
         # Build the user interface
         st.title("Q&A")
 
         # 留意点の表示
         st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
+
+        # ラジオボタンで直接入力とPDFアップロードを選択
+        choice = st.radio("入力方法を選択してください", ["直接入力", "PDFアップロード"])
+
+        # 直接入力が選択された場合
+        if choice == "直接入力":
+            user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""))
+            st.session_state["user_input_Q&A"] = user_input
+
+        # PDFアップロードが選択された場合
+        elif choice == "PDFアップロード":
+            uploaded_file = st.file_uploader("PDFファイルをアップロード", type='pdf')
+
+            def extract_text_from_pdf(feed):
+                extracted_text = ""
+                with pdfplumber.load(feed) as pdf:
+                    for page in pdf.pages:
+                        extracted_text += page.extract_text()
+                return extracted_text
+
+            if uploaded_file is not None:
+                extracted_text = extract_text_from_pdf(uploaded_file)
+                user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text)
+                st.session_state["user_input_Q&A"] = user_input
+
 
         # Create a placeholder for the user's input
         user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""))
@@ -169,25 +195,6 @@ if st.session_state["authenticated"]:
             else:
                 st.session_state["user_input_Q&A"] = user_input
                 communicate(st.session_state["user_input_Q&A"], bot_response_placeholder, model, temperature, top_p)
-
-
-        # アップローダーの設置
-        uploaded_file = st.file_uploader("ファイルアップロード", type='pdf')
-
-        def extract_text_from_pdf(feed):
-            extracted_text = ""
-            with pdfplumber.load(feed) as pdf:
-                for page in pdf.pages:
-                    extracted_text += page.extract_text()
-            return extracted_text
-
-        if uploaded_file is not None:
-            extracted_text = extract_text_from_pdf(uploaded_file)
-            user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text)
-            st.session_state["user_input_Q&A"] = user_input
-        else:
-            user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""))
-            st.session_state["user_input_Q&A"] = user_input
 
         # Clear the user input
         st.session_state["user_input_Q&A"] = ""
