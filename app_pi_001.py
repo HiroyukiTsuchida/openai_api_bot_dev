@@ -174,11 +174,11 @@ if st.session_state["authenticated"]:
         # アップローダーの設置
         uploaded_file = st.file_uploader("ファイルアップロード", type='pdf')
 
-            def extract_text_from_pdf(feed):
-                extracted_text = ""
-                with pdfplumber.load(feed) as pdf:
-                    for page in pdf.pages:
-                    extracted_text += page.extract_text()
+        def extract_text_from_pdf(feed):
+            extracted_text = ""
+            with pdfplumber.load(feed) as pdf:
+                for page in pdf.pages:
+                extracted_text += page.extract_text()
             return extracted_text
 
         if uploaded_file is not None:
