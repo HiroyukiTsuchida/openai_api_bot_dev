@@ -177,10 +177,15 @@ if st.session_state["authenticated"]:
 
 
         # トークン数を計算
-        tokens = count_tokens(user_input)-2
+        #tokens = count_tokens(user_input)-2
 
+        # ユーザー入力の確認
+        if 'user_input' in locals() and user_input:
+            tokens = count_tokens(user_input) - 2
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
+            st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
+        else:
+            tokens = 0
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
