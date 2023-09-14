@@ -175,7 +175,7 @@ if st.session_state["authenticated"]:
         # ユーザー入力の確認
         if 'user_input' in locals() and user_input:
             tokens = count_tokens(user_input) - 1
-            
+
         # トークン数を表示
             st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
         else:
@@ -202,7 +202,11 @@ if st.session_state["authenticated"]:
         st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
 
         # 右側の入力フォーム
-        
+
+        # ウィジェット生成前にsession_stateを更新
+        if "user_input_translation" not in st.session_state:
+            st.session_state["user_input_translation"] = ""
+
         # ラジオボタンで直接入力とPDFアップロードを選択
         choice = st.radio("入力方法を選択してください", ["直接入力", "PDFアップロード"])
 
@@ -234,7 +238,7 @@ if st.session_state["authenticated"]:
         # ユーザー入力の確認
         if 'user_input' in locals() and user_input:
             tokens = count_tokens(user_input) - 2
-            
+
         # トークン数を表示
             st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
         else:
