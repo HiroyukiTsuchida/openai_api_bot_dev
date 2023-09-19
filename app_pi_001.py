@@ -113,8 +113,8 @@ if st.session_state["authenticated"]:
         st.write("Top_P: 温度と同様に、これはランダム性を制御しますが、別の方法を使用します。Top_P を下げると、より可能性が高い回答に絞り込まれます。Top_P を上げると、確率が高い回答と低い回答の両方から選択されるようになります。【推奨値:0.50】")
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
-    # 履歴リセットボタンの設置
-    if st.sidebar.button("リセット"):
+    # 累積トークン数リセットボタンの設置
+    if st.sidebar.button("トークン数リセット"):
         st.session_state["messages"] = [
             {"role": "system", "content": "You are the best AI assistant in the world."}
         ]
