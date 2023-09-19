@@ -7,6 +7,7 @@ import numpy as np
 import pdfplumber
 import pandas as pd
 
+
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
 
@@ -658,6 +659,8 @@ if st.session_state["authenticated"]:
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
             st.write(initial_prompt)
+
+
 
 # DeepLのAPIキーを取得
 #DEEPL_API_KEY = st.secrets["DeepLAPI"]["deepl_api_key"]
