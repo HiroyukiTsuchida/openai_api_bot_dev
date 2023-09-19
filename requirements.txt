@@ -2,8 +2,3 @@ streamlit==1.20.0
 openai
 pdfplumber
 pandas
-webdriver
-Options
-By
-WebDriverWait
-expected_conditions
