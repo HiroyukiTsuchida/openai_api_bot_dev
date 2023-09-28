@@ -166,7 +166,7 @@ if st.session_state["authenticated"]:
 
         # ファイルアップロードが選択された場合
         elif choice == "ファイルをアップロード":
-            uploaded_file = st.file_uploader("ファイルをアップロード", type=['pdf','csv'])
+            uploaded_file = st.file_uploader("ファイルをアップロード", type='pdf')
 
             def extract_text_from_pdf(feed):
                 extracted_text = ""
@@ -228,7 +228,7 @@ if st.session_state["authenticated"]:
 
         # ファイルアップロードが選択された場合
         elif choice == "ファイルをアップロード":
-            uploaded_file = st.file_uploader("ファイルをアップロード", type=['pdf','csv'])
+            uploaded_file = st.file_uploader("ファイルをアップロード", type='pdf')
 
             def extract_text_from_pdf(feed):
                 extracted_text = ""
@@ -404,7 +404,7 @@ if st.session_state["authenticated"]:
 
         # ファイルアップロードが選択された場合
         elif choice == "ファイルをアップロード":
-            uploaded_file = st.file_uploader("ファイルをアップロード", type=['pdf','csv'])
+            uploaded_file = st.file_uploader("ファイルをアップロード", type='pdf')
 
             def extract_text_from_pdf(feed):
                 extracted_text = ""
@@ -498,7 +498,7 @@ if st.session_state["authenticated"]:
 
         # ファイルアップロードが選択された場合
         elif choice == "ファイルをアップロード":
-            uploaded_file = st.file_uploader("ファイルをアップロード", type=['pdf','csv'])
+            uploaded_file = st.file_uploader("ファイルをアップロード", type='csv')
 
             def extract_data_from_csv(feed):
                 # CSVをpandas DataFrameとして読み込む
@@ -583,7 +583,7 @@ if st.session_state["authenticated"]:
 
         # ファイルアップロードが選択された場合
         elif choice == "ファイルをアップロード":
-            uploaded_file = st.file_uploader("ファイルをアップロード", type=['pdf','csv'])
+            uploaded_file = st.file_uploader("ファイルをアップロード", type='csv')
 
             def extract_data_from_csv(feed):
                 # CSVをpandas DataFrameとして読み込む
