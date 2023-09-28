@@ -125,7 +125,7 @@ if st.session_state["authenticated"]:
     def create_mailto_link():
         to_address = "kazuki.takahashi@front-ia.com,katakahashi@pictet.com"
         cc_address = "hiroyuki.tsuchida@front-ia.com"
-        subject = ""
+        subject = "AI Assistant"
         return f"mailto:{to_address}?subject={subject}&cc={cc_address}"
 
     mailto_link = create_mailto_link()
