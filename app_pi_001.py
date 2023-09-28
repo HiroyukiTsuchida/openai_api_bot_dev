@@ -177,7 +177,7 @@ if st.session_state["authenticated"]:
 
             if uploaded_file is not None:
                 extracted_text = extract_text_from_pdf(uploaded_file)
-                user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text)
+                user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text, height=500)
                 st.session_state["user_input_Q&A"] = user_input
 
         # ユーザー入力の確認
@@ -242,7 +242,7 @@ if st.session_state["authenticated"]:
                 # session_stateの更新
                 st.session_state["user_input_translation"] = extracted_text
                 # ウィジェット生成
-                user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text, key="user_input_translation")
+                user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text, key="user_input_translation", height=500)
 
 
         # 追加：補足情報の入力フィールド
@@ -418,7 +418,7 @@ if st.session_state["authenticated"]:
                 # session_stateの更新
                 st.session_state["user_input_proof"] = extracted_text
                 # ウィジェット生成
-                user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text, key="user_input_proof")
+                user_input = st.text_area("PDFから抽出したテキスト:", value=extracted_text, key="user_input_proof", height=500)
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -511,7 +511,7 @@ if st.session_state["authenticated"]:
                 # session_stateの更新
                 st.session_state["user_input_formula"] = extracted_data
                 # ウィジェット生成
-                user_input = st.text_area("CSVから抽出したデータ:", value=extracted_data, key="user_input_formula")
+                user_input = st.text_area("CSVから抽出したデータ:", value=extracted_data, key="user_input_formula", height=500)
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
@@ -596,7 +596,7 @@ if st.session_state["authenticated"]:
                 # session_stateの更新
                 st.session_state["user_input_vba"] = extracted_data
                 # ウィジェット生成
-                user_input = st.text_area("CSVから抽出したデータ:", value=extracted_data, key="user_input_vba")
+                user_input = st.text_area("CSVから抽出したデータ:", value=extracted_data, key="user_input_vba", height=500)
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
