@@ -156,17 +156,17 @@ if st.session_state["authenticated"]:
         user_input = ""
         uploaded_file = ""
 
-        # ラジオボタンで直接入力とPDFアップロードを選択
-        choice = st.radio("入力方法を選択してください", ["直接入力", "PDFアップロード"])
+        # ラジオボタンで直接入力とファイルアップロードを選択
+        choice = st.radio("入力方法を選択してください", ["直接入力", "ファイルをアップロード"])
 
         # 直接入力が選択された場合
         if choice == "直接入力":
             user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""), height=500)
             st.session_state["user_input_Q&A"] = user_input
 
-        # PDFアップロードが選択された場合
-        elif choice == "PDFアップロード":
-            uploaded_file = st.file_uploader("PDFをアップロード", type='pdf')
+        # ファイルアップロードが選択された場合
+        elif choice == "ファイルをアップロード":
+            uploaded_file = st.file_uploader("ファイルをアップロード", type=['pdf','csv'])
 
             def extract_text_from_pdf(feed):
                 extracted_text = ""
@@ -213,8 +213,8 @@ if st.session_state["authenticated"]:
         user_input = ""
         uploaded_file = ""
 
-        # ラジオボタンで直接入力とPDFアップロードを選択
-        choice = st.radio("入力方法を選択してください", ["直接入力", "PDFアップロード"])
+        # ラジオボタンで直接入力とファイルアップロードを選択
+        choice = st.radio("入力方法を選択してください", ["直接入力", "ファイルをアップロード"])
 
         # 直接入力が選択された場合
         if choice == "直接入力":
@@ -226,9 +226,9 @@ if st.session_state["authenticated"]:
             # ウィジェット生成
             user_input = st.text_area("翻訳したい文章を入力してください。", value=default_value, height=500, key="user_input_translation")
 
-        # PDFアップロードが選択された場合
-        elif choice == "PDFアップロード":
-            uploaded_file = st.file_uploader("PDFをアップロード", type='pdf')
+        # ファイルアップロードが選択された場合
+        elif choice == "ファイルをアップロード":
+            uploaded_file = st.file_uploader("ファイルをアップロード", type=['pdf','csv'])
 
             def extract_text_from_pdf(feed):
                 extracted_text = ""
@@ -389,8 +389,8 @@ if st.session_state["authenticated"]:
         user_input = ""
         uploaded_file = ""
 
-        # ラジオボタンで直接入力とPDFアップロードを選択
-        choice = st.radio("入力方法を選択してください", ["直接入力", "PDFアップロード"])
+        # ラジオボタンで直接入力とファイルアップロードを選択
+        choice = st.radio("入力方法を選択してください", ["直接入力", "ファイルをアップロード"])
 
         # 直接入力が選択された場合
         if choice == "直接入力":
@@ -402,9 +402,9 @@ if st.session_state["authenticated"]:
             # ウィジェット生成
             user_input = st.text_area("校閲/校正したい文章を入力してください。", value=default_value, height=200, key="user_input_proof")
 
-        # PDFアップロードが選択された場合
-        elif choice == "PDFアップロード":
-            uploaded_file = st.file_uploader("PDFをアップロード", type='pdf')
+        # ファイルアップロードが選択された場合
+        elif choice == "ファイルをアップロード":
+            uploaded_file = st.file_uploader("ファイルをアップロード", type=['pdf','csv'])
 
             def extract_text_from_pdf(feed):
                 extracted_text = ""
@@ -483,8 +483,8 @@ if st.session_state["authenticated"]:
         user_input = ""
         uploaded_file = ""
 
-        # ラジオボタンで直接入力とPDFアップロードを選択
-        choice = st.radio("入力方法を選択してください", ["直接入力", "CSVファイルアップロード"])
+        # ラジオボタンで直接入力とファイルアップロードを選択
+        choice = st.radio("入力方法を選択してください", ["直接入力", "ファイルをアップロード"])
 
         # 直接入力が選択された場合
         if choice == "直接入力":
@@ -496,9 +496,9 @@ if st.session_state["authenticated"]:
             # ウィジェット生成
             user_input = st.text_area("解析したいExcelの式を入力してください。", value=default_value, height=200, key="user_input_formula")
 
-        # CSVファイルアップロードが選択された場合
-        elif choice == "CSVファイルアップロード":
-            uploaded_file = st.file_uploader("CSVファイルをアップロード", type='csv')
+        # ファイルアップロードが選択された場合
+        elif choice == "ファイルをアップロード":
+            uploaded_file = st.file_uploader("ファイルをアップロード", type=['pdf','csv'])
 
             def extract_data_from_csv(feed):
                 # CSVをpandas DataFrameとして読み込む
@@ -568,8 +568,8 @@ if st.session_state["authenticated"]:
         user_input = ""
         uploaded_file = ""
 
-        # ラジオボタンで直接入力とPDFアップロードを選択
-        choice = st.radio("入力方法を選択してください", ["直接入力", "CSVファイルアップロード"])
+        # ラジオボタンで直接入力とファイルアップロードを選択
+        choice = st.radio("入力方法を選択してください", ["直接入力", "ファイルをアップロード"])
 
         # 直接入力が選択された場合
         if choice == "直接入力":
@@ -581,9 +581,9 @@ if st.session_state["authenticated"]:
             # ウィジェット生成
             user_input = st.text_area("解析したいVBAのコードを入力してください。", value=default_value, height=200, key="user_input_vba")
 
-        # CSVファイルアップロードが選択された場合
-        elif choice == "CSVファイルアップロード":
-            uploaded_file = st.file_uploader("CSVファイルをアップロード", type='csv')
+        # ファイルアップロードが選択された場合
+        elif choice == "ファイルをアップロード":
+            uploaded_file = st.file_uploader("ファイルをアップロード", type=['pdf','csv'])
 
             def extract_data_from_csv(feed):
                 # CSVをpandas DataFrameとして読み込む
