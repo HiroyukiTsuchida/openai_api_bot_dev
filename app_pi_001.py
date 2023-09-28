@@ -6,7 +6,8 @@ from PIL import Image
 import numpy as np
 import pdfplumber
 import pandas as pd
-#from docx import Document 
+#from docx import Document
+#結果をWord形式で出力したいが、docxのインポートがうまくいかずエラーになるため、保留。
 
 
 # サービス名を表示する
@@ -160,7 +161,7 @@ if st.session_state["authenticated"]:
 
         # 直接入力が選択された場合
         if choice == "直接入力":
-            user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""), height=600)
+            user_input = st.text_area("自由に質問を入力してください。", value=st.session_state.get("user_input_Q&A", ""), height=500)
             st.session_state["user_input_Q&A"] = user_input
 
         # PDFアップロードが選択された場合
@@ -223,7 +224,7 @@ if st.session_state["authenticated"]:
             else:
                 default_value = ""
             # ウィジェット生成
-            user_input = st.text_area("翻訳したい文章を入力してください。", value=default_value, height=600, key="user_input_translation")
+            user_input = st.text_area("翻訳したい文章を入力してください。", value=default_value, height=500, key="user_input_translation")
 
         # PDFアップロードが選択された場合
         elif choice == "PDFアップロード":
@@ -261,7 +262,7 @@ if st.session_state["authenticated"]:
 
         initial_prompt = (
                     "あなたは優秀な翻訳家です。あなたの役割は、英文を日本語に翻訳し、日本語のウェブサイト上で日本人の投資家向けに翻訳された間違いのない情報を提供することです。\n"
-                    "以下の指示1から指示4に従って作業を行ってください。\n"
+                    "以下の指示1から指示4に従って作業を行ってください。出力は下記の「形式」の通りとし、「#指示」の文言は出力しないでください。\n"
                     "＃指示1\n"
                     f"{user_input}を、下記の「注意してほしい点」を参照しながら、可能な限り原文に忠実に、漏れや間違いなく、自然な日本語に翻訳し、【翻訳結果】として出力してください\n"
                     f"＃補足情報: {additional_info}"
@@ -338,13 +339,28 @@ if st.session_state["authenticated"]:
                     "#指示1で翻訳により作成された文章を、半分の分量になるよう要約し、【要約】として出力してください。"           
                     "###\n"
                     "＃指示3\n"    
-                    "#指示1で翻訳により作成された文章中、固有名詞にあたるものを下記の例に従ってリストとして出力してください。"
+                    "#指示1で翻訳により作成された文章中、固有名詞にあたるものを下記の例に従ってリスト化し、【固有名詞】として出力してください。"
                     "#例\n"
                     "・固有名詞１（○段落○行目）\n"
                     "＃指示4\n"    
-                    "#指示1で翻訳により作成された文章中、数値にあたるものを下記の例に従って、数値の説明とともにリストとして出力してください。"
+                    "#指示1で翻訳により作成された文章中、数値にあたるものを下記の例に従ってリスト化し、数値の説明とともに【数値とその説明】として出力してください。"
                     "#例\n"
                     "・○○％（○段落○行目）：○○の割合\n"
+                    "###"
+                    "#形式\n"
+                    "【翻訳】\n"
+                    "○○○\n"
+                    "---\n"
+                    "【要約】\n"
+                    "○○○\n"
+                    "---\n"
+                    "【固有名詞】\n"
+                    "○○○\n"
+                    "---\n"
+                    "【数値とその説明】\n"
+                    "○○○\n"
+                    "---\n"
+                    "###"
         )
 
         if st.button("実行", key="send_button_translation"):
