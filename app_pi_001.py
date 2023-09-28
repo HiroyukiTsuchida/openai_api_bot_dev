@@ -6,7 +6,7 @@ from PIL import Image
 import numpy as np
 import pdfplumber
 import pandas as pd
-from docx import Document
+#from docx import Document 
 
 
 # サービス名を表示する
