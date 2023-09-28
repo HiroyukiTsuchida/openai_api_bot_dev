@@ -400,7 +400,7 @@ if st.session_state["authenticated"]:
             else:
                 default_value = ""
             # ウィジェット生成
-            user_input = st.text_area("校閲/校正したい文章を入力してください。", value=default_value, height=200, key="user_input_proof")
+            user_input = st.text_area("校閲/校正したい文章を入力してください。", value=default_value, height=500, key="user_input_proof")
 
         # ファイルアップロードが選択された場合
         elif choice == "ファイルをアップロード":
@@ -494,7 +494,7 @@ if st.session_state["authenticated"]:
             else:
                 default_value = ""
             # ウィジェット生成
-            user_input = st.text_area("解析したいExcelの式を入力してください。", value=default_value, height=200, key="user_input_formula")
+            user_input = st.text_area("解析したいExcelの式を入力してください。", value=default_value, height=500, key="user_input_formula")
 
         # ファイルアップロードが選択された場合
         elif choice == "ファイルをアップロード":
@@ -579,7 +579,7 @@ if st.session_state["authenticated"]:
             else:
                 default_value = ""
             # ウィジェット生成
-            user_input = st.text_area("解析したいVBAのコードを入力してください。", value=default_value, height=200, key="user_input_vba")
+            user_input = st.text_area("解析したいVBAのコードを入力してください。", value=default_value, height=500, key="user_input_vba")
 
         # ファイルアップロードが選択された場合
         elif choice == "ファイルをアップロード":
@@ -652,7 +652,7 @@ if st.session_state["authenticated"]:
         st.markdown('<span style="color:red">***個人情報や機密情報は入力しないでください**</span>', unsafe_allow_html=True)
 
         # 右側の入力フォーム
-        user_input = st.text_area("解析したいログデータを入力し、実行ボタンを押してください。", height=200, key="user_input_data")
+        user_input = st.text_area("解析したいログデータを入力し、実行ボタンを押してください。", height=500, key="user_input_data")
 
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
