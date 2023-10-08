@@ -390,6 +390,7 @@ if st.session_state["authenticated"]:
                 st.warning("データを入力してください。")
             else:
                 chunk_size = 1000
+                bot_response_placeholder = st.empty()
                 translated_text = translate_text_chunked(user_input, chunk_size, communicate, model, temperature, top_p, initial_prompt, additional_info)
                 st.text(translated_text)
 
