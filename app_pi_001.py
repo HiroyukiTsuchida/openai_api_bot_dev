@@ -83,6 +83,28 @@ if st.session_state["authenticated"]:
         # Reset the messages after the chat
         messages = [{"role": "system", "content": "You are the best AI assistant in the world."}]
 
+
+    def translate_text_chunked(text, chunk_size, communicate, model, temperature, top_p, initial_prompt, additional_info):
+        """
+        テキストをチャンクに分割し、それぞれのチャンクを翻訳して最後に結合する関数
+        """
+        # 文字数がchunk_size以下ならばそのまま翻訳
+        if len(text) <= chunk_size:
+            return communicate(text, None, model, temperature, top_p, initial_prompt, additional_info)
+    
+        # テキストを指定されたチャンクサイズで分割
+        chunks = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
+    
+        translated_chunks = []
+        for chunk in chunks:
+            full_chunk = initial_prompt + "\n\n" + additional_info + "\n\n" + chunk
+            translated_chunk = communicate(full_chunk, None, model, temperature, top_p)
+            translated_chunks.append(translated_chunk)
+
+
+        # すべてのチャンクを結合して返す
+        return "".join(translated_chunks)
+
     # サイドバーで機能を選択
     selected_option = st.sidebar.selectbox(
         "機能を選択してください",
@@ -335,14 +357,14 @@ if st.session_state["authenticated"]:
                     "【悪い日本語訳の例】申込書は確認のために社長に提出されなければならない。\n"
                     "【良い日本語訳の例】申込書を提出し社長の確認を受けなければならない。\n"
                     "###\n"
-                    "＃指示2\n"    
-                    "#指示1で翻訳により作成された文章を、半分の分量になるよう要約し、【要約】として出力してください。"           
+                    "＃指示2\n"
+                    "#指示1で翻訳により作成された文章を、半分の分量になるよう要約し、【要約】として出力してください。"
                     "###\n"
-                    "＃指示3\n"    
+                    "＃指示3\n"
                     "#指示1で翻訳により作成された文章中、固有名詞にあたるものを下記の例に従ってリスト化し、【固有名詞】として出力してください。"
                     "#例\n"
                     "・固有名詞１（○段落○行目）\n"
-                    "＃指示4\n"    
+                    "＃指示4\n"
                     "#指示1で翻訳により作成された文章中、数値にあたるものを下記の例に従ってリスト化し、数値の説明とともに【数値とその説明】として出力してください。"
                     "#例\n"
                     "・○○％（○段落○行目）：○○の割合\n"
@@ -367,8 +389,9 @@ if st.session_state["authenticated"]:
             if user_input.strip() == "":
                 st.warning("データを入力してください。")
             else:
-                st.session_state["user_input"] = initial_prompt
-                communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
+                chunk_size = 1000
+                translated_text = translate_text_chunked(user_input, chunk_size, communicate, model, temperature, top_p, initial_prompt, additional_info)
+                st.text(translated_text)
 
 
         # 「システムプロンプトを表示」ボタンの説明
