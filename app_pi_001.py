@@ -85,26 +85,27 @@ if st.session_state["authenticated"]:
         messages = [{"role": "system", "content": "You are the best AI assistant in the world."}]
 
 
-    def translate_text_chunked(text, chunk_size, communicate, model, temperature, top_p, initial_prompt, additional_info, bot_response_placeholder):
+    def translate_chunk(chunk_text, model, temperature, top_p):
         """
         テキストをチャンクに分割し、それぞれのチャンクを翻訳して最後に結合する関数
         """
+    def chunk_and_translate(text, chunk_size, model, temperature, top_p):
+
         # 文字数がchunk_size以下ならばそのまま翻訳
         if len(text) <= chunk_size:
             return communicate(text, bot_response_placeholder, model, temperature, top_p)
 
-        # テキストを指定されたチャンクサイズで分割
+        # テキストをチャンクに分割します。
         chunks = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
 
-        translated_chunks = []
-        for chunk in chunks:
-            full_chunk = initial_prompt + "\n\n" + additional_info + "\n\n" + chunk
-            translated_chunk = communicate(full_chunk, bot_response_placeholder, model, temperature, top_p)
-            translated_chunks.append(translated_chunk)
+        translated_text = ""
 
+        for chunk in chunks:
+            translated_chunk = translate_chunk(chunk, model, temperature, top_p)
+            translated_text += translated_chunk
 
         # すべてのチャンクを結合して返す
-        return "".join(translated_chunks)
+        return translated_text
 
     # サイドバーで機能を選択
     selected_option = st.sidebar.selectbox(
