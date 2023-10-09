@@ -73,7 +73,8 @@ if st.session_state["authenticated"]:
                 complete_response += content
                 formatted_response = complete_response.replace("\n", "<br>")
                 indented_response = "".join([f"<div style='margin-left: 20px; white-space: pre-wrap;'>{line}</div>" for line in complete_response.split('\n')]) # インデントで回答
-                bot_response_placeholder.markdown(indented_response, unsafe_allow_html=True)
+                if bot_response_placeholder is not None:
+                    bot_response_placeholder.markdown(indented_response, unsafe_allow_html=True)
 
         # After all chunks are received, add the complete response to the chat history
         if complete_response:
@@ -91,10 +92,10 @@ if st.session_state["authenticated"]:
         # 文字数がchunk_size以下ならばそのまま翻訳
         if len(text) <= chunk_size:
             return communicate(text, None, model, temperature, top_p, initial_prompt, additional_info)
-    
+
         # テキストを指定されたチャンクサイズで分割
         chunks = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
-    
+
         translated_chunks = []
         for chunk in chunks:
             full_chunk = initial_prompt + "\n\n" + additional_info + "\n\n" + chunk
@@ -391,7 +392,8 @@ if st.session_state["authenticated"]:
             else:
                 chunk_size = 1000
                 bot_response_placeholder = st.empty()
-                translated_text = translate_text_chunked(user_input, chunk_size, communicate, model, temperature, top_p, initial_prompt, additional_info)
+                translated_text = translate_text_chunked(user_input, chunk_size, communicate, model,temperature, top_p, initial_prompt, additional_info,
+                bot_response_placeholder)
                 st.text(translated_text)
 
 
