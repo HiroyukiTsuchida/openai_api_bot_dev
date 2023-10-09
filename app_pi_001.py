@@ -393,8 +393,7 @@ if st.session_state["authenticated"]:
             else:
                 chunk_size = 1000
                 bot_response_placeholder = st.empty()
-                translated_text = translate_chunk(user_input, chunk_size, communicate, model,temperature, top_p, initial_prompt, additional_info,
-                bot_response_placeholder)
+                translated_text = translate_chunk(chunk_text, model, temperature, top_p)
                 st.text(translated_text)
 
 
