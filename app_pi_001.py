@@ -85,13 +85,13 @@ if st.session_state["authenticated"]:
         messages = [{"role": "system", "content": "You are the best AI assistant in the world."}]
 
 
-    def translate_text_chunked(text, chunk_size, communicate, model, temperature, top_p, initial_prompt, additional_info):
+    def translate_text_chunked(text, chunk_size, communicate, model, temperature, top_p, initial_prompt, additional_info, bot_response_placeholder):
         """
         テキストをチャンクに分割し、それぞれのチャンクを翻訳して最後に結合する関数
         """
         # 文字数がchunk_size以下ならばそのまま翻訳
         if len(text) <= chunk_size:
-            return communicate(text, None, model, temperature, top_p, initial_prompt, additional_info)
+            return communicate(text, bot_response_placeholder, model, temperature, top_p)
 
         # テキストを指定されたチャンクサイズで分割
         chunks = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
@@ -99,7 +99,7 @@ if st.session_state["authenticated"]:
         translated_chunks = []
         for chunk in chunks:
             full_chunk = initial_prompt + "\n\n" + additional_info + "\n\n" + chunk
-            translated_chunk = communicate(full_chunk, None, model, temperature, top_p)
+            translated_chunk = communicate(full_chunk, bot_response_placeholder, model, temperature, top_p)
             translated_chunks.append(translated_chunk)
 
 
