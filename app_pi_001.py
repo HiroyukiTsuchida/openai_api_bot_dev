@@ -8,6 +8,7 @@ import pdfplumber
 import pandas as pd
 #from docx import Document
 #結果をWord形式で出力したいが、docxのインポートがうまくいかずエラーになるため、保留。
+import textwrap
 
 
 # サービス名を表示する
@@ -84,28 +85,81 @@ if st.session_state["authenticated"]:
         # Reset the messages after the chat
         messages = [{"role": "system", "content": "You are the best AI assistant in the world."}]
 
+#翻訳の部分のみ、communicate関数ではなく単純なチャンク翻訳コマンドに修正
+    def chunk_text(text, chunk_size=1000):
+        """
+        Split the input text into chunks of size `chunk_size`.
 
-    def translate_chunk(chunk_text, model, temperature, top_p):
+        Parameters:
+            text (str): The text to be chunked.
+            chunk_size (int): The size of each chunk. Default is 1000.
+
+        Returns:
+            list of str: The text chunks.
         """
-        テキストをチャンクに分割し、それぞれのチャンクを翻訳して最後に結合する関数
+        return textwrap.wrap(text, chunk_size)
+
+    def translate_with_chatgpt(text_chunk):
         """
-    def chunk_and_translate(text, chunk_size, model, temperature, top_p):
+        Translate a text chunk using ChatGPT.
+        In a real scenario, this function would make an API call to ChatGPT
+        to get the translation. Here, we'll just return the input as-is due to the
+        lack of internet access in the current environment.
+
+        Parameters:
+            text_chunk (str): A chunk of text to be translated.
+
+        Returns:
+            str: The translated text.
+        """
+        # API call to ChatGPT would go here.
+        # For now, return the input text as-is.
+        return text_chunk
+
+
+
+    # Example usage:
+
+# Original text in English
+original_text = "Your long English text goes here. " * 100  # Replace with actual text
+
+# Chunk the text
+text_chunks = chunk_text(original_text)
+
+# Translate each chunk
+translated_chunks = [translate_with_chatgpt(chunk) for chunk in text_chunks]
+
+# Combine translated chunks
+translated_text = " ".join(translated_chunks)
+
+
+
+
+
+#以下現在ボツのコード。communicate関数でチャンク分割と翻訳を試みた。
+    #def translate_chunk(chunk_text, model, temperature, top_p):
+        #"""
+        #テキストをチャンクに分割し、それぞれのチャンクを翻訳して最後に結合する関数
+        #"""
+    #def chunk_and_translate(text, chunk_size, model, temperature, top_p):
 
         # 文字数がchunk_size以下ならばそのまま翻訳
-        if len(text) <= chunk_size:
-            return communicate(text, bot_response_placeholder, model, temperature, top_p)
+        #if len(text) <= chunk_size:
+        #    return communicate(text, bot_response_placeholder, model, temperature, top_p)
 
         # テキストをチャンクに分割します。
-        chunks = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
+        #chunks = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
 
-        translated_text = ""
+        #translated_text = ""
 
-        for chunk in chunks:
-            translated_chunk = translate_chunk(chunk, model, temperature, top_p)
-            translated_text += translated_chunk
+        #for chunk in chunks:
+        #    translated_chunk = translate_chunk(chunk, model, temperature, top_p)
+        #    translated_text += translated_chunk
 
         # すべてのチャンクを結合して返す
-        return translated_text
+        #return translated_text
+#翻訳ボツコードは以上
+
 
     # サイドバーで機能を選択
     selected_option = st.sidebar.selectbox(
@@ -125,7 +179,7 @@ if st.session_state["authenticated"]:
         """)
         model = st.selectbox(
         "モデルを選択してください",
-        ["gpt-4", "gpt-3.5-turbo-16k"],
+        ["gpt-4-32k", "gpt-4", "gpt-3.5-turbo-16k"],
         key="model_selectbox_key"  # 固定のキーを指定する
     )
 
