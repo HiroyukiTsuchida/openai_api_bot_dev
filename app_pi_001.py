@@ -179,7 +179,7 @@ translated_text = " ".join(translated_chunks)
         """)
         model = st.selectbox(
         "モデルを選択してください",
-        ["gpt-4-32k", "gpt-4", "gpt-3.5-turbo-16k"],
+        ["gpt-4", "gpt-3.5-turbo-16k"],
         key="model_selectbox_key"  # 固定のキーを指定する
     )
 
