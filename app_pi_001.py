@@ -335,7 +335,7 @@ if st.session_state["authenticated"]:
                     "【悪い日本語訳の例】申込書は確認のために社長に提出されなければならない。\n"
                     "【良い日本語訳の例】申込書を提出し社長の確認を受けなければならない。\n"
                     "###\n"
-
+        )
 
         if st.button("実行", key="send_button_translation"):
             if user_input.strip() == "":
