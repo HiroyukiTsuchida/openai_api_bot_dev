@@ -437,7 +437,7 @@ if st.session_state["authenticated"]:
                     "○○○\n"
                     "---\n"
                     "###\n"
-        )
+                    )
 
         if st.button("実行", key="send_button_summarize"):
             if user_input.strip() == "":
@@ -648,7 +648,7 @@ if st.session_state["authenticated"]:
 
              "出力3:修正後全文
              "修正を反映させた全文を出力してください。
-
+            )
 
 
 
