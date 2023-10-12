@@ -412,7 +412,7 @@ if st.session_state["authenticated"]:
         bot_response_placeholder = st.empty()
 
         initial_prompt = (
-                    "以下の指示に従って処理してください。\n"
+                    """以下の指示に従って処理してください。\n"
                     "###\n"
                     "＃指示1\n"
                     "#入力された文章を、半分の分量になるよう要約し、【要約】として出力してください。\n"
@@ -436,7 +436,7 @@ if st.session_state["authenticated"]:
                     "【数値とその説明】\n"
                     "○○○\n"
                     "---\n"
-                    "###\n"
+                    "###\n"""
         )
 
         if st.button("実行", key="send_button_summarize"):
