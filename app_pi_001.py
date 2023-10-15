@@ -6,6 +6,7 @@ from PIL import Image
 import numpy as np
 import pdfplumber
 import pandas as pd
+from fpdf import FPDF
 #from docx import Document
 #結果をWord形式で出力したいが、docxのインポートがうまくいかずエラーになるため、保留。
 
@@ -140,6 +141,24 @@ if st.session_state["authenticated"]:
     st.sidebar.markdown("""
     [v1.2.0](https://ai-assistant-releasenote-mfjkhzwcdpy9p33km6tffg.streamlit.app/)
     """)
+
+    def create_pdf(translated_text):
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_font("Arial", size=12)
+        pdf.cell(200, 10, txt=translated_text, ln=True, align='C')
+    
+        # PDFを一時ファイルとして保存
+        pdf_output_path = "/tmp/translated_text.pdf"
+        pdf.output(pdf_output_path)
+    
+        return pdf_output_path
+
+
+
+
+
+
 
     # 機能に応じたUIの表示
     if selected_option == "選択してください":
@@ -347,6 +366,12 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
+
+            # PDFを生成
+            pdf_path = create_pdf(bot_response_placeholder)
+    
+            # PDFをダウンロードリンクとして提供
+            st.markdown(f"[Download Translated Text]({pdf_path})")
 
         # 「システムプロンプトを表示」ボタンの説明
         st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプト（命令文）を表示できます。**</span>', unsafe_allow_html=True)
