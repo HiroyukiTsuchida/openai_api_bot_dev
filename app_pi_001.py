@@ -84,10 +84,8 @@ if st.session_state["authenticated"]:
 
         # Reset the messages after the chat
         messages = [{"role": "system", "content": "You are the best AI assistant in the world."}]
-
-
-        generated_text = " "
-        return generated_text
+      
+        return complete_response
 
     # サイドバーで機能を選択
     selected_option = st.sidebar.selectbox(
@@ -388,7 +386,7 @@ if st.session_state["authenticated"]:
 
 
                 # PDFをダウンロードリンクとして提供
-                st.markdown(get_binary_file_downloader_html(pdf_path, 'Download PDF file'), unsafe_allow_html=True)
+                st.markdown(get_binary_file_downloader_html(pdf_path, '結果をPDF形式でダウンロード'), unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの説明
         st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプト（命令文）を表示できます。**</span>', unsafe_allow_html=True)
