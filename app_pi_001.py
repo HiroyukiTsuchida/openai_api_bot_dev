@@ -84,6 +84,10 @@ if st.session_state["authenticated"]:
         # Reset the messages after the chat
         messages = [{"role": "system", "content": "You are the best AI assistant in the world."}]
 
+
+        generated_text = " "
+        return generated_text
+
     # サイドバーで機能を選択
     selected_option = st.sidebar.selectbox(
         "機能を選択してください",
@@ -221,6 +225,8 @@ if st.session_state["authenticated"]:
 
         # Clear the user input
         st.session_state["user_input_Q&A"] = ""
+
+
 
     elif selected_option == "Translation":
         st.title("Translation")
@@ -364,14 +370,17 @@ if st.session_state["authenticated"]:
                 st.warning("データを入力してください。")
             else:
                 st.session_state["user_input"] = initial_prompt
-                communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
+                generated_text = communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
+                # 生成されたテキストをUIに表示します。
+                bot_response_placeholder = st.write(generated_text)
 
-            # PDFを生成
-            pdf_path = create_pdf(bot_response_placeholder)
-    
-            # PDFをダウンロードリンクとして提供
-            st.markdown(f"[Download Translated Text]({pdf_path})")
+                # PDFを生成
+                pdf_path = create_pdf(generated_text)
+        
+                # PDFをダウンロードリンクとして提供
+                st.markdown(f"[Download Translated Text]({pdf_path})")
+
 
         # 「システムプロンプトを表示」ボタンの説明
         st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプト（命令文）を表示できます。**</span>', unsafe_allow_html=True)
