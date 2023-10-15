@@ -7,6 +7,7 @@ import numpy as np
 import pdfplumber
 import pandas as pd
 from fpdf import FPDF
+import base64
 #from docx import Document
 #結果をWord形式で出力したいが、docxのインポートがうまくいかずエラーになるため、保留。
 
@@ -377,10 +378,17 @@ if st.session_state["authenticated"]:
 
                 # PDFを生成
                 pdf_path = create_pdf(generated_text)
-        
-                # PDFをダウンロードリンクとして提供
-                st.markdown(f"[Download Translated Text]({pdf_path})")
 
+                def get_binary_file_downloader_html(bin_file, file_label='File'):
+                    with open(bin_file, 'rb') as f:
+                        data = f.read()
+                    bin_str = base64.b64encode(data).decode()
+                    href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{bin_file}">{file_label}</a>'
+                    return href
+
+
+                # PDFをダウンロードリンクとして提供
+                st.markdown(get_binary_file_downloader_html(pdf_path, 'Download PDF file'), unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの説明
         st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプト（命令文）を表示できます。**</span>', unsafe_allow_html=True)
