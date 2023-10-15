@@ -148,19 +148,17 @@ if st.session_state["authenticated"]:
     def create_pdf(translated_text):
         pdf = FPDF()
         pdf.add_page()
-        pdf.set_font("Arial", size=12)
-        pdf.cell(200, 10, txt=translated_text, ln=True, align='C')
+
+        # フォントを追加
+        pdf.add_font("DejaVu", style="", fname="DejaVuSans.ttf", uni=True)
     
-        # PDFを一時ファイルとして保存
+        # 追加したフォントを使用
+        pdf.set_font("DejaVu", size=12)
+    
+        pdf.cell(200, 10, txt=text, ln=True, align='C')
         pdf_output_path = "/tmp/translated_text.pdf"
         pdf.output(pdf_output_path)
-    
         return pdf_output_path
-
-
-
-
-
 
 
     # 機能に応じたUIの表示
