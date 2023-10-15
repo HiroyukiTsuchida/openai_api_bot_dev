@@ -370,7 +370,7 @@ if st.session_state["authenticated"]:
                 generated_text = communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
                 # 生成されたテキストをUIに表示します。
-                bot_response_placeholder = st.write(generated_text)
+                #bot_response_placeholder = st.write(generated_text)
 
                 # PDFを生成
                 pdf_path = create_pdf(generated_text)
