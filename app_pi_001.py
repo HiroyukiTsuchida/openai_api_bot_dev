@@ -156,7 +156,7 @@ if st.session_state["authenticated"]:
     [v1.2.0](https://ai-assistant-releasenote-mfjkhzwcdpy9p33km6tffg.streamlit.app/)
     """)
 
-    def create_pdf(translated_text):
+    def create_pdf(text):
         pdf = FPDF()
         pdf.add_page()
 
@@ -165,7 +165,6 @@ if st.session_state["authenticated"]:
 
         # テキストをサニタイズ
         sanitized_text = sanitize_text(text)
-    
 
         pdf.cell(200, 10, txt=sanitized_text, ln=True, align='C')
         pdf_output_path = "/tmp/translated_text.pdf"
