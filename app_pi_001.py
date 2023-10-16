@@ -6,10 +6,8 @@ from PIL import Image
 import numpy as np
 import pdfplumber
 import pandas as pd
-from fpdf import FPDF
+from docx import Document
 import base64
-#from docx import Document
-#結果をWord形式で出力したいが、docxのインポートがうまくいかずエラーになるため、保留。
 
 
 # サービス名を表示する
@@ -52,16 +50,12 @@ if st.session_state["authenticated"]:
         token_count = response['usage']['total_tokens']
         return token_count
 
-    def sanitize_text(text):
-        sanitized_text = ""
-        for char in text:
-            try:
-                char.encode("latin-1")
-                sanitized_text += char
-            except UnicodeEncodeError:
-                sanitized_text += "?"  # 「?」は任意の代替文字に変更可
-        return sanitized_text
-
+    def get_binary_file_downloader_html(bin_file, file_label="File"):
+        with open(bin_file, "rb") as f:
+            data = f.read()
+        bin_str = base64.b64encode(data).decode()
+        href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{file_label}.docx">Download {file_label}</a>'
+        return href
 
     # チャットボットとやりとりする関数
     def communicate(user_input, bot_response_placeholder, model, temperature, top_p):
@@ -156,20 +150,12 @@ if st.session_state["authenticated"]:
     [v1.2.0](https://ai-assistant-releasenote-mfjkhzwcdpy9p33km6tffg.streamlit.app/)
     """)
 
-    def create_pdf(text):
-        pdf = FPDF()
-        pdf.add_page()
-
-        # デフォルトのフォントを使用
-        pdf.set_font("Arial", size=12)
-
-        # テキストをサニタイズ
-        sanitized_text = sanitize_text(text)
-
-        pdf.cell(200, 10, txt=sanitized_text, ln=True, align='C')
-        pdf_output_path = "/tmp/translated_text.pdf"
-        pdf.output(pdf_output_path)
-        return pdf_output_path
+    def create_word_doc(text):
+        doc = Document()
+        doc.add_paragraph(text)
+        output_path = "/tmp/translated_text.docx"
+        doc.save(output_path)
+        return output_path
 
 
     # 機能に応じたUIの表示
@@ -383,8 +369,8 @@ if st.session_state["authenticated"]:
                 # 生成されたテキストをUIに表示します。
                 #bot_response_placeholder = st.write(generated_text)
 
-                # PDFを生成
-                pdf_path = create_pdf(generated_text)
+                # Word文書を生成
+                doc_path = create_word_doc(generated_text)
 
                 def get_binary_file_downloader_html(bin_file, file_label='File'):
                     with open(bin_file, 'rb') as f:
@@ -393,9 +379,8 @@ if st.session_state["authenticated"]:
                     href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{bin_file}">{file_label}</a>'
                     return href
 
-
-                # PDFをダウンロードリンクとして提供
-                st.markdown(get_binary_file_downloader_html(pdf_path, '結果をPDF形式でダウンロード'), unsafe_allow_html=True)
+                # Word文書をダウンロードリンクとして提供
+                st.markdown(get_binary_file_downloader_html(doc_path, "Translated_Text"), unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの説明
         st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプト（命令文）を表示できます。**</span>', unsafe_allow_html=True)
