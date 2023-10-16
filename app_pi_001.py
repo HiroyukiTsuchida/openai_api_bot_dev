@@ -52,6 +52,17 @@ if st.session_state["authenticated"]:
         token_count = response['usage']['total_tokens']
         return token_count
 
+    def sanitize_text(text):
+        sanitized_text = ""
+        for char in text:
+            try:
+                char.encode("latin-1")
+                sanitized_text += char
+            except UnicodeEncodeError:
+                sanitized_text += "?"  # 「?」は任意の代替文字に変更可
+        return sanitized_text
+
+
     # チャットボットとやりとりする関数
     def communicate(user_input, bot_response_placeholder, model, temperature, top_p):
         messages = st.session_state["messages"]
@@ -84,7 +95,7 @@ if st.session_state["authenticated"]:
 
         # Reset the messages after the chat
         messages = [{"role": "system", "content": "You are the best AI assistant in the world."}]
-      
+
         return complete_response
 
     # サイドバーで機能を選択
@@ -149,13 +160,14 @@ if st.session_state["authenticated"]:
         pdf = FPDF()
         pdf.add_page()
 
-        # フォントを追加
-        pdf.add_font("DejaVu", style="", fname="DejaVuSans.ttf", uni=True)
+        # デフォルトのフォントを使用
+        pdf.set_font("Arial", size=12)
+
+        # テキストをサニタイズ
+        sanitized_text = sanitize_text(text)
     
-        # 追加したフォントを使用
-        pdf.set_font("DejaVu", size=12)
-    
-        pdf.cell(200, 10, txt=text, ln=True, align='C')
+
+        pdf.cell(200, 10, txt=sanitized_text, ln=True, align='C')
         pdf_output_path = "/tmp/translated_text.pdf"
         pdf.output(pdf_output_path)
         return pdf_output_path
