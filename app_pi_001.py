@@ -8,7 +8,7 @@ import pdfplumber
 import pandas as pd
 from docx import Document
 import base64
-
+import re
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
@@ -147,16 +147,29 @@ if st.session_state["authenticated"]:
 
     # バージョン情報表示（リリースノートへのハイパーリンク）
     st.sidebar.markdown("""
-    [v1.2.0](https://ai-assistant-releasenote-mfjkhzwcdpy9p33km6tffg.streamlit.app/)
+    [v1.3.0](https://ai-assistant-releasenote-mfjkhzwcdpy9p33km6tffg.streamlit.app/)
     """)
 
     def create_word_doc(text):
+
+        # 最初の行を取得
+        first_line = text.split("\n")[0].strip()
+
+        # 日付や時間などを含む文字列から、タイトル部分を取得
+        title = first_line.split(' ', 2)[-1] 
+
+        # ファイル名として使用できない文字を取り除く
+        valid_filename = re.sub(r"[^a-zA-Z0-9]", "_", first_line)
+        valid_filename = re.sub(r"_+", "_", valid_filename)
+
+        # 一定の長さに制限する (例: 20文字)
+        valid_filename = valid_filename[:20] + ".docx"
+ 
         doc = Document()
         doc.add_paragraph(text)
-        output_path = "/tmp/translated_text.docx"
+        output_path = f"/tmp/{valid_filename}"
         doc.save(output_path)
         return output_path
-
 
     # 機能に応じたUIの表示
     if selected_option == "選択してください":
