@@ -10,6 +10,7 @@ from docx import Document
 import base64
 import re
 import os
+import difflib
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
