@@ -159,7 +159,7 @@ if st.session_state["authenticated"]:
         title = first_line.split(' ', 2)[-1] 
 
         # ファイル名として使用できない文字を取り除く
-        valid_filename = re.sub(r"[^a-zA-Z0-9]", "_", first_line)
+        valid_filename = re.sub(r"[^a-zA-Z0-9]", "_", title)
         valid_filename = re.sub(r"_+", "_", valid_filename)
 
         # 一定の長さに制限する (例: 20文字)
