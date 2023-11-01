@@ -155,8 +155,12 @@ if st.session_state["authenticated"]:
         # 最初の行を取得
         first_line = text.split("\n")[0].strip()
 
-        # 日付や時間などを含む文字列から、タイトル部分を取得
-        title = first_line.split(' ', 2)[-1] 
+        # 正規表現を使用してタイトル部分を取得
+        match = re.search(r'\d{2}:\d{2} (.+)', first_line)
+        if match:
+            title = match.group(1)
+        else:
+            title = first_line
 
         # ファイル名として使用できない文字を取り除く
         valid_filename = re.sub(r"[^a-zA-Z0-9]", "_", title)
