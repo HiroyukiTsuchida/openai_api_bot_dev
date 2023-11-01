@@ -200,6 +200,7 @@ if st.session_state["authenticated"]:
 
         # ラジオボタンで直接入力とファイルアップロードを選択
         choice = st.radio("入力方法を選択してください", ["直接入力", "ファイルをアップロード"])
+        st.markdown('<span style="color:black">***「ファイルをアップロード」は社内環境からは実行しないでください**</span>', unsafe_allow_html=True)
 
         # 直接入力が選択された場合
         if choice == "直接入力":
@@ -258,6 +259,7 @@ if st.session_state["authenticated"]:
 
         # ラジオボタンで直接入力とファイルアップロードを選択
         choice = st.radio("入力方法を選択してください", ["直接入力", "ファイルをアップロード"])
+        st.markdown('<span style="color:black">***「ファイルをアップロード」は社内環境からは実行しないでください**</span>', unsafe_allow_html=True)
 
         # 直接入力が選択された場合
         if choice == "直接入力":
@@ -426,6 +428,7 @@ if st.session_state["authenticated"]:
 
         # ラジオボタンで直接入力とファイルアップロードを選択
         choice = st.radio("入力方法を選択してください", ["直接入力", "ファイルをアップロード"])
+        st.markdown('<span style="color:black">***「ファイルをアップロード」は社内環境からは実行しないでください**</span>', unsafe_allow_html=True)
 
         # 直接入力が選択された場合
         if choice == "直接入力":
@@ -571,7 +574,7 @@ if st.session_state["authenticated"]:
             "#3:文章を省略しないこと。 \n"
             "出力1:修正後全文 \n"
             "修正を反映させた全文を出力してください。 \n"
-            "出力にあたっては、処理2で修正した個所をアスタリスク（太字表示）で出力してください。 \n"
+            "出力にあたっては、Markdown形式とし、処理2で修正した個所をアスタリスク（太字表示）で出力してください。 \n"
             "出力2:修正箇所リスト \n"
             "操作2で修正した指摘したすべての個所について、以下に示す箇条書きの形式で、一つずつ改行して出力してください。なお、該当がない項目については項目を含め出力しないでください。 \n"
             "形式: \n"
@@ -635,6 +638,7 @@ if st.session_state["authenticated"]:
 
         # ラジオボタンで直接入力とファイルアップロードを選択
         choice = st.radio("入力方法を選択してください", ["直接入力", "ファイルをアップロード"])
+        st.markdown('<span style="color:black">***「ファイルをアップロード」は社内環境からは実行しないでください**</span>', unsafe_allow_html=True)
 
         # 直接入力が選択された場合
         if choice == "直接入力":
@@ -686,7 +690,9 @@ if st.session_state["authenticated"]:
                     "複雑なネスト構造になっているExcel関数を改行し、かつインデント表示をすることで、わかりやすく表示してください。インデントは見やすくなるよう全角\n"
                     "]\n"
                     "操作2:[\n"
-                    "操作1を行った後にこのExcel関数がどのような処理を行おうとしているものか解説し、よりシンプルで分かりやすい関数に書き換えが可能であれば、その提案をしてください。]\n"
+                    "操作1を行った後にこのExcel関数がどのような処理を行おうとしているものか解説してください。]\n"
+                    "操作3:[\n"
+                    "操作2を行った後に入力されたExcel関数よりシンプルで分かりやすい関数を提案し、出力してください。
                     "＃Excel関数:\n"
                     f"{user_input}\n"
                     "＃補足情報:\n"
@@ -720,6 +726,7 @@ if st.session_state["authenticated"]:
 
         # ラジオボタンで直接入力とファイルアップロードを選択
         choice = st.radio("入力方法を選択してください", ["直接入力", "ファイルをアップロード"])
+        st.markdown('<span style="color:black">***「ファイルをアップロード」は社内環境からは実行しないでください**</span>', unsafe_allow_html=True)
 
         # 直接入力が選択された場合
         if choice == "直接入力":
