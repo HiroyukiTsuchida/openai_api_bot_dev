@@ -154,6 +154,7 @@ if st.session_state["authenticated"]:
 
         # 最初の行を取得
         first_line = text.split("\n")[0].strip()
+        print(f"Debug: First Line = {first_line}")
 
         # 正規表現を使用してタイトル部分を取得
         match = re.search(r'\d{2}:\d{2} (.+)', first_line)
@@ -162,9 +163,8 @@ if st.session_state["authenticated"]:
         else:
             title = first_line
 
-        print(f"Debug: first_line = {first_line}")  # デバッグのための出力
-        print(f"Debug: match = {match}")  # マッチしたオブジェクトの出力
-        print(f"Debug: title = {title}")  # タイトルの出力
+        print(f"Debug: Title = {title}")
+
 
         # ファイル名として使用できない文字を取り除く
         valid_filename = re.sub(r"[^a-zA-Z0-9]", "_", title)
@@ -172,7 +172,9 @@ if st.session_state["authenticated"]:
 
         # 一定の長さに制限する (例: 20文字)
         valid_filename = valid_filename[:20] + ".docx"
- 
+
+        print(f"Debug: Valid Filename = {valid_filename}")
+
         doc = Document()
         doc.add_paragraph(text)
         output_path = f"/tmp/{valid_filename}"
@@ -401,7 +403,7 @@ if st.session_state["authenticated"]:
                     return href
 
                 # Word文書をダウンロードリンクとして提供
-                st.markdown(get_binary_file_downloader_html(doc_path, "結果をWord形式でダウンロード"), unsafe_allow_html=True)
+                st.markdown(get_binary_file_downloader_html(doc_path, os.path.basename(doc_path)), unsafe_allow_html=True)
 
         # 「システムプロンプトを表示」ボタンの説明
         st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプト（命令文）を表示できます。**</span>', unsafe_allow_html=True)
