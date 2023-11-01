@@ -162,6 +162,10 @@ if st.session_state["authenticated"]:
         else:
             title = first_line
 
+        print(f"Debug: first_line = {first_line}")  # デバッグのための出力
+        print(f"Debug: match = {match}")  # マッチしたオブジェクトの出力
+        print(f"Debug: title = {title}")  # タイトルの出力
+
         # ファイル名として使用できない文字を取り除く
         valid_filename = re.sub(r"[^a-zA-Z0-9]", "_", title)
         valid_filename = re.sub(r"_+", "_", valid_filename)
@@ -174,6 +178,7 @@ if st.session_state["authenticated"]:
         output_path = f"/tmp/{valid_filename}"
         doc.save(output_path)
         return output_path
+
 
     # 機能に応じたUIの表示
     if selected_option == "選択してください":
