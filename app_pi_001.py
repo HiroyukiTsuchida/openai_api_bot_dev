@@ -617,7 +617,7 @@ if st.session_state["authenticated"]:
                 st.warning("データを入力してください。")
             else:
                 st.session_state["user_input"] = initial_prompt
-                communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
+                generated_text = communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
 
                 # AIモデルの応答を分割
@@ -641,8 +641,6 @@ if st.session_state["authenticated"]:
                 bot_response_placeholder.markdown(bolded_text)
                 for correction in correction_list:
                     bot_response_placeholder.write(correction)
-
-
 
 
 
