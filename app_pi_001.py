@@ -400,7 +400,7 @@ if st.session_state["authenticated"]:
                     with open(bin_file, 'rb') as f:
                         data = f.read()
                     bin_str = base64.b64encode(data).decode()
-                    href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{bin_file}">{file_label}</a>'
+                    href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">{file_label}</a>'
                     return href
 
                 # Word文書をダウンロードリンクとして提供
