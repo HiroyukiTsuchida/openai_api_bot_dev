@@ -619,6 +619,33 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
+
+                # AIモデルの応答を分割
+                response_lines = generated_text.split("\n")
+                corrected_full_text = response_lines[0]  # 最初の行は「修正後全文」
+                correction_list = response_lines[1:]  # 残りの行は「修正箇所リスト」
+
+                # Find the differences between the original user input and the corrected text
+                d = difflib.Differ()
+                diff = list(d.compare(user_input, corrected_full_text))
+
+                # Extract the modified parts and make them bold
+                bolded_text = ""
+                for part in diff:
+                    if part.startswith('+ ') or part.startswith('- '):
+                        bolded_text += "**" + part[2:] + "**"
+                    else:
+                        bolded_text += part[2:]
+
+                # Display the bolded corrected text and the correction list
+                bot_response_placeholder.markdown(bolded_text)
+                for correction in correction_list:
+                    bot_response_placeholder.write(correction)
+
+
+
+
+
         # 「システムプロンプトを表示」ボタンの説明
         st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプト（命令文）を表示できます。**</span>', unsafe_allow_html=True)
 
