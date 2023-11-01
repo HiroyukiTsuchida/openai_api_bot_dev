@@ -9,6 +9,7 @@ import pandas as pd
 from docx import Document
 import base64
 import re
+import os
 
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
