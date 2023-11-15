@@ -201,7 +201,7 @@ if st.session_state["authenticated"]:
 
         # ラジオボタンで直接入力とファイルアップロードを選択
         choice = st.radio("入力方法を選択してください", ["直接入力", "ファイルをアップロード"])
-        st.markdown('<span style="color:black">***「ファイルをアップロード」は社内環境からは実行しないでください**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:red">***「ファイルをアップロード」は社内環境からは実行しないでください**</span>', unsafe_allow_html=True)
 
         # 直接入力が選択された場合
         if choice == "直接入力":
@@ -260,7 +260,7 @@ if st.session_state["authenticated"]:
 
         # ラジオボタンで直接入力とファイルアップロードを選択
         choice = st.radio("入力方法を選択してください", ["直接入力", "ファイルをアップロード"])
-        st.markdown('<span style="color:black">***「ファイルをアップロード」は社内環境からは実行しないでください**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:red">***「ファイルをアップロード」は社内環境からは実行しないでください**</span>', unsafe_allow_html=True)
 
         # 直接入力が選択された場合
         if choice == "直接入力":
@@ -429,7 +429,7 @@ if st.session_state["authenticated"]:
 
         # ラジオボタンで直接入力とファイルアップロードを選択
         choice = st.radio("入力方法を選択してください", ["直接入力", "ファイルをアップロード"])
-        st.markdown('<span style="color:black">***「ファイルをアップロード」は社内環境からは実行しないでください**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:red">***「ファイルをアップロード」は社内環境からは実行しないでください**</span>', unsafe_allow_html=True)
 
         # 直接入力が選択された場合
         if choice == "直接入力":
@@ -664,7 +664,7 @@ if st.session_state["authenticated"]:
 
         # ラジオボタンで直接入力とファイルアップロードを選択
         choice = st.radio("入力方法を選択してください", ["直接入力", "ファイルをアップロード"])
-        st.markdown('<span style="color:black">***「ファイルをアップロード」は社内環境からは実行しないでください**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:red">***「ファイルをアップロード」は社内環境からは実行しないでください**</span>', unsafe_allow_html=True)
 
         # 直接入力が選択された場合
         if choice == "直接入力":
@@ -752,7 +752,7 @@ if st.session_state["authenticated"]:
 
         # ラジオボタンで直接入力とファイルアップロードを選択
         choice = st.radio("入力方法を選択してください", ["直接入力", "ファイルをアップロード"])
-        st.markdown('<span style="color:black">***「ファイルをアップロード」は社内環境からは実行しないでください**</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:red">***「ファイルをアップロード」は社内環境からは実行しないでください**</span>', unsafe_allow_html=True)
 
         # 直接入力が選択された場合
         if choice == "直接入力":
