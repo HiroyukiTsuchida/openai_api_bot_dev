@@ -1,5 +1,6 @@
+
 import streamlit as st
-import openai
+from openai import OpenAI
 import uuid
 from PIL import Image
 import numpy as np
