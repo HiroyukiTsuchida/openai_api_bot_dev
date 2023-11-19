@@ -48,7 +48,7 @@ if st.session_state["authenticated"]:
         st.session_state["user_input"] = ""
 
     def count_tokens(text):
-        response = openai.Completion.create(model="text-davinci-002", prompt=text, max_tokens=1)
+        response = openai.ChatCompletion.create(model="text-davinci-002", messages=[{"role": "system", "content": text}])
         token_count = response['usage']['total_tokens']
         return token_count
 
