@@ -51,7 +51,7 @@ if st.session_state["authenticated"]:
         st.session_state["user_input"] = ""
 
     def count_tokens(text):
-        response = client.chat.completions.create(model="text-davinci-002", messages=[{"role": "system", "content": text}])
+        response = openai.Completion.create(model="text-davinci-002", messages=[{"role": "system", "content": text}])
         token_count = response['usage']['total_tokens']
         return token_count
 
@@ -72,7 +72,7 @@ if st.session_state["authenticated"]:
         complete_response = ""
 
         # Get the response from ChatCompletion in streaming mode
-        for chunk in client.chat.completions.create(
+        for chunk in openai.Completion.create(
             model=model,
             messages=messages,
             temperature=temperature,
