@@ -236,13 +236,13 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input_Q&A"] = user_input
 
         # ユーザー入力の確認
-        if 'user_input' in locals() and user_input:
-            tokens = count_tokens(user_input) - 1
+        #if 'user_input' in locals() and user_input:
+        #    tokens = count_tokens(user_input) - 1
 
         # トークン数を表示
-            st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
-        else:
-            tokens = 0
+        #    st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
+        #else:
+        #    tokens = 0
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -306,13 +306,13 @@ if st.session_state["authenticated"]:
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # ユーザー入力の確認
-        if 'user_input' in locals() and user_input:
-            tokens = count_tokens(user_input) - 2
+        #if 'user_input' in locals() and user_input:
+        #    tokens = count_tokens(user_input) - 2
 
         # トークン数を表示
-            st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
-        else:
-            tokens = 0
+        #    st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
+        #else:
+        #    tokens = 0
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -477,13 +477,13 @@ if st.session_state["authenticated"]:
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # ユーザー入力の確認
-        if 'user_input' in locals() and user_input:
-            tokens = count_tokens(user_input) - 2
+        #if 'user_input' in locals() and user_input:
+        #    tokens = count_tokens(user_input) - 2
 
         # トークン数を表示
-            st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
-        else:
-            tokens = 0
+        #    st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
+        #else:
+        #    tokens = 0
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -711,13 +711,13 @@ if st.session_state["authenticated"]:
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # ユーザー入力の確認
-        if 'user_input' in locals() and user_input:
-            tokens = count_tokens(user_input) - 2
+        #if 'user_input' in locals() and user_input:
+        #    tokens = count_tokens(user_input) - 2
 
         # トークン数を表示
-            st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
-        else:
-            tokens = 0
+        #    st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
+        #else:
+        #    tokens = 0
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -799,13 +799,13 @@ if st.session_state["authenticated"]:
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # ユーザー入力の確認
-        if 'user_input' in locals() and user_input:
-            tokens = count_tokens(user_input) - 2
+        #if 'user_input' in locals() and user_input:
+        #    tokens = count_tokens(user_input) - 2
 
         # トークン数を表示
-            st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
-        else:
-            tokens = 0
+        #    st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
+        #else:
+        #    tokens = 0
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
@@ -855,10 +855,10 @@ if st.session_state["authenticated"]:
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # トークン数を計算
-        tokens = count_tokens(user_input) + count_tokens(additional_info)-4
+        #tokens = count_tokens(user_input) + count_tokens(additional_info)-4
 
         # トークン数を表示
-        st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
+        #st.markdown(f'<span style="color:grey; font-size:12px;">入力されたトークン数（上限の目安：2,000）: {tokens}</span>', unsafe_allow_html=True)
 
         # Create a placeholder for the bot's responses
         bot_response_placeholder = st.empty()
