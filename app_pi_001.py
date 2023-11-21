@@ -109,7 +109,7 @@ if st.session_state["authenticated"]:
     st.sidebar.header("オプション")
 
     # モデルの選択とその補足情報
-    with st.sidebar.beta_expander("モデル  🛈"):
+    with st.sidebar.expander("モデル  🛈"):
         st.write(
         """gpt-4（推奨）は、高品質な回答を出力します。入力・出力の合計で約8,000トークンまで処理可能です。gpt-3.5-turbo-16kは、gpt-4と比較すると回答の質は下がりますが、入力・出力の合計で約16,000トークンまで処理でき、gpt-4に比べ高速で回答の出力が可能です。
         """)
@@ -120,12 +120,12 @@ if st.session_state["authenticated"]:
     )
 
     # Temperatureスライダーとその補足情報
-    with st.sidebar.beta_expander("Temperature  🛈"):
+    with st.sidebar.expander("Temperature  🛈"):
         st.write("Temperature（温度）:モデルの出力の「確信度」または「多様性」を制御します。値が高いとモデルの出力は多様性が増し、予測はよりランダムになります。逆に、値が低いとモデルの出力はより確信度が高くなり、最も確率的に高い結果を選びやすくなります。【推奨値:0.10】")
         temperature = st.slider("", 0.0, 2.0, 0.1, 0.01)
 
     # Top_Pスライダーとその補足情報
-    with st.sidebar.beta_expander("Top_P  🛈"):
+    with st.sidebar.expander("Top_P  🛈"):
         st.write("Top_P: 温度と同様に、これはランダム性を制御しますが、別の方法を使用します。Top_P を下げると、より可能性が高い回答に絞り込まれます。Top_P を上げると、確率が高い回答と低い回答の両方から選択されるようになります。【推奨値:0.50】")
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
