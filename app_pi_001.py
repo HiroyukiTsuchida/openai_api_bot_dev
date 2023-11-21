@@ -36,7 +36,8 @@ if st.session_state["authenticated"]:
     unique_key = str(uuid.uuid4())
 
     # Streamlit Community Cloudの「Secrets」からOpenAI API keyを取得
-    openai.api_key = st.secrets.OpenAIAPI.openai_api_key
+    #openai.api_key = st.secrets.OpenAIAPI.openai_api_key
+    api_key = st.secrets.OpenAIAPI.openai_api_key
 
     # st.session_stateを使いメッセージのやりとりを保存
     if "messages" not in st.session_state:
@@ -45,13 +46,13 @@ if st.session_state["authenticated"]:
         ]
 
     # ApiClientインスタンスを作成
-    #client = openai.ApiClient(st.secrets.OpenAIAPI.openai_api_key)
+    client = OpemAI(api_key = api_key)
 
     if "user_input" not in st.session_state:
         st.session_state["user_input"] = ""
 
     def count_tokens(text):
-        response = openai.ChatCompletion.create(model="text-davinci-002", messages=[{"role": "system", "content": text}])
+        response = client.completions.create(model="text-davinci-002", messages=[{"role": "system", "content": text}])
         token_count = response['usage']['total_tokens']
         return token_count
 
@@ -72,7 +73,7 @@ if st.session_state["authenticated"]:
         complete_response = ""
 
         # Get the response from ChatCompletion in streaming mode
-        for chunk in openai.ChatCompletion.create(
+        for chunk in client.completions.create(
             model=model,
             messages=messages,
             temperature=temperature,
