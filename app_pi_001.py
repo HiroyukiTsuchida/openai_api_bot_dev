@@ -45,7 +45,7 @@ if st.session_state["authenticated"]:
         ]
 
     # ApiClientインスタンスを作成
-    client = openai.ApiClient(openai.api_key = st.secrets.OpenAIAPI.openai_api_key)
+    client = openai.ApiClient(st.secrets.OpenAIAPI.openai_api_key)
 
     if "user_input" not in st.session_state:
         st.session_state["user_input"] = ""
