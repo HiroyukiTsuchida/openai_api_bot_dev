@@ -138,10 +138,10 @@ if st.session_state["authenticated"]:
         top_p = st.slider("", 0.0, 1.0, 0.5, 0.01)
 
     # 累積トークン数リセットボタンの設置
-    if st.sidebar.button("トークン数リセット"):
-        st.session_state["messages"] = [
-            {"role": "system", "content": "You are the best AI assistant in the world."}
-        ]
+    #if st.sidebar.button("トークン数リセット"):
+    #    st.session_state["messages"] = [
+    #        {"role": "system", "content": "You are the best AI assistant in the world."}
+    #    ]
 
     # 「お問い合わせ」ハイパーリンクの設置
     def create_mailto_link():
