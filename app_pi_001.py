@@ -1,6 +1,6 @@
 
 import streamlit as st
-import openai
+from openai import OpenAI
 import uuid
 from PIL import Image
 import numpy as np
@@ -46,7 +46,7 @@ if st.session_state["authenticated"]:
         ]
 
     # ApiClientインスタンスを作成
-    client = OpemAI(api_key = api_key)
+    client = OpenAI(api_key = api_key)
 
     if "user_input" not in st.session_state:
         st.session_state["user_input"] = ""
