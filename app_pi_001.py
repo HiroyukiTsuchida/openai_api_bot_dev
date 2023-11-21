@@ -36,7 +36,7 @@ if st.session_state["authenticated"]:
     unique_key = str(uuid.uuid4())
 
     # Streamlit Community Cloudの「Secrets」からOpenAI API keyを取得
-    #openai.api_key = st.secrets.OpenAIAPI.openai_api_key
+    openai.api_key = st.secrets.OpenAIAPI.openai_api_key
 
     # st.session_stateを使いメッセージのやりとりを保存
     if "messages" not in st.session_state:
@@ -45,7 +45,7 @@ if st.session_state["authenticated"]:
         ]
 
     # ApiClientインスタンスを作成
-    client = openai.ApiClient(st.secrets.OpenAIAPI.openai_api_key)
+    #client = openai.ApiClient(st.secrets.OpenAIAPI.openai_api_key)
 
     if "user_input" not in st.session_state:
         st.session_state["user_input"] = ""
