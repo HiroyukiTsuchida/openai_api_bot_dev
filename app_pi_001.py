@@ -112,6 +112,8 @@ if st.session_state["authenticated"]:
         user_message = {"role": "user", "content": user_input}
         messages.append(user_message)
 
+        complete_response = ""
+
         # Get the response from ChatCompletion
         response = client.chat.completions.create(
             model=model,
