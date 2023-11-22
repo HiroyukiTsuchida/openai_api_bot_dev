@@ -112,21 +112,13 @@ if st.session_state["authenticated"]:
         user_message = {"role": "user", "content": user_input}
         messages.append(user_message)
 
-        # Temporary variable to store chunks
-        complete_response = ""
-
-        # Generate prompt from messages
-        prompt = "\n".join([f"{message['role']}: {message['content']}" for message in messages])
-
-        # Get the response from ChatCompletion in streaming mode
-        responce = client.completions.create(
+        # Get the response from ChatCompletion
+        responce = client.chat.completions.create(
             model=model,
-            messages=[{"role": "system", "content": user_input}],
+            messages=messages,
             temperature=temperature,
             max_tokens=8000,
             top_p=top_p,
-            n=1,
-            stream=True
         ):
             content = response.choices[0].text
             if content is not None:
