@@ -121,18 +121,14 @@ if st.session_state["authenticated"]:
             temperature=temperature,
             max_tokens=4000,
             top_p=top_p,
-            stream=True
         )
-        for chunk in response:
-            # 'choices'属性からレスポンステキストを取得
-            if chunk.choices:
-                response_text = chunk.choices[0].text
-                if response_text is not None:
-                    # Accumulate content and update the bot's response in real time
-                    complete_response += response_text
-                    formatted_response = complete_response.replace("\n", "<br>")
-                    indented_response = "".join([f"<div style='margin-left: 20px; white-space: pre-wrap;'>{line}</div>" for line in complete_response.split('\n')]) # インデントで回答
-                    bot_response_placeholder.markdown(indented_response, unsafe_allow_html=True)
+        response_message = response.choices[0].message.content
+        if response_message is not None:
+            # Accumulate content and update the bot's response in real time
+            complete_response += response_message
+            formatted_response = complete_response.replace("\n", "<br>")
+            indented_response = "".join([f"<div style='margin-left: 20px; white-space: pre-wrap;'>{line}</div>" for line in complete_response.split('\n')]) # インデントで回答
+            bot_response_placeholder.markdown(indented_response, unsafe_allow_html=True)
 
         # After all chunks are received, add the complete response to the chat history
         if complete_response:
@@ -143,7 +139,6 @@ if st.session_state["authenticated"]:
         messages = [{"role": "system", "content": "You are the best AI assistant in the world."}]
 
         return complete_response
-
 
 
     # サイドバーで機能を選択
