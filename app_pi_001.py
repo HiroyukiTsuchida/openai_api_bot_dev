@@ -120,7 +120,7 @@ if st.session_state["authenticated"]:
             max_tokens=8000,
             top_p=top_p,
         )
-        content = response.choices[0].message['content']
+        content = response.choices[0].message.content
         if content is not None:
             # Accumulate content and update the bot's response in real time
             complete_response += content
