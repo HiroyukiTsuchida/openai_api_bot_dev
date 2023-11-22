@@ -120,9 +120,9 @@ if st.session_state["authenticated"]:
             max_tokens=8000,
             top_p=top_p,
         )
-        content = response.choices[0].text
+        content = response.choices[0].message['content']
         if content is not None:
-                # Accumulate content and update the bot's response in real time
+            # Accumulate content and update the bot's response in real time
             complete_response += content
             formatted_response = complete_response.replace("\n", "<br>")
             indented_response = "".join([f"<div style='margin-left: 20px; white-space: pre-wrap;'>{line}</div>" for line in complete_response.split('\n')]) # インデントで回答
