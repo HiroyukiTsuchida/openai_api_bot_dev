@@ -113,7 +113,7 @@ if st.session_state["authenticated"]:
         messages.append(user_message)
 
         # Get the response from ChatCompletion
-        responce = client.chat.completions.create(
+        response = client.chat.completions.create(
             model=model,
             messages=messages,
             temperature=temperature,
