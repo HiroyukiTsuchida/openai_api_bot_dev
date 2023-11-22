@@ -121,12 +121,12 @@ if st.session_state["authenticated"]:
             top_p=top_p,
         )
         content = response.choices[0].text
-            if content is not None:
+        if content is not None:
                 # Accumulate content and update the bot's response in real time
-                complete_response += content
-                formatted_response = complete_response.replace("\n", "<br>")
-                indented_response = "".join([f"<div style='margin-left: 20px; white-space: pre-wrap;'>{line}</div>" for line in complete_response.split('\n')]) # インデントで回答
-                bot_response_placeholder.markdown(indented_response, unsafe_allow_html=True)
+            complete_response += content
+            formatted_response = complete_response.replace("\n", "<br>")
+            indented_response = "".join([f"<div style='margin-left: 20px; white-space: pre-wrap;'>{line}</div>" for line in complete_response.split('\n')]) # インデントで回答
+            bot_response_placeholder.markdown(indented_response, unsafe_allow_html=True)
 
         # After all chunks are received, add the complete response to the chat history
         if complete_response:
