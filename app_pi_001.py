@@ -71,6 +71,42 @@ if st.session_state["authenticated"]:
         return href
 
     # チャットボットとやりとりする関数
+    #def communicate(user_input, bot_response_placeholder, model, temperature, top_p):
+    #    messages = st.session_state["messages"]
+    #    user_message = {"role": "user", "content": user_input}
+    #    messages.append(user_message)
+
+    #    # Temporary variable to store chunks
+    #    complete_response = ""
+
+    #    # Get the response from ChatCompletion in streaming mode
+    #    for chunk in client.completions.create(
+    #        model=model,
+    #        messages=messages,
+    #        temperature=temperature,
+    #        top_p=top_p,
+    #        stream=True
+    #    ):
+    #        content = chunk["choices"][0].get("delta", {}).get("content")
+    #        if content is not None:
+    #            # Accumulate content and update the bot's response in real time
+    #            complete_response += content
+    #            formatted_response = complete_response.replace("\n", "<br>")
+    #            indented_response = "".join([f"<div style='margin-left: 20px; white-space: pre-wrap;'>{line}</div>" for line in complete_response.split('\n')]) # インデントで回答
+    #            bot_response_placeholder.markdown(indented_response, unsafe_allow_html=True)
+
+    #    # After all chunks are received, add the complete response to the chat history
+    #    if complete_response:
+    #        bot_message = {"role": "assistant", "content": complete_response}
+    #        messages.append(bot_message)
+
+    #   # Reset the messages after the chat
+    #    messages = [{"role": "system", "content": "You are the best AI assistant in the world."}]
+
+    #    return complete_response
+
+
+    # チャットボットとやりとりする関数
     def communicate(user_input, bot_response_placeholder, model, temperature, top_p):
         messages = st.session_state["messages"]
         user_message = {"role": "user", "content": user_input}
@@ -79,15 +115,20 @@ if st.session_state["authenticated"]:
         # Temporary variable to store chunks
         complete_response = ""
 
+        # Generate prompt from messages
+        prompt = "\n".join([f"{message['role']}: {message['content']}" for message in messages])
+
         # Get the response from ChatCompletion in streaming mode
         for chunk in client.completions.create(
             model=model,
-            messages=messages,
+            prompt=prompt
             temperature=temperature,
+            max_tokens=8000,
             top_p=top_p,
+            n=1,
             stream=True
         ):
-            content = chunk["choices"][0].get("delta", {}).get("content")
+            content = chunk["choices"][0].get("text", "")
             if content is not None:
                 # Accumulate content and update the bot's response in real time
                 complete_response += content
@@ -104,6 +145,8 @@ if st.session_state["authenticated"]:
         messages = [{"role": "system", "content": "You are the best AI assistant in the world."}]
 
         return complete_response
+
+
 
     # サイドバーで機能を選択
     selected_option = st.sidebar.selectbox(
