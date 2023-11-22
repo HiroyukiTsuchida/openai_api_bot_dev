@@ -121,7 +121,7 @@ if st.session_state["authenticated"]:
         # Get the response from ChatCompletion in streaming mode
         for chunk in client.completions.create(
             model=model,
-            prompt=prompt
+            prompt=prompt,
             temperature=temperature,
             max_tokens=8000,
             top_p=top_p,
