@@ -125,7 +125,7 @@ if st.session_state["authenticated"]:
         )
         for chunk in response:
             # ここでチャンクごとに処理を行う
-            response_message = chunk.choices[0].message.content
+            response_message = chunk.choices[0].message.text
             if response_message is not None:
                 # Accumulate content and update the bot's response in real time
                 complete_response += response_message
