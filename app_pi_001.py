@@ -119,7 +119,7 @@ if st.session_state["authenticated"]:
             model=model,
             messages=messages,
             temperature=temperature,
-            max_tokens=128000,
+            #max_tokens=4000,
             top_p=top_p,
         )
         response_message = response.choices[0].message.content
