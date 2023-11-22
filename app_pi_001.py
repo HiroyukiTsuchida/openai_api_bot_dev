@@ -119,7 +119,7 @@ if st.session_state["authenticated"]:
             temperature=temperature,
             max_tokens=8000,
             top_p=top_p,
-        ):
+        )
             content = response.choices[0].text
             if content is not None:
                 # Accumulate content and update the bot's response in real time
