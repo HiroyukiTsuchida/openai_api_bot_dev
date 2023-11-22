@@ -125,8 +125,8 @@ if st.session_state["authenticated"]:
         )
         for chunk in response:
             # 'choices'属性からレスポンステキストを取得
-            if chunk['choices']:
-                response_text = chunk['choices'][0]['text']
+            if chunk.choices:
+                response_text = chunk.choices[0].text
                 if response_text is not None:
                     # Accumulate content and update the bot's response in real time
                     complete_response += response_text
