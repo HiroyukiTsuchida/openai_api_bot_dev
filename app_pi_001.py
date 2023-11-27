@@ -763,6 +763,14 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input"] = initial_prompt
                 generated_text = communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
+        # APIに送信するデータを表示する前に、`messages` 変数の状態を確認
+        if "messages" in st.session_state:
+            messages = st.session_state["messages"]
+            st.write("送信するリクエスト:", {"model": model, "messages": messages, "temperature": temperature, "top_p": top_p})
+        else:
+            st.write("メッセージが未定義です。")
+
+
         # APIに送信するデータを表示
         st.write("送信するリクエスト:", {"model": model, "messages": messages, "temperature": temperature, "top_p": top_p})
 
