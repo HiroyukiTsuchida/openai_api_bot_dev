@@ -783,11 +783,6 @@ if st.session_state["authenticated"]:
             st.write("メッセージが未定義です。")
 
 
-        # APIに送信するデータを表示
-        st.write("送信するリクエスト:", {"model": model, "messages": messages, "temperature": temperature, "top_p": top_p})
-
-
-
         # 「システムプロンプトを表示」ボタンの説明
         st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプト（命令文）を表示できます。**</span>', unsafe_allow_html=True)
 
