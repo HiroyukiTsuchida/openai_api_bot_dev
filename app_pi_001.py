@@ -763,6 +763,12 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input"] = initial_prompt
                 generated_text = communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
+                # 応答の処理
+                if generated_text is not None:
+                    bolded_text, correction_list = process_response(generated_text, user_input)
+                else:
+                    st.write("応答テキストがありません。")
+
         # APIに送信するデータを表示する前に、`messages` 変数の状態を確認
         if "messages" in st.session_state:
             messages = st.session_state["messages"]
@@ -774,11 +780,6 @@ if st.session_state["authenticated"]:
         # APIに送信するデータを表示
         st.write("送信するリクエスト:", {"model": model, "messages": messages, "temperature": temperature, "top_p": top_p})
 
-        # 応答の処理
-        if generated_text is not None:
-            bolded_text, correction_list = process_response(generated_text, user_input)
-        else:
-            st.write("応答テキストがありません。")
 
         # 太字にした修正後のテキストと修正箇所リストを表示
         bot_response_placeholder.markdown(bolded_text)
