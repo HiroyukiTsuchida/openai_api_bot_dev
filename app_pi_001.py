@@ -767,18 +767,18 @@ if st.session_state["authenticated"]:
         st.write("送信するリクエスト:", {"model": model, "messages": messages, "temperature": temperature, "top_p": top_p})
 
 
-                # 応答の処理
-                bolded_text, correction_list = process_response(generated_text, user_input)
+        # 応答の処理
+        bolded_text, correction_list = process_response(generated_text, user_input)
 
-                # 太字にした修正後のテキストと修正箇所リストを表示
-                bot_response_placeholder.markdown(bolded_text)
-                for correction in correction_list:
-                    bot_response_placeholder.write(correction)
+        # 太字にした修正後のテキストと修正箇所リストを表示
+        bot_response_placeholder.markdown(bolded_text)
+        for correction in correction_list:
+        bot_response_placeholder.write(correction)
 
-                # process_response関数の結果を表示
-                bolded_text, correction_list = process_response(generated_text, user_input)
-                st.write("修正後の全文:", bolded_text)
-                st.write("修正箇所リスト:", correction_list)
+        # process_response関数の結果を表示
+        bolded_text, correction_list = process_response(generated_text, user_input)
+        st.write("修正後の全文:", bolded_text)
+        st.write("修正箇所リスト:", correction_list)
 
 
 
