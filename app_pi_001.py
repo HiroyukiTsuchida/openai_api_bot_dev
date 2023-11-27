@@ -569,6 +569,9 @@ if st.session_state["authenticated"]:
         # 追加：補足情報の入力フィールド
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
+        # ユーザーの入力を表示
+        st.write("ユーザー入力:", user_input)
+
         # ユーザー入力の確認
         #if 'user_input' in locals() and user_input:
         #    tokens = count_tokens(user_input) - 2
@@ -760,6 +763,10 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input"] = initial_prompt
                 generated_text = communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
+        # APIに送信するデータを表示
+        st.write("送信するリクエスト:", {"model": model, "messages": messages, "temperature": temperature, "top_p": top_p})
+
+
                 # 応答の処理
                 bolded_text, correction_list = process_response(generated_text, user_input)
 
@@ -767,6 +774,11 @@ if st.session_state["authenticated"]:
                 bot_response_placeholder.markdown(bolded_text)
                 for correction in correction_list:
                     bot_response_placeholder.write(correction)
+
+                # process_response関数の結果を表示
+                bolded_text, correction_list = process_response(generated_text, user_input)
+                st.write("修正後の全文:", bolded_text)
+                st.write("修正箇所リスト:", correction_list)
 
 
 
