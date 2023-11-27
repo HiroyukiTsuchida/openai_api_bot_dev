@@ -781,8 +781,7 @@ if st.session_state["authenticated"]:
                     # AIモデルの応答から修正後の全文と修正箇所リストを抽出
                     # 例: 正規表現や文字列処理を使って必要な部分を抽出する
                     # ここでは具体的な抽出方法は省略し、仮の変数を使用
-                    pattern = r"出力1:修正後全文\n(.+?)\n\n出力2:修正箇所リスト\n(.+?)\n\n出力3:"
-                    match = re.search(pattern, generated_text, re.DOTALL)
+                    match = re.search(r"出力1:修正後全文\n\n(.+?)\n\n出力2:修正箇所リスト\n\n(.+?)\n\n出力3:", generated_text, re.DOTALL)
                     if match:
                         extracted_full_text = match.group(1).strip()
                         extracted_correction_list_str = match.group(2).strip() 
@@ -795,7 +794,9 @@ if st.session_state["authenticated"]:
                         for correction in extracted_correction_list:
                             bot_response_placeholder.markdown(correction)
                     else:
-                        st.write("応答テキストがありません。")
+                        bot_response_placeholder.write("適切なデータが抽出できませんでした。")
+                else:
+                    st.write("応答テキストがありません。")
 
 
         # APIに送信するデータを表示する前に、`messages` 変数の状態を確認
