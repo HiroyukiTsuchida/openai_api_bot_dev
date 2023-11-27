@@ -12,6 +12,7 @@ import re
 import os
 import difflib
 
+
 # サービス名を表示する
 st.sidebar.title("[Dev] AI Assistant")
 
@@ -780,21 +781,21 @@ if st.session_state["authenticated"]:
                     # AIモデルの応答から修正後の全文と修正箇所リストを抽出
                     # 例: 正規表現や文字列処理を使って必要な部分を抽出する
                     # ここでは具体的な抽出方法は省略し、仮の変数を使用
-                    extracted_full_text = "ここに抽出した修正後の全文"
-                    extracted_correction_list =  ["ここに抽出した修正箇所リストの項目1", "項目2", ...] 
+                    pattern = r"出力1:修正後全文\n(.+?)\n\n出力2:修正箇所リスト\n(.+?)\n\n出力3:"
+                    match = re.search(pattern, generated_text, re.DOTALL)
+                    if match:
+                        extracted_full_text = match.group(1).strip()
+                        extracted_correction_list_str = match.group(2).strip() 
 
-                    # 抽出したテキストとリストをMarkdown形式で表示
-                    bot_response_placeholder.markdown(extracted_full_text)
-                    for correction in extracted_correction_list:
-                        bot_response_placeholder.markdown(correction)
-                else:
-                    st.write("応答テキストがありません。")
-
-
-
-
-
-
+                        # 抽出した修正箇所リストをリスト形式に変換
+                        extracted_correction_list = extracted_correction_list_str.split('\n')
+                    
+                        # Streamlitでの表示
+                        bot_response_placeholder.markdown(extracted_full_text)
+                        for correction in extracted_correction_list:
+                            bot_response_placeholder.markdown(correction)
+                    else:
+                        st.write("応答テキストがありません。")
 
 
         # APIに送信するデータを表示する前に、`messages` 変数の状態を確認
@@ -811,6 +812,10 @@ if st.session_state["authenticated"]:
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
             st.write(initial_prompt)
+
+
+
+
 
     elif selected_option == "Excel Formula Analysis":
         st.title("Excel Formula Analysis")
