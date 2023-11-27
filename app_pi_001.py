@@ -56,11 +56,6 @@ if st.session_state["authenticated"]:
     #    token_count = response['usage']['total_tokens']
     #    return token_count
 
-    #def count_tokens(text):
-    #    response = client.completions.create(model="text-davinci-002", prompt=[{"role": "system", "content": text}])
-    #    token_count = response['usage']['total_tokens']
-    #    return token_count
-
 
 
     def get_binary_file_downloader_html(bin_file, file_label="File"):
@@ -70,7 +65,7 @@ if st.session_state["authenticated"]:
         href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{file_label}.docx">Download {file_label}</a>'
         return href
 
-    # チャットボットとやりとりする関数
+    # （アップデート前のコード）チャットボットとやりとりする関数
     #def communicate(user_input, bot_response_placeholder, model, temperature, top_p):
     #    messages = st.session_state["messages"]
     #    user_message = {"role": "user", "content": user_input}
@@ -106,6 +101,45 @@ if st.session_state["authenticated"]:
     #    return complete_response
 
 
+# （作業中）チャットボットとやりとりする関数（ストリームモード）
+# def communicate(user_input, bot_response_placeholder, model, temperature, top_p):
+#     messages = st.session_state["messages"]
+#     user_message = {"role": "user", "content": user_input}
+#     messages.append(user_message)
+
+#     complete_response = ""
+
+#     # Get the response from ChatCompletion
+#     response = client.chat.completions.create(
+#         model=model,
+#         messages=messages,
+#         temperature=temperature,
+#         max_tokens=4000,
+#         top_p=top_p,
+#         stream=True
+#     )
+#     for chunk in response:
+#         # 'choices'属性からレスポンステキストを取得
+#         if chunk.choices:
+#             response_text = chunk.choices[0].text
+#             if response_text is not None:
+#                 # Accumulate content and update the bot's response in real time
+#                 complete_response += response_text
+#                 formatted_response = complete_response.replace("\n", "<br>")
+#                 indented_response = "".join([f"<div style='margin-left: 20px; white-space: pre-wrap;'>{line}</div>" for line in complete_response.split('\n')]) # インデントで回答
+#                 bot_response_placeholder.markdown(indented_response, unsafe_allow_html=True)
+
+#     # After all chunks are received, add the complete response to the chat history
+#     if complete_response:
+#         bot_message = {"role": "assistant", "content": complete_response}
+#         messages.append(bot_message)
+
+#     # Reset the messages after the chat
+#     messages = [{"role": "system", "content": "You are the best AI assistant in the world."}]
+
+#     return complete_response
+
+
     # チャットボットとやりとりする関数
     def communicate(user_input, bot_response_placeholder, model, temperature, top_p):
         messages = st.session_state["messages"]
@@ -139,6 +173,27 @@ if st.session_state["authenticated"]:
         messages = [{"role": "system", "content": "You are the best AI assistant in the world."}]
 
         return complete_response
+
+    def process_response(generated_text, user_input):
+        # 分割して、修正後の全文と修正箇所リストを抽出
+        response_lines = generated_text.split("\n")
+        corrected_full_text = response_lines[0]  # 最初の行を「修正後全文」と仮定
+        correction_list = response_lines[1:]  # 残りの行を「修正箇所リスト」と仮定
+
+        # 元のテキストと修正後のテキストの比較
+        corrected_full_text_words = corrected_full_text.split()
+        user_input_words = user_input.split()
+        bolded_text = ""
+
+        # 各単語を比較して、変更された部分を強調
+        for word in corrected_full_text_words:
+            if word in user_input_words:
+                bolded_text += word + " "
+            else:
+                bolded_text += "**" + word + "** "
+
+        return bolded_text, correction_list
+
 
 
     # サイドバーで機能を選択
@@ -443,6 +498,8 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input"] = initial_prompt
                 generated_text = communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
+
+
                 # 生成されたテキストをUIに表示します。
                 #bot_response_placeholder = st.write(generated_text)
 
@@ -662,7 +719,40 @@ if st.session_state["authenticated"]:
             f"**{user_input}**を校閲・校正してください。  \n"
             f"＃補足情報: **{additional_info}**"
             )
+        
+#         #修正前の校正実行コマンド
+#         if st.button("実行", key="send_button_proofreading"):
+#             if user_input.strip() == "":
+#                 st.warning("データを入力してください。")
+#             else:
+#                 st.session_state["user_input"] = initial_prompt
+#                 generated_text = communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
+
+#                 # AIモデルの応答を分割
+#                 response_lines = generated_text.split("\n")
+#                 corrected_full_text = response_lines[0]  # 最初の行は「修正後全文」
+#                 correction_list = response_lines[1:]  # 残りの行は「修正箇所リスト」
+
+#                 # Find the differences between the original user input and the corrected text
+#                 d = difflib.Differ()
+#                 diff = list(d.compare(user_input, corrected_full_text))
+
+#                 # Extract the modified parts and make them bold
+#                 bolded_text = ""
+#                 for part in diff:
+#                     if part.startswith('+ ') or part.startswith('- '):
+#                         bolded_text += "**" + part[2:] + "**"
+#                     else:
+#                         bolded_text += part[2:]
+
+#                 # Display the bolded corrected text and the correction list
+#                 bot_response_placeholder.markdown(bolded_text)
+#                 for correction in correction_list:
+#                     bot_response_placeholder.write(correction)
+
+
+        # 校正の実行コマンド
         if st.button("実行", key="send_button_proofreading"):
             if user_input.strip() == "":
                 st.warning("データを入力してください。")
@@ -670,25 +760,10 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input"] = initial_prompt
                 generated_text = communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
+                # 応答の処理
+                bolded_text, correction_list = process_response(generated_text, user_input)
 
-                # AIモデルの応答を分割
-                response_lines = generated_text.split("\n")
-                corrected_full_text = response_lines[0]  # 最初の行は「修正後全文」
-                correction_list = response_lines[1:]  # 残りの行は「修正箇所リスト」
-
-                # Find the differences between the original user input and the corrected text
-                d = difflib.Differ()
-                diff = list(d.compare(user_input, corrected_full_text))
-
-                # Extract the modified parts and make them bold
-                bolded_text = ""
-                for part in diff:
-                    if part.startswith('+ ') or part.startswith('- '):
-                        bolded_text += "**" + part[2:] + "**"
-                    else:
-                        bolded_text += part[2:]
-
-                # Display the bolded corrected text and the correction list
+                # 太字にした修正後のテキストと修正箇所リストを表示
                 bot_response_placeholder.markdown(bolded_text)
                 for correction in correction_list:
                     bot_response_placeholder.write(correction)
