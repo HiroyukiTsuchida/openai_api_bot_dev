@@ -766,6 +766,7 @@ if st.session_state["authenticated"]:
                 # 応答の処理
                 if generated_text is not None:
                     bolded_text, correction_list = process_response(generated_text, user_input)
+                    bot_response_placeholder.markdown(bolded_text)
                 else:
                     st.write("応答テキストがありません。")
 
