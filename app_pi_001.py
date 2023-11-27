@@ -764,17 +764,38 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input"] = initial_prompt
                 generated_text = communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
-                # 応答の処理
-                if generated_text is not None:
-                    bolded_text, correction_list = process_response(generated_text, user_input)
-                    st.write("修正後の全文:", bolded_text)
-                    st.write("修正箇所リスト:", correction_list)
-                    bot_response_placeholder.markdown(bolded_text)
-                    # 太字にした修正後のテキストと修正箇所リストを表示
-                    for correction in correction_list:
-                        bot_response_placeholder.write(correction)
-                else:
-                    st.write("応答テキストがありません。")
+#                # 応答の処理
+#                if generated_text is not None:
+#                    bolded_text, correction_list = process_response(generated_text, user_input)
+#                    st.write("修正後の全文:", bolded_text)
+#                    st.write("修正箇所リスト:", correction_list)
+#                    bot_response_placeholder.markdown(bolded_text)
+#                    # 太字にした修正後のテキストと修正箇所リストを表示
+#                    for correction in correction_list:
+#                        bot_response_placeholder.write(correction)
+#                else:
+#                    st.write("応答テキストがありません。")
+
+                 if generated_text is not None:
+                     # AIモデルの応答から修正後の全文と修正箇所リストを抽出
+                     # 例: 正規表現や文字列処理を使って必要な部分を抽出する
+                     # ここでは具体的な抽出方法は省略し、仮の変数を使用
+                     extracted_bolded_text = "ここに抽出した修正後の全文"
+                     extracted_correction_list = ["ここに抽出した修正箇所リストの項目1", "項目2", ...]
+
+                     # 抽出したテキストとリストをMarkdown形式で表示
+                     bot_response_placeholder.markdown(extracted_bolded_text)
+                     correction_list_str = "\n".join(extracted_correction_list)
+                     bot_response_placeholder.markdown(correction_list_str)
+                 else:
+                     st.write("応答テキストがありません。")
+
+
+
+
+
+
+
 
         # APIに送信するデータを表示する前に、`messages` 変数の状態を確認
         if "messages" in st.session_state:
