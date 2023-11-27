@@ -786,7 +786,7 @@ if st.session_state["authenticated"]:
                     # 抽出したテキストとリストをMarkdown形式で表示
                     bot_response_placeholder.markdown(extracted_full_text)
                     for correction in extracted_correction_list:
-                        bot_response_placeholder.markdown(correction_list_str)
+                        bot_response_placeholder.markdown(correction)
                 else:
                     st.write("応答テキストがありません。")
 
