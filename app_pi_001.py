@@ -784,7 +784,7 @@ if st.session_state["authenticated"]:
                     extracted_correction_list =  ["ここに抽出した修正箇所リストの項目1", "項目2", ...] 
 
                     # 抽出したテキストとリストをMarkdown形式で表示
-                    bot_response_placeholder.markdown(extracted_bolded_text)
+                    bot_response_placeholder.markdown(extracted_full_text)
                     for correction in extracted_correction_list:
                         bot_response_placeholder.markdown(correction_list_str)
                 else:
