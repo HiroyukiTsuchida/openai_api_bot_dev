@@ -724,7 +724,7 @@ if st.session_state["authenticated"]:
             f"**{user_input}**を校閲・校正してください。  \n"
             f"＃補足情報: **{additional_info}**"
             )
-        
+
 #         #修正前の校正実行コマンド
 #         if st.button("実行", key="send_button_proofreading"):
 #             if user_input.strip() == "":
@@ -777,18 +777,20 @@ if st.session_state["authenticated"]:
 #                else:
 #                    st.write("応答テキストがありません。")
 
+
                 if generated_text is not None:
                     # AIモデルの応答から修正後の全文と修正箇所リストを抽出
                     # 例: 正規表現や文字列処理を使って必要な部分を抽出する
                     # ここでは具体的な抽出方法は省略し、仮の変数を使用
+                    pattern = r"出力1:修正後全文\n\n([\s\S]+?)\n\n出力2:修正箇所リスト\n\n([\s\S]+?)\n\n出力3:"
                     match = re.search(r"出力1:修正後全文\n\n(.+?)\n\n出力2:修正箇所リスト\n\n(.+?)\n\n出力3:", generated_text, re.DOTALL)
                     if match:
                         extracted_full_text = match.group(1).strip()
-                        extracted_correction_list_str = match.group(2).strip() 
+                        extracted_correction_list_str = match.group(2).strip()
 
                         # 抽出した修正箇所リストをリスト形式に変換
                         extracted_correction_list = extracted_correction_list_str.split('\n')
-                    
+
                         # Streamlitでの表示
                         bot_response_placeholder.markdown(extracted_full_text)
                         for correction in extracted_correction_list:
