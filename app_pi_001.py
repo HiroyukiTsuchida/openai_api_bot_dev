@@ -767,6 +767,9 @@ if st.session_state["authenticated"]:
                 if generated_text is not None:
                     bolded_text, correction_list = process_response(generated_text, user_input)
                     bot_response_placeholder.markdown(bolded_text)
+                    # 太字にした修正後のテキストと修正箇所リストを表示
+                    for correction in correction_list:
+                        bot_response_placeholder.write(correction)
                 else:
                     st.write("応答テキストがありません。")
 
@@ -782,10 +785,7 @@ if st.session_state["authenticated"]:
         st.write("送信するリクエスト:", {"model": model, "messages": messages, "temperature": temperature, "top_p": top_p})
 
 
-        # 太字にした修正後のテキストと修正箇所リストを表示
-        bot_response_placeholder.markdown(bolded_text)
-        for correction in correction_list:
-            bot_response_placeholder.write(correction)
+
 
         # process_response関数の結果を表示
         bolded_text, correction_list = process_response(generated_text, user_input)
