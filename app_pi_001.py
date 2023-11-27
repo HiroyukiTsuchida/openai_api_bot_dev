@@ -773,7 +773,7 @@ if st.session_state["authenticated"]:
         # 太字にした修正後のテキストと修正箇所リストを表示
         bot_response_placeholder.markdown(bolded_text)
         for correction in correction_list:
-        bot_response_placeholder.write(correction)
+            bot_response_placeholder.write(correction)
 
         # process_response関数の結果を表示
         bolded_text, correction_list = process_response(generated_text, user_input)
