@@ -781,7 +781,7 @@ if st.session_state["authenticated"]:
                 # 新しいセッションごとにメッセージ履歴をリセット
                 st.session_state["messages"] = []
                 # ユーザーの入力をメッセージ履歴に追加
-                st.session_state["messages"].append({"role": "user", "content": user_input})
+                #st.session_state["messages"].append({"role": "user", "content": user_input})
 
                 st.session_state["user_input"] = initial_prompt
                 generated_text = communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
@@ -810,9 +810,7 @@ if st.session_state["authenticated"]:
 
                     # 応答テキストを確認
                     st.write(generated_text)
-                    # トークン使用量をリセット
-                    reset_token_usage()
-                    st.success('トークン使用量がリセットされました。')
+
                 else:
                     st.write("応答テキストがありません。")
 
