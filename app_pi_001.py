@@ -592,6 +592,7 @@ if st.session_state["authenticated"]:
             "なお、処理1と処理2については、後の出力1・2のための処理を行うのみとし、結果を文章として表示しないでください。  \n"
             "表示は出力1の「修正後全文」と出力2「修正箇所リスト」、及び出力3「表記揺れと考えられるもの」においてのみ行ってください。  \n"
             "また、該当するものがない項目についても、表示はしないでください \n"
+            "入力された文章の文の途中に改行が入っていた場合は、適宜改行を削除して処理を行ってください。\n"
             "###  \n"
             "処理1:誤りの検知（表示しない） \n"
             "以下の基準に該当するものをすべて検知してください。 \n"
@@ -724,37 +725,6 @@ if st.session_state["authenticated"]:
             f"**{user_input}**を校閲・校正してください。  \n"
             f"＃補足情報: **{additional_info}**"
             )
-
-#         #修正前の校正実行コマンド
-#         if st.button("実行", key="send_button_proofreading"):
-#             if user_input.strip() == "":
-#                 st.warning("データを入力してください。")
-#             else:
-#                 st.session_state["user_input"] = initial_prompt
-#                 generated_text = communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
-
-
-#                 # AIモデルの応答を分割
-#                 response_lines = generated_text.split("\n")
-#                 corrected_full_text = response_lines[0]  # 最初の行は「修正後全文」
-#                 correction_list = response_lines[1:]  # 残りの行は「修正箇所リスト」
-
-#                 # Find the differences between the original user input and the corrected text
-#                 d = difflib.Differ()
-#                 diff = list(d.compare(user_input, corrected_full_text))
-
-#                 # Extract the modified parts and make them bold
-#                 bolded_text = ""
-#                 for part in diff:
-#                     if part.startswith('+ ') or part.startswith('- '):
-#                         bolded_text += "**" + part[2:] + "**"
-#                     else:
-#                         bolded_text += part[2:]
-
-#                 # Display the bolded corrected text and the correction list
-#                 bot_response_placeholder.markdown(bolded_text)
-#                 for correction in correction_list:
-#                     bot_response_placeholder.write(correction)
 
 
         # 校正の実行コマンド
