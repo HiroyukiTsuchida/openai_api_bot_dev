@@ -200,7 +200,7 @@ if st.session_state["authenticated"]:
             model=model,
             messages=messages,
             temperature=temperature,
-            max_tokens=4000,
+            max_tokens=2000,
             top_p=top_p,
         )
         response_message = response.choices[0].message.content
@@ -809,7 +809,7 @@ if st.session_state["authenticated"]:
                         bot_response_placeholder.write("・・・")
 
                     # 応答テキストを確認
-                    #st.write(generated_text)
+                    st.write(generated_text)
 
                 else:
                     st.write("応答テキストがありません。")
