@@ -67,7 +67,7 @@ if st.session_state["authenticated"]:
             max_tokens=1               # 生成するトークンの最大数
         )
         # 'Completion' オブジェクトから必要な情報を取得
-        token_count = response.choices[0].usage['total_tokens']
+        token_count = dict(response).get('usage')['total_tokens']
         return token_count
 
 
