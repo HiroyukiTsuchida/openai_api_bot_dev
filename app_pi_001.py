@@ -52,11 +52,23 @@ if st.session_state["authenticated"]:
     if "user_input" not in st.session_state:
         st.session_state["user_input"] = ""
 
-    def count_tokens(text):
-        response = client.completions.create(model="text-davinci-002", messages=[{"role": "system", "content": text}])
-        token_count = response['usage']['total_tokens']
-        return token_count
+    #トークン数カウント（修正前）
+    #def count_tokens(text):
+    #    response = client.completions.create(model="text-davinci-002", messages=[{"role": "system", "content": text}])
+    #    token_count = response['usage']['total_tokens']
+    #    return token_count
 
+
+
+    def count_tokens(text):
+        response = client.completions.create(
+            model="text-davinci-002",  # または他のモデル名
+            prompt=text,               # トークン数を数えたいテキスト
+            max_tokens=1               # 生成するトークンの最大数（トークン数を数えるので少なめに設定）
+        )
+        # トークン数を取得して返す
+        token_count = response['choices'][0]['usage']['total_tokens']
+        return token_count
 
 
     def get_binary_file_downloader_html(bin_file, file_label="File"):
