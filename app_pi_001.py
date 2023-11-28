@@ -52,6 +52,38 @@ if st.session_state["authenticated"]:
     if "user_input" not in st.session_state:
         st.session_state["user_input"] = ""
 
+#↓トークン数上限監視のためのコード
+    # トークン使用量を記録するセッションステートの初期化
+    #if 'token_usage' not in st.session_state:
+    #    st.session_state['token_usage'] = 0
+
+    # トークン使用量の上限
+    #TOKEN_LIMIT = 100000  # 例として100,000トークンを上限とします
+
+    # トークン使用量を更新する関数
+    #def update_token_usage(new_tokens):
+    #    st.session_state['token_usage'] += new_tokens
+    #    # 上限に達した場合の警告表示
+    #    if st.session_state['token_usage'] >= TOKEN_LIMIT:
+    #        st.warning('トークン使用量の上限に達しました。')
+
+    # APIリクエストを行う関数（仮）
+    #def make_api_request():
+    #    # ここでAPIリクエストを行い、レスポンスを取得します
+    #    # 仮にトークン数を50とします
+    #    used_tokens = 50
+    #    return used_tokens
+
+    # ボタンでAPIリクエストをトリガーする
+    #if st.button('APIリクエスト実行'):
+    #    tokens = make_api_request()
+    #    update_token_usage(tokens)
+
+    # 現在のトークン使用量を表示
+    #st.write(f'現在のトークン使用量: {st.session_state["token_usage"]}')
+#↑トークン数上限監視のためのコード
+
+
     #トークン数カウント（修正前）
     #def count_tokens(text):
     #    response = client.completions.create(model="text-davinci-002", messages=[{"role": "system", "content": text}])
@@ -59,7 +91,7 @@ if st.session_state["authenticated"]:
     #    return token_count
 
 
-
+    #トークン数カウント（修正中）
     #def count_tokens(text):
     #    response = client.completions.create({
     #        "model": "text-davinci-002",  # or your preferred model
@@ -189,25 +221,25 @@ if st.session_state["authenticated"]:
 
         return complete_response
 
-    def process_response(generated_text, user_input):
-        # 分割して、修正後の全文と修正箇所リストを抽出
-        response_lines = generated_text.split("\n")
-        corrected_full_text = response_lines[0]  # 最初の行を「修正後全文」と仮定
-        correction_list = response_lines[1:]  # 残りの行を「修正箇所リスト」と仮定
+#    def process_response(generated_text, user_input):
+#        # 分割して、修正後の全文と修正箇所リストを抽出
+#        response_lines = generated_text.split("\n")
+#        corrected_full_text = response_lines[0]  # 最初の行を「修正後全文」と仮定
+#        correction_list = response_lines[1:]  # 残りの行を「修正箇所リスト」と仮定
 
-        # 元のテキストと修正後のテキストの比較
-        corrected_full_text_words = corrected_full_text.split()
-        user_input_words = user_input.split()
-        bolded_text = ""
+#        # 元のテキストと修正後のテキストの比較
+#        corrected_full_text_words = corrected_full_text.split()
+#        user_input_words = user_input.split()
+#        bolded_text = ""
 
         # 各単語を比較して、変更された部分を強調
-        for word in corrected_full_text_words:
-            if word in user_input_words:
-                bolded_text += word + " "
-            else:
-                bolded_text += "**" + word + "** "
-
-        return bolded_text, correction_list
+#        for word in corrected_full_text_words:
+#            if word in user_input_words:
+#                bolded_text += word + " "
+#            else:
+#                bolded_text += "**" + word + "** "
+#
+#        return bolded_text, correction_list
 
 
 
@@ -269,36 +301,36 @@ if st.session_state["authenticated"]:
     [v1.3.0](https://ai-assistant-releasenote-mfjkhzwcdpy9p33km6tffg.streamlit.app/)
     """)
 
-    def create_word_doc(text):
+    #def create_word_doc(text):
 
         # 最初の行を取得
-        first_line = text.split("\n")[0].strip()
-        print(f"Debug: First Line = {first_line}")
+#        first_line = text.split("\n")[0].strip()
+#        print(f"Debug: First Line = {first_line}")
 
         # 正規表現を使用してタイトル部分を取得
-        match = re.search(r'\d{2}:\d{2} (.+)', first_line)
-        if match:
-            title = match.group(1)
-        else:
-            title = first_line
+#        match = re.search(r'\d{2}:\d{2} (.+)', first_line)
+#        if match:
+#            title = match.group(1)
+#        else:
+#            title = first_line
 
-        print(f"Debug: Title = {title}")
+#        print(f"Debug: Title = {title}")
 
 
         # ファイル名として使用できない文字を取り除く
-        valid_filename = re.sub(r"[^a-zA-Z0-9]", "_", title)
-        valid_filename = re.sub(r"_+", "_", valid_filename)
+#        valid_filename = re.sub(r"[^a-zA-Z0-9]", "_", title)
+#        valid_filename = re.sub(r"_+", "_", valid_filename)
 
         # 一定の長さに制限する (例: 20文字)
-        valid_filename = valid_filename[:20] + ".docx"
+#        valid_filename = valid_filename[:20] + ".docx"
 
-        print(f"Debug: Valid Filename = {valid_filename}")
+#        print(f"Debug: Valid Filename = {valid_filename}")
 
-        doc = Document()
-        doc.add_paragraph(text)
-        output_path = f"/tmp/{valid_filename}"
-        doc.save(output_path)
-        return output_path
+#        doc = Document()
+#        doc.add_paragraph(text)
+#        output_path = f"/tmp/{valid_filename}"
+#        doc.save(output_path)
+#        return output_path
 
 
     # 機能に応じたUIの表示
@@ -740,6 +772,9 @@ if st.session_state["authenticated"]:
             f"＃補足情報: **{additional_info}**"
             )
 
+        # トークン使用量をリセットする関数
+        def reset_token_usage():
+           st.session_state['token_usage'] = 0
 
         # 校正の実行コマンド
         if st.button("実行", key="send_button_proofreading"):
@@ -772,6 +807,9 @@ if st.session_state["authenticated"]:
 
                     # 応答テキストを確認
                     st.write(generated_text)
+                    # トークン使用量をリセット
+                    reset_token_usage()
+                    st.success('トークン使用量がリセットされました。')
                 else:
                     st.write("応答テキストがありません。")
 
@@ -789,6 +827,8 @@ if st.session_state["authenticated"]:
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
             st.write(initial_prompt)
+
+
 
     elif selected_option == "Excel Formula Analysis":
         st.title("Excel Formula Analysis")
