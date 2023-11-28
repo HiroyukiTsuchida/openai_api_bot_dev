@@ -60,19 +60,18 @@ if st.session_state["authenticated"]:
 
 
 
-    def count_tokens(text):
-        response = client.completions.create({
-            "model": "text-davinci-002",  # or your preferred model
-            "prompt": user_input,        # the text you want to process
-            "max_tokens": 1              # maximum number of tokens to generate
-        })
-        #レスポンスの内容を表示
-        st.write(response)
+    #def count_tokens(text):
+    #    response = client.completions.create({
+    #        "model": "text-davinci-002",  # or your preferred model
+    #        "prompt": user_input,        # the text you want to process
+    #        "max_tokens": 1              # maximum number of tokens to generate
+    #    })
+    #    #レスポンスの内容を表示
+    #    st.write(response)
 
         # 'Completion' オブジェクトから必要な情報を取得
         #token_count = response.choices[0].usage.total_tokens
         #return token_count
-
 
     def get_binary_file_downloader_html(bin_file, file_label="File"):
         with open(bin_file, "rb") as f:
