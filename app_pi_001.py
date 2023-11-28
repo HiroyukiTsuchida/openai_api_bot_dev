@@ -791,7 +791,7 @@ if st.session_state["authenticated"]:
                     # AIアシスタントの応答をメッセージ履歴に追加
                     st.session_state["messages"].append({"role": "assistant", "content": generated_text})
                     # 分割キーワードに基づいてテキストを分割
-                    # ここでのキーワードは応答の形式に基づいて選択してください
+                    # ここでのキーワードは応答の形式に基づいて選択する
                     try:
                         sections = generated_text.split("出力1:修正後全文\n\n")[1].split("出力2:修正箇所リスト\n\n")
                         extracted_full_text = sections[0].split("\n\n出力3:")[0].strip()
