@@ -777,23 +777,41 @@ if st.session_state["authenticated"]:
 #                else:
 #                    st.write("応答テキストがありません。")
 
-                # 応答の処理（成功！これを基に進める！）
-                if generated_text is not None:
-                    # 応答から修正後の全文と修正箇所リストを抽出する
-                    # 以下は具体的な抽出方法の例ですが、実際の応答に合わせて調整が必要です
-                    # 抽出した全文
-                    extracted_full_text = "ここに抽出した修正後の全文"
-                    # 抽出した修正箇所リスト
-                    extracted_correction_list = ["ここに抽出した修正箇所リストの項目1", "項目2", ...]
 
-                    # 修正箇所リストを文字列に変換
-                    #correction_list_str = "\n".join(extracted_correction_list)
+                if generated_text is not None:
+                    # 特定のキーワードでテキストを分割
+                    sections = generated_text.split("出力1:修正後全文\n\n")[1].split("出力2:修正箇所リスト\n\n")
+                    extracted_full_text = sections[0].split("\n\n出力3:")[0].strip()  # 修正後の全文
+                    extracted_correction_list_str = sections[1].split("\n\n出力3:")[0].strip()  # 修正箇所リスト
+
+                    # 修正箇所リストをリスト形式に変換
+                    extracted_correction_list = extracted_correction_list_str.split('\n')
 
                     # Streamlitでの表示
                     bot_response_placeholder.markdown(extracted_full_text)
-                    bot_response_placeholder.markdown(correction_list_str)
+                    for correction in extracted_correction_list:
+                        bot_response_placeholder.markdown(correction)
                 else:
                     st.write("応答テキストがありません。")
+
+
+#                # 応答の処理（成功！これを基に進める！）
+#                if generated_text is not None:
+#                    # 応答から修正後の全文と修正箇所リストを抽出する
+#                    # 以下は具体的な抽出方法の例ですが、実際の応答に合わせて調整が必要です
+#                    # 抽出した全文
+#                    extracted_full_text = "ここに抽出した修正後の全文"
+#                    # 抽出した修正箇所リスト
+#                    extracted_correction_list = ["ここに抽出した修正箇所リストの項目1", "項目2", ...]
+#
+#                    # 修正箇所リストを文字列に変換
+#                    correction_list_str = "\n".join(extracted_correction_list)
+
+#                    # Streamlitでの表示
+#                    bot_response_placeholder.markdown(extracted_full_text)
+#                    bot_response_placeholder.markdown(correction_list_str)
+#                else:
+#                    st.write("応答テキストがありません。")
 
 
 
