@@ -779,20 +779,26 @@ if st.session_state["authenticated"]:
 
 
                 if generated_text is not None:
-                    # 特定のキーワードでテキストを分割
-                    sections = generated_text.split("出力1:修正後全文\n\n")[1].split("出力2:修正箇所リスト\n\n")
-                    extracted_full_text = sections[0].split("\n\n出力3:")[0].strip()  # 修正後の全文
-                    extracted_correction_list_str = sections[1].split("\n\n出力3:")[0].strip()  # 修正箇所リスト
+                    # 応答テキストを確認
+                    st.write("応答テキスト:", generated_text)
 
-                    # 修正箇所リストをリスト形式に変換
-                    extracted_correction_list = extracted_correction_list_str.split('\n')
+                    # 分割キーワードに基づいてテキストを分割
+                    # ここでのキーワードは応答の形式に基づいて選択してください
+                    try:
+                        sections = generated_text.split("出力1:修正後全文\n\n")[1].split("出力2:修正箇所リスト\n\n")
+                        extracted_full_text = sections[0].split("\n\n出力3:")[0].strip()
+                        extracted_correction_list_str = sections[1].split("\n\n出力3:")[0].strip()
 
-                    # Streamlitでの表示
-                    bot_response_placeholder.markdown(extracted_full_text)
-                    for correction in extracted_correction_list:
-                        bot_response_placeholder.markdown(correction)
+                        extracted_correction_list = extracted_correction_list_str.split('\n')
+
+                        bot_response_placeholder.markdown(extracted_full_text)
+                        for correction in extracted_correction_list:
+                            bot_response_placeholder.markdown(correction)
+                    except IndexError:
+                        bot_response_placeholder.write("テキストの分割に失敗しました。")
                 else:
                     st.write("応答テキストがありません。")
+
 
 
 #                # 応答の処理（成功！これを基に進める！）
