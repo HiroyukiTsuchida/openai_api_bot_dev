@@ -765,19 +765,7 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input"] = initial_prompt
                 generated_text = communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
-#                # 応答の処理（修正前）
-#                if generated_text is not None:
-#                    bolded_text, correction_list = process_response(generated_text, user_input)
-#                    st.write("修正後の全文:", bolded_text)
-#                    st.write("修正箇所リスト:", correction_list)
-#                    bot_response_placeholder.markdown(bolded_text)
-#                    # 太字にした修正後のテキストと修正箇所リストを表示
-#                    for correction in correction_list:
-#                        bot_response_placeholder.write(correction)
-#                else:
-#                    st.write("応答テキストがありません。")
-
-
+                # 応答の処理
                 if generated_text is not None:
                     # 応答テキストを確認
                     st.write("応答テキスト:", generated_text)
@@ -791,77 +779,16 @@ if st.session_state["authenticated"]:
 
                         extracted_correction_list = extracted_correction_list_str.split('\n')
 
-                        bot_response_placeholder.markdown(extracted_full_text)
+                        # Markdownの太字テキストを赤色で表示するためのHTMLに変換
+                        html_text = extracted_full_text.replace("**", "<span style='color: red; font-weight: bold;'>").replace("**", "</span>")
+                        bot_response_placeholder.markdown(html_text, unsafe_allow_html=True)
+
                         for correction in extracted_correction_list:
                             bot_response_placeholder.markdown(correction)
                     except IndexError:
                         bot_response_placeholder.write("テキストの分割に失敗しました。")
                 else:
                     st.write("応答テキストがありません。")
-
-
-
-#                # 応答の処理（成功！これを基に進める！）
-#                if generated_text is not None:
-#                    # 応答から修正後の全文と修正箇所リストを抽出する
-#                    # 以下は具体的な抽出方法の例ですが、実際の応答に合わせて調整が必要です
-#                    # 抽出した全文
-#                    extracted_full_text = "ここに抽出した修正後の全文"
-#                    # 抽出した修正箇所リスト
-#                    extracted_correction_list = ["ここに抽出した修正箇所リストの項目1", "項目2", ...]
-#
-#                    # 修正箇所リストを文字列に変換
-#                    correction_list_str = "\n".join(extracted_correction_list)
-
-#                    # Streamlitでの表示
-#                    bot_response_placeholder.markdown(extracted_full_text)
-#                    bot_response_placeholder.markdown(correction_list_str)
-#                else:
-#                    st.write("応答テキストがありません。")
-
-
-
-
-
-#                # 応答の処理（Ellipseが出てしまう）
-#                if generated_text is not None:
-#                    # 応答から修正後の全文と修正箇所リストを抽出する
-#                    # 以下は具体的な抽出方法の例ですが、実際の応答に合わせて調整が必要です
-#                    # 抽出した全文
-#                    extracted_full_text = "ここに抽出した修正後の全文"
-#                    # 抽出した修正箇所リスト
-#                    extracted_correction_list = ["ここに抽出した修正箇所リストの項目1", "項目2", ...]
-
-#                    # Streamlitでの表示
-#                    bot_response_placeholder.markdown(extracted_full_text)
-#                    for correction in extracted_correction_list:
-#                        bot_response_placeholder.write(correction)
-#                else:
-#                    st.write("応答テキストがありません。")
-
-#応答の処理（正規表現を使った抽出）
-#                if generated_text is not None:
-#                    # AIモデルの応答から修正後の全文と修正箇所リストを抽出
-#                    # 例: 正規表現や文字列処理を使って必要な部分を抽出する
-#                    # ここでは具体的な抽出方法は省略し、仮の変数を使用
-#                    pattern = r"出力1:修正後全文\n\n([\s\S]+?)\n\n出力2:修正箇所リスト\n\n([\s\S]+?)\n\n出力3:"
-#                    match = re.search(r"出力1:修正後全文\n\n(.+?)\n\n出力2:修正箇所リスト\n\n(.+?)\n\n出力3:", generated_text, re.DOTALL)
-#                    if match:
-#                        extracted_full_text = match.group(1).strip()
-#                        extracted_correction_list_str = match.group(2).strip()
-#
-#                        # 抽出した修正箇所リストをリスト形式に変換
-#                        extracted_correction_list = extracted_correction_list_str.split('\n')
-#
-#                        # Streamlitでの表示
-#                        bot_response_placeholder.markdown(extracted_full_text)
-#                        for correction in extracted_correction_list:
-#                            bot_response_placeholder.markdown(correction)
-#                    else:
-#                        bot_response_placeholder.write("適切なデータが抽出できませんでした。")
-#                else:
-#                    st.write("応答テキストがありません。")
-
 
         # APIに送信するデータを表示する前に、`messages` 変数の状態を確認
         if "messages" in st.session_state:
@@ -877,10 +804,6 @@ if st.session_state["authenticated"]:
         # 「システムプロンプトを表示」ボタンの設置
         if st.button("システムプロンプトを表示"):
             st.write(initial_prompt)
-
-
-
-
 
     elif selected_option == "Excel Formula Analysis":
         st.title("Excel Formula Analysis")
