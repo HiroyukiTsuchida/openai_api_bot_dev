@@ -301,8 +301,8 @@ if st.session_state["authenticated"]:
     [v1.3.0](https://ai-assistant-releasenote-mfjkhzwcdpy9p33km6tffg.streamlit.app/)
     """)
 
+    #Wordファイル形式での出力を定義（ここでは不要か？）
     #def create_word_doc(text):
-
         # 最初の行を取得
 #        first_line = text.split("\n")[0].strip()
 #        print(f"Debug: First Line = {first_line}")
@@ -809,7 +809,7 @@ if st.session_state["authenticated"]:
                         bot_response_placeholder.write("・・・")
 
                     # 応答テキストを確認
-                    st.write(generated_text)
+                    #st.write(generated_text)
 
                 else:
                     st.write("応答テキストがありません。")
