@@ -756,7 +756,7 @@ if st.session_state["authenticated"]:
                         for correction in extracted_correction_list:
                             bot_response_placeholder.markdown(correction)
                     except IndexError:
-                        bot_response_placeholder.write("テキストの分割に失敗しました。")
+                        bot_response_placeholder.write("・・・")
                 else:
                     st.write("応答テキストがありません。")
 
