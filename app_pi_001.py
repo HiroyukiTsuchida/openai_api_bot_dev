@@ -571,7 +571,7 @@ if st.session_state["authenticated"]:
         additional_info = st.text_area("補足情報を入力してください。", "", key="additional_info")
 
         # ユーザーの入力を表示
-        st.write("ユーザー入力:", user_input)
+        #st.write("ユーザー入力:", user_input)
 
         # ユーザー入力の確認
         #if 'user_input' in locals() and user_input:
@@ -738,7 +738,7 @@ if st.session_state["authenticated"]:
                 # 応答の処理
                 if generated_text is not None:
                     # 応答テキストを確認
-                    st.write(generated_text)
+                    #st.write(generated_text)
 
                     # 分割キーワードに基づいてテキストを分割
                     # ここでのキーワードは応答の形式に基づいて選択してください
@@ -761,11 +761,11 @@ if st.session_state["authenticated"]:
                     st.write("応答テキストがありません。")
 
         # APIに送信するデータを表示する前に、`messages` 変数の状態を確認
-        if "messages" in st.session_state:
-            messages = st.session_state["messages"]
-            st.write("送信するリクエスト:", {"model": model, "messages": messages, "temperature": temperature, "top_p": top_p})
-        else:
-            st.write("メッセージが未定義です。")
+#        if "messages" in st.session_state:
+#            messages = st.session_state["messages"]
+#            st.write("送信するリクエスト:", {"model": model, "messages": messages, "temperature": temperature, "top_p": top_p})
+#        else:
+#            st.write("メッセージが未定義です。")
 
 
         # 「システムプロンプトを表示」ボタンの説明
