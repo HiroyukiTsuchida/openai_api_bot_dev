@@ -761,11 +761,11 @@ if st.session_state["authenticated"]:
                     st.write("応答テキストがありません。")
 
         # APIに送信するデータを表示する前に、`messages` 変数の状態を確認
-#        if "messages" in st.session_state:
-#            messages = st.session_state["messages"]
-#            st.write("送信するリクエスト:", {"model": model, "messages": messages, "temperature": temperature, "top_p": top_p})
-#        else:
-#            st.write("メッセージが未定義です。")
+        if "messages" in st.session_state:
+            messages = st.session_state["messages"]
+            st.write("送信するリクエスト:", {"model": model, "messages": messages, "temperature": temperature, "top_p": top_p})
+        else:
+            st.write("メッセージが未定義です。")
 
 
         # 「システムプロンプトを表示」ボタンの説明
