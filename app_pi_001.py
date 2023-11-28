@@ -737,8 +737,6 @@ if st.session_state["authenticated"]:
 
                 # 応答の処理
                 if generated_text is not None:
-                    # 応答テキストを確認
-                    st.write(generated_text)
 
                     # 分割キーワードに基づいてテキストを分割
                     # ここでのキーワードは応答の形式に基づいて選択してください
@@ -757,6 +755,9 @@ if st.session_state["authenticated"]:
                             bot_response_placeholder.markdown(correction)
                     except IndexError:
                         bot_response_placeholder.write("・・・")
+                    
+                    # 応答テキストを確認
+                    st.write(generated_text)
                 else:
                     st.write("応答テキストがありません。")
 
