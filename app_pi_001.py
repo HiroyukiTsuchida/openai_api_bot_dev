@@ -777,7 +777,7 @@ if st.session_state["authenticated"]:
 #                else:
 #                    st.write("応答テキストがありません。")
 
-                # 応答の処理
+                # 応答の処理（成功！これを基に進める！）
                 if generated_text is not None:
                     # 応答から修正後の全文と修正箇所リストを抽出する
                     # 以下は具体的な抽出方法の例ですが、実際の応答に合わせて調整が必要です
@@ -787,7 +787,7 @@ if st.session_state["authenticated"]:
                     extracted_correction_list = ["ここに抽出した修正箇所リストの項目1", "項目2", ...]
 
                     # 修正箇所リストを文字列に変換
-                    correction_list_str = "\n".join(extracted_correction_list)
+                    #correction_list_str = "\n".join(extracted_correction_list)
 
                     # Streamlitでの表示
                     bot_response_placeholder.markdown(extracted_full_text)
