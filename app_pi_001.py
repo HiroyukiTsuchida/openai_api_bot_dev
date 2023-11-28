@@ -61,7 +61,7 @@ if st.session_state["authenticated"]:
 
 
     def count_tokens(text):
-        response = client.completions.create("・・・"）
+        response = client.completions.create("・・・")
             #model="text-davinci-002",  # または他のモデル名
             #prompt=text,               # トークン数を数えたいテキスト
             #max_tokens=1               # 生成するトークンの最大数
