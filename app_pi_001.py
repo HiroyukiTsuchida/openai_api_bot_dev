@@ -809,7 +809,7 @@ if st.session_state["authenticated"]:
                         bot_response_placeholder.write("・・・")
 
                     # 応答テキストを確認
-                    #st.write(generated_text)
+                    st.write(generated_text)
 
                 else:
                     st.write("応答テキストがありません。")
