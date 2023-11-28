@@ -772,21 +772,24 @@ if st.session_state["authenticated"]:
             f"＃補足情報: **{additional_info}**"
             )
 
-        # トークン使用量をリセットする関数
-        def reset_token_usage():
-           st.session_state['token_usage'] = 0
 
         # 校正の実行コマンド
         if st.button("実行", key="send_button_proofreading"):
             if user_input.strip() == "":
                 st.warning("データを入力してください。")
             else:
+                # 新しいセッションごとにメッセージ履歴をリセット
+                st.session_state["messages"] = []
+                # ユーザーの入力をメッセージ履歴に追加
+                st.session_state["messages"].append({"role": "user", "content": user_input})
+
                 st.session_state["user_input"] = initial_prompt
                 generated_text = communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
                 # 応答の処理
                 if generated_text is not None:
-
+                    # AIアシスタントの応答をメッセージ履歴に追加
+                    st.session_state["messages"].append({"role": "assistant", "content": generated_text})
                     # 分割キーワードに基づいてテキストを分割
                     # ここでのキーワードは応答の形式に基づいて選択してください
                     try:
@@ -812,6 +815,10 @@ if st.session_state["authenticated"]:
                     st.success('トークン使用量がリセットされました。')
                 else:
                     st.write("応答テキストがありません。")
+
+                # メッセージ履歴の初期化
+                if "messages" not in st.session_state:
+                    st.session_state["messages"] = []
 
         # APIに送信するデータを表示する前に、`messages` 変数の状態を確認
         #if "messages" in st.session_state:
