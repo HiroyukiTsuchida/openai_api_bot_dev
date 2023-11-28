@@ -66,9 +66,12 @@ if st.session_state["authenticated"]:
             prompt=text,               # トークン数を数えたいテキスト
             max_tokens=1               # 生成するトークンの最大数
         )
+        #レスポンスの内容を表示
+        st.write(response)
+
         # 'Completion' オブジェクトから必要な情報を取得
-        token_count = response.choices[0].usage.total_tokens
-        return token_count
+        #token_count = response.choices[0].usage.total_tokens
+        #return token_count
 
 
     def get_binary_file_downloader_html(bin_file, file_label="File"):
