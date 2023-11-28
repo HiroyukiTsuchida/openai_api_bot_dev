@@ -738,7 +738,7 @@ if st.session_state["authenticated"]:
                 # 応答の処理
                 if generated_text is not None:
                     # 応答テキストを確認
-                    #st.write(generated_text)
+                    st.write(generated_text)
 
                     # 分割キーワードに基づいてテキストを分割
                     # ここでのキーワードは応答の形式に基づいて選択してください
