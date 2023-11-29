@@ -401,6 +401,12 @@ if st.session_state["authenticated"]:
                 st.session_state["user_input_Q&A"] = user_input
                 communicate(st.session_state["user_input_Q&A"], bot_response_placeholder, model, temperature, top_p)
 
+    # 累積トークン数リセットボタンの設置
+    if st.sidebar.button("トークン数リセット"):
+        st.session_state["messages"] = [
+            {"role": "system", "content": "You are the best AI assistant in the world."}
+        ]
+
         # Clear the user input
         st.session_state["user_input_Q&A"] = ""
 
@@ -942,6 +948,9 @@ if st.session_state["authenticated"]:
             if user_input.strip() == "":
                 st.warning("データを入力してください。")
             else:
+                # 新しいセッションごとにメッセージ履歴をリセット
+                st.session_state["messages"] = []
+                # イニシャルプロンプトの入力とチャットの生成
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
@@ -1029,6 +1038,9 @@ if st.session_state["authenticated"]:
             if user_input.strip() == "":
                 st.warning("データを入力してください。")
             else:
+                # 新しいセッションごとにメッセージ履歴をリセット
+                st.session_state["messages"] = []
+                # イニシャルプロンプトの入力とチャットの生成
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
@@ -1075,6 +1087,9 @@ if st.session_state["authenticated"]:
             if user_input.strip() == "":
                 st.warning("データを入力してください。")
             else:
+                # 新しいセッションごとにメッセージ履歴をリセット
+                st.session_state["messages"] = []
+                # イニシャルプロンプトの入力とチャットの生成
                 st.session_state["user_input"] = initial_prompt
                 communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
