@@ -298,10 +298,18 @@ if st.session_state["authenticated"]:
 
     # バージョン情報表示（リリースノートへのハイパーリンク）
     st.sidebar.markdown("""
-    [v1.3.0](https://ai-assistant-releasenote-mfjkhzwcdpy9p33km6tffg.streamlit.app/)
+    [v2.0.0](https://ai-assistant-releasenote-mfjkhzwcdpy9p33km6tffg.streamlit.app/)
     """)
 
-    #Wordファイル形式での出力を定義（ここでは不要か？）
+   #Wordファイル形式での出力を定義
+    def create_word_doc(text):
+        doc = Document()
+        doc.add_paragraph(text)
+        output_path = "/tmp/translated_text.docx"
+        doc.save(output_path)
+        return output_path
+
+    #Wordファイル形式での出力を定義（ファイルタイトルを原文タイトルから取得するよう修正中）
     #def create_word_doc(text):
         # 最初の行を取得
 #        first_line = text.split("\n")[0].strip()
@@ -537,18 +545,21 @@ if st.session_state["authenticated"]:
                     "#指示1で翻訳により作成された文章から、固有名詞を抜き出してリスト化し、簡単な説明をつけて、【固有名詞とその説明】として出力してください。\n"
                     "###\n"
         )
-
+        # 翻訳の実行コマンド
         if st.button("実行", key="send_button_translation"):
             if user_input.strip() == "":
                 st.warning("データを入力してください。")
             else:
+                # 新しいセッションごとにメッセージ履歴をリセット
+                st.session_state["messages"] = []
+                # イニシャルプロンプトの入力とチャットの生成
                 st.session_state["user_input"] = initial_prompt
                 generated_text = communicate(initial_prompt, bot_response_placeholder, model, temperature, top_p)
 
-
-
                 # 生成されたテキストをUIに表示します。
                 #bot_response_placeholder = st.write(generated_text)
+
+
 
                 # Word文書を生成
                 doc_path = create_word_doc(generated_text)
@@ -557,11 +568,27 @@ if st.session_state["authenticated"]:
                     with open(bin_file, 'rb') as f:
                         data = f.read()
                     bin_str = base64.b64encode(data).decode()
-                    href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">{file_label}</a>'
+                    href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{bin_file}">{file_label}</a>'
                     return href
+                    # ファイル名を原文タイトルから取得するパターン（修正中）
+                    #href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">{file_label}</a>'
 
                 # Word文書をダウンロードリンクとして提供
-                st.markdown(get_binary_file_downloader_html(doc_path, os.path.basename(doc_path)), unsafe_allow_html=True)
+                st.markdown(get_binary_file_downloader_html(doc_path, "結果をWord形式でダウンロード"), unsafe_allow_html=True)
+                # ファイル名を原文タイトルから取得するパターン（修正中）
+                #st.markdown(get_binary_file_downloader_html(doc_path, os.path.basename(doc_path)), unsafe_allow_html=True)
+
+                # メッセージ履歴の初期化
+                if "messages" not in st.session_state:
+                    st.session_state["messages"] = []
+
+        # APIに送信するデータを表示する前に、`messages` 変数の状態を確認
+        #if "messages" in st.session_state:
+        #    messages = st.session_state["messages"]
+        #    st.write("送信するリクエスト:", {"model": model, "messages": messages, "temperature": temperature, "top_p": top_p})
+        #else:
+        #    st.write("メッセージが未定義です。")
+
 
         # 「システムプロンプトを表示」ボタンの説明
         st.markdown('<span style="color:grey; font-size:12px;">***下の「システムプロンプトを表示」ボタンを押すと、この機能にあらかじめ組み込まれているプロンプト（命令文）を表示できます。**</span>', unsafe_allow_html=True)
@@ -809,7 +836,7 @@ if st.session_state["authenticated"]:
                         bot_response_placeholder.write("・・・")
 
                     # 応答テキストを確認
-                    st.write(generated_text)
+                    st.markdown(generated_text)
 
                 else:
                     st.write("応答テキストがありません。")
